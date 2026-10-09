@@ -1,0 +1,468 @@
+/* css/ge2/utils.css — utilities, adopted from the ge project unchanged;
+ * the button classes at the end are ge2's own.
+ * Import last, layer(utils) — the last layer, so a utility always wins
+ * over page rules. The flip side: a page cannot restyle an element carrying
+ * one; drop the utility from the markup instead.
+ * Modifiers are scoped under .flex (`.flex.center`, never `.center`), so
+ * nothing here claims a generic global class name. */
+
+.flex { display: flex; }
+
+.flex.row { flex-direction: row; }
+.flex.column { flex-direction: column; }
+.flex.row-reverse { flex-direction: row-reverse; }
+.flex.column-reverse { flex-direction: column-reverse; }
+
+.flex.top { align-items: flex-start; }
+.flex.bottom { align-items: flex-end; }
+.flex.middle { align-items: center; }
+.flex.base { align-items: baseline; }
+.flex.stretch { align-items: stretch; }
+
+.flex.left { justify-content: flex-start; }
+.flex.right { justify-content: flex-end; }
+.flex.center { justify-content: center; }
+.flex.between { justify-content: space-between; }
+.flex.around { justify-content: space-around; }
+.flex.evenly { justify-content: space-evenly; }
+
+.flex.wrap { flex-wrap: wrap; }
+.flex.nowrap { flex-wrap: nowrap; }
+.flex.wrap-reverse { flex-wrap: wrap-reverse; }
+
+.flex.grow { flex-grow: 1; }
+.flex.shrink { flex-shrink: 1; }
+.flex.noshrink { flex-shrink: 0; }
+.flex.nobasis { flex-basis: 0; }
+
+.flex.flex-1 { flex: 1; }
+
+.flex.gap-1 { gap: var(--vxs); }
+.flex.gap-2 { gap: var(--xs); }
+.flex.gap-3 { gap: var(--sm); }
+.flex.gap-4 { gap: var(--md); }
+.flex.gap-6 { gap: var(--lg); }
+.flex.gap-8 { gap: var(--xlg); }
+
+.p1 { padding: var(--vxs) var(--xs); }
+.p2 { padding: var(--xs) var(--sm); }
+.p3 { padding: var(--sm) var(--md); }
+.p4 { padding: var(--md) var(--lg); }
+.p5 { padding: var(--lg) var(--xlg); }
+
+.w10 { width: 10%; }
+.w15 { width: 15%; }
+.w20 { width: 20%; }
+.w25 { width: 25%; }
+.w30 { width: 30%; }
+.w33 { width: 33%; }
+.w34 { width: 34%; }
+.w40 { width: 40%; }
+.w50 { width: 50%; }
+.w60 { width: 60%; }
+.w66 { width: 66%; }
+.w67 { width: 67%; }
+.w70 { width: 70%; }
+.w75 { width: 75%; }
+.w80 { width: 80%; }
+.w85 { width: 85%; }
+.w90 { width: 90%; }
+.w100 { width: 100%; }
+
+.fsmall { font-size: var(--xs); margin: var(--md) 0; padding: var(--xs); }
+
+/* ═══ generated: responsive variants ═══
+   Mobile-first (Bootstrap semantics): -<bp> applies from that breakpoint UP.
+   Generated from the base rules above by scratchpad/gen/responsive.js — edit
+   those and regenerate, never inside the sentinels; a test checks they match.
+   Widths are explicit: .w* holds at every size. */
+
+/* ── sm and up (--bp-sm) ── */
+@media (min-width: 576px) {
+  .flex-sm { display: flex; }
+  .flex.row-sm { flex-direction: row; }
+  .flex.column-sm { flex-direction: column; }
+  .flex.row-reverse-sm { flex-direction: row-reverse; }
+  .flex.column-reverse-sm { flex-direction: column-reverse; }
+  .flex.top-sm { align-items: flex-start; }
+  .flex.bottom-sm { align-items: flex-end; }
+  .flex.middle-sm { align-items: center; }
+  .flex.base-sm { align-items: baseline; }
+  .flex.stretch-sm { align-items: stretch; }
+  .flex.left-sm { justify-content: flex-start; }
+  .flex.right-sm { justify-content: flex-end; }
+  .flex.center-sm { justify-content: center; }
+  .flex.between-sm { justify-content: space-between; }
+  .flex.around-sm { justify-content: space-around; }
+  .flex.evenly-sm { justify-content: space-evenly; }
+  .flex.wrap-sm { flex-wrap: wrap; }
+  .flex.nowrap-sm { flex-wrap: nowrap; }
+  .flex.wrap-reverse-sm { flex-wrap: wrap-reverse; }
+  .flex.grow-sm { flex-grow: 1; }
+  .flex.shrink-sm { flex-shrink: 1; }
+  .flex.noshrink-sm { flex-shrink: 0; }
+  .flex.nobasis-sm { flex-basis: 0; }
+  .flex.flex-1-sm { flex: 1; }
+  .flex.gap-1-sm { gap: var(--vxs); }
+  .flex.gap-2-sm { gap: var(--xs); }
+  .flex.gap-3-sm { gap: var(--sm); }
+  .flex.gap-4-sm { gap: var(--md); }
+  .flex.gap-6-sm { gap: var(--lg); }
+  .flex.gap-8-sm { gap: var(--xlg); }
+  .p1-sm { padding: var(--vxs) var(--xs); }
+  .p2-sm { padding: var(--xs) var(--sm); }
+  .p3-sm { padding: var(--sm) var(--md); }
+  .p4-sm { padding: var(--md) var(--lg); }
+  .p5-sm { padding: var(--lg) var(--xlg); }
+  .w10-sm { width: 10%; }
+  .w15-sm { width: 15%; }
+  .w20-sm { width: 20%; }
+  .w25-sm { width: 25%; }
+  .w30-sm { width: 30%; }
+  .w33-sm { width: 33%; }
+  .w34-sm { width: 34%; }
+  .w40-sm { width: 40%; }
+  .w50-sm { width: 50%; }
+  .w60-sm { width: 60%; }
+  .w66-sm { width: 66%; }
+  .w67-sm { width: 67%; }
+  .w70-sm { width: 70%; }
+  .w75-sm { width: 75%; }
+  .w80-sm { width: 80%; }
+  .w85-sm { width: 85%; }
+  .w90-sm { width: 90%; }
+  .w100-sm { width: 100%; }
+  .fsmall-sm { font-size: var(--xs); margin: var(--md) 0; padding: var(--xs); }
+}
+
+/* ── md and up (--bp-md) ── */
+@media (min-width: 768px) {
+  .flex-md { display: flex; }
+  .flex.row-md { flex-direction: row; }
+  .flex.column-md { flex-direction: column; }
+  .flex.row-reverse-md { flex-direction: row-reverse; }
+  .flex.column-reverse-md { flex-direction: column-reverse; }
+  .flex.top-md { align-items: flex-start; }
+  .flex.bottom-md { align-items: flex-end; }
+  .flex.middle-md { align-items: center; }
+  .flex.base-md { align-items: baseline; }
+  .flex.stretch-md { align-items: stretch; }
+  .flex.left-md { justify-content: flex-start; }
+  .flex.right-md { justify-content: flex-end; }
+  .flex.center-md { justify-content: center; }
+  .flex.between-md { justify-content: space-between; }
+  .flex.around-md { justify-content: space-around; }
+  .flex.evenly-md { justify-content: space-evenly; }
+  .flex.wrap-md { flex-wrap: wrap; }
+  .flex.nowrap-md { flex-wrap: nowrap; }
+  .flex.wrap-reverse-md { flex-wrap: wrap-reverse; }
+  .flex.grow-md { flex-grow: 1; }
+  .flex.shrink-md { flex-shrink: 1; }
+  .flex.noshrink-md { flex-shrink: 0; }
+  .flex.nobasis-md { flex-basis: 0; }
+  .flex.flex-1-md { flex: 1; }
+  .flex.gap-1-md { gap: var(--vxs); }
+  .flex.gap-2-md { gap: var(--xs); }
+  .flex.gap-3-md { gap: var(--sm); }
+  .flex.gap-4-md { gap: var(--md); }
+  .flex.gap-6-md { gap: var(--lg); }
+  .flex.gap-8-md { gap: var(--xlg); }
+  .p1-md { padding: var(--vxs) var(--xs); }
+  .p2-md { padding: var(--xs) var(--sm); }
+  .p3-md { padding: var(--sm) var(--md); }
+  .p4-md { padding: var(--md) var(--lg); }
+  .p5-md { padding: var(--lg) var(--xlg); }
+  .w10-md { width: 10%; }
+  .w15-md { width: 15%; }
+  .w20-md { width: 20%; }
+  .w25-md { width: 25%; }
+  .w30-md { width: 30%; }
+  .w33-md { width: 33%; }
+  .w34-md { width: 34%; }
+  .w40-md { width: 40%; }
+  .w50-md { width: 50%; }
+  .w60-md { width: 60%; }
+  .w66-md { width: 66%; }
+  .w67-md { width: 67%; }
+  .w70-md { width: 70%; }
+  .w75-md { width: 75%; }
+  .w80-md { width: 80%; }
+  .w85-md { width: 85%; }
+  .w90-md { width: 90%; }
+  .w100-md { width: 100%; }
+  .fsmall-md { font-size: var(--xs); margin: var(--md) 0; padding: var(--xs); }
+}
+
+/* ── lg and up (--bp-lg) ── */
+@media (min-width: 992px) {
+  .flex-lg { display: flex; }
+  .flex.row-lg { flex-direction: row; }
+  .flex.column-lg { flex-direction: column; }
+  .flex.row-reverse-lg { flex-direction: row-reverse; }
+  .flex.column-reverse-lg { flex-direction: column-reverse; }
+  .flex.top-lg { align-items: flex-start; }
+  .flex.bottom-lg { align-items: flex-end; }
+  .flex.middle-lg { align-items: center; }
+  .flex.base-lg { align-items: baseline; }
+  .flex.stretch-lg { align-items: stretch; }
+  .flex.left-lg { justify-content: flex-start; }
+  .flex.right-lg { justify-content: flex-end; }
+  .flex.center-lg { justify-content: center; }
+  .flex.between-lg { justify-content: space-between; }
+  .flex.around-lg { justify-content: space-around; }
+  .flex.evenly-lg { justify-content: space-evenly; }
+  .flex.wrap-lg { flex-wrap: wrap; }
+  .flex.nowrap-lg { flex-wrap: nowrap; }
+  .flex.wrap-reverse-lg { flex-wrap: wrap-reverse; }
+  .flex.grow-lg { flex-grow: 1; }
+  .flex.shrink-lg { flex-shrink: 1; }
+  .flex.noshrink-lg { flex-shrink: 0; }
+  .flex.nobasis-lg { flex-basis: 0; }
+  .flex.flex-1-lg { flex: 1; }
+  .flex.gap-1-lg { gap: var(--vxs); }
+  .flex.gap-2-lg { gap: var(--xs); }
+  .flex.gap-3-lg { gap: var(--sm); }
+  .flex.gap-4-lg { gap: var(--md); }
+  .flex.gap-6-lg { gap: var(--lg); }
+  .flex.gap-8-lg { gap: var(--xlg); }
+  .p1-lg { padding: var(--vxs) var(--xs); }
+  .p2-lg { padding: var(--xs) var(--sm); }
+  .p3-lg { padding: var(--sm) var(--md); }
+  .p4-lg { padding: var(--md) var(--lg); }
+  .p5-lg { padding: var(--lg) var(--xlg); }
+  .w10-lg { width: 10%; }
+  .w15-lg { width: 15%; }
+  .w20-lg { width: 20%; }
+  .w25-lg { width: 25%; }
+  .w30-lg { width: 30%; }
+  .w33-lg { width: 33%; }
+  .w34-lg { width: 34%; }
+  .w40-lg { width: 40%; }
+  .w50-lg { width: 50%; }
+  .w60-lg { width: 60%; }
+  .w66-lg { width: 66%; }
+  .w67-lg { width: 67%; }
+  .w70-lg { width: 70%; }
+  .w75-lg { width: 75%; }
+  .w80-lg { width: 80%; }
+  .w85-lg { width: 85%; }
+  .w90-lg { width: 90%; }
+  .w100-lg { width: 100%; }
+  .fsmall-lg { font-size: var(--xs); margin: var(--md) 0; padding: var(--xs); }
+}
+
+/* ── xl and up (--bp-xl) ── */
+@media (min-width: 1200px) {
+  .flex-xl { display: flex; }
+  .flex.row-xl { flex-direction: row; }
+  .flex.column-xl { flex-direction: column; }
+  .flex.row-reverse-xl { flex-direction: row-reverse; }
+  .flex.column-reverse-xl { flex-direction: column-reverse; }
+  .flex.top-xl { align-items: flex-start; }
+  .flex.bottom-xl { align-items: flex-end; }
+  .flex.middle-xl { align-items: center; }
+  .flex.base-xl { align-items: baseline; }
+  .flex.stretch-xl { align-items: stretch; }
+  .flex.left-xl { justify-content: flex-start; }
+  .flex.right-xl { justify-content: flex-end; }
+  .flex.center-xl { justify-content: center; }
+  .flex.between-xl { justify-content: space-between; }
+  .flex.around-xl { justify-content: space-around; }
+  .flex.evenly-xl { justify-content: space-evenly; }
+  .flex.wrap-xl { flex-wrap: wrap; }
+  .flex.nowrap-xl { flex-wrap: nowrap; }
+  .flex.wrap-reverse-xl { flex-wrap: wrap-reverse; }
+  .flex.grow-xl { flex-grow: 1; }
+  .flex.shrink-xl { flex-shrink: 1; }
+  .flex.noshrink-xl { flex-shrink: 0; }
+  .flex.nobasis-xl { flex-basis: 0; }
+  .flex.flex-1-xl { flex: 1; }
+  .flex.gap-1-xl { gap: var(--vxs); }
+  .flex.gap-2-xl { gap: var(--xs); }
+  .flex.gap-3-xl { gap: var(--sm); }
+  .flex.gap-4-xl { gap: var(--md); }
+  .flex.gap-6-xl { gap: var(--lg); }
+  .flex.gap-8-xl { gap: var(--xlg); }
+  .p1-xl { padding: var(--vxs) var(--xs); }
+  .p2-xl { padding: var(--xs) var(--sm); }
+  .p3-xl { padding: var(--sm) var(--md); }
+  .p4-xl { padding: var(--md) var(--lg); }
+  .p5-xl { padding: var(--lg) var(--xlg); }
+  .w10-xl { width: 10%; }
+  .w15-xl { width: 15%; }
+  .w20-xl { width: 20%; }
+  .w25-xl { width: 25%; }
+  .w30-xl { width: 30%; }
+  .w33-xl { width: 33%; }
+  .w34-xl { width: 34%; }
+  .w40-xl { width: 40%; }
+  .w50-xl { width: 50%; }
+  .w60-xl { width: 60%; }
+  .w66-xl { width: 66%; }
+  .w67-xl { width: 67%; }
+  .w70-xl { width: 70%; }
+  .w75-xl { width: 75%; }
+  .w80-xl { width: 80%; }
+  .w85-xl { width: 85%; }
+  .w90-xl { width: 90%; }
+  .w100-xl { width: 100%; }
+  .fsmall-xl { font-size: var(--xs); margin: var(--md) 0; padding: var(--xs); }
+}
+
+/* ── xxl and up (--bp-xxl) ── */
+@media (min-width: 1400px) {
+  .flex-xxl { display: flex; }
+  .flex.row-xxl { flex-direction: row; }
+  .flex.column-xxl { flex-direction: column; }
+  .flex.row-reverse-xxl { flex-direction: row-reverse; }
+  .flex.column-reverse-xxl { flex-direction: column-reverse; }
+  .flex.top-xxl { align-items: flex-start; }
+  .flex.bottom-xxl { align-items: flex-end; }
+  .flex.middle-xxl { align-items: center; }
+  .flex.base-xxl { align-items: baseline; }
+  .flex.stretch-xxl { align-items: stretch; }
+  .flex.left-xxl { justify-content: flex-start; }
+  .flex.right-xxl { justify-content: flex-end; }
+  .flex.center-xxl { justify-content: center; }
+  .flex.between-xxl { justify-content: space-between; }
+  .flex.around-xxl { justify-content: space-around; }
+  .flex.evenly-xxl { justify-content: space-evenly; }
+  .flex.wrap-xxl { flex-wrap: wrap; }
+  .flex.nowrap-xxl { flex-wrap: nowrap; }
+  .flex.wrap-reverse-xxl { flex-wrap: wrap-reverse; }
+  .flex.grow-xxl { flex-grow: 1; }
+  .flex.shrink-xxl { flex-shrink: 1; }
+  .flex.noshrink-xxl { flex-shrink: 0; }
+  .flex.nobasis-xxl { flex-basis: 0; }
+  .flex.flex-1-xxl { flex: 1; }
+  .flex.gap-1-xxl { gap: var(--vxs); }
+  .flex.gap-2-xxl { gap: var(--xs); }
+  .flex.gap-3-xxl { gap: var(--sm); }
+  .flex.gap-4-xxl { gap: var(--md); }
+  .flex.gap-6-xxl { gap: var(--lg); }
+  .flex.gap-8-xxl { gap: var(--xlg); }
+  .p1-xxl { padding: var(--vxs) var(--xs); }
+  .p2-xxl { padding: var(--xs) var(--sm); }
+  .p3-xxl { padding: var(--sm) var(--md); }
+  .p4-xxl { padding: var(--md) var(--lg); }
+  .p5-xxl { padding: var(--lg) var(--xlg); }
+  .w10-xxl { width: 10%; }
+  .w15-xxl { width: 15%; }
+  .w20-xxl { width: 20%; }
+  .w25-xxl { width: 25%; }
+  .w30-xxl { width: 30%; }
+  .w33-xxl { width: 33%; }
+  .w34-xxl { width: 34%; }
+  .w40-xxl { width: 40%; }
+  .w50-xxl { width: 50%; }
+  .w60-xxl { width: 60%; }
+  .w66-xxl { width: 66%; }
+  .w67-xxl { width: 67%; }
+  .w70-xxl { width: 70%; }
+  .w75-xxl { width: 75%; }
+  .w80-xxl { width: 80%; }
+  .w85-xxl { width: 85%; }
+  .w90-xxl { width: 90%; }
+  .w100-xxl { width: 100%; }
+  .fsmall-xxl { font-size: var(--xs); margin: var(--md) 0; padding: var(--xs); }
+}
+
+/* ═══ end generated ═══ */
+
+/* ═══ buttons ═══
+   Outside the generated block on purpose: no responsive variants.
+   `.btn` / `.button` is the solid box, for <button> or <a>. A bare <button>
+   stays unstyled (base.css) until it carries a style or tone class, so
+   `button.naked`, `.button.naked` and `.btn.naked` are the same thing.
+   Style: .rounded .plain .outline .naked .link
+   Tone:  .pr .sc .da .wr .ac — no tone is neutral
+   Size:  .vxs .xs .sm .md .lg .xlg — default .sm
+   Modifiers are scoped under button/.button/.btn, like .flex.center.
+   .is-hover / .is-focus force the state, for docs and tests. */
+
+:where(.btn, .button, button:is(.rounded, .plain, .outline, .naked, .link, .pr, .sc, .da, .wr, .ac, .vxs, .xs, .sm, .md, .lg, .xlg)) {
+  --btn: var(--fg);
+  --btn-bg: var(--bg-muted);
+  --btn-subtle: var(--bg-subtle);
+  --btn-border: var(--border);
+  --btn-text: var(--fg);
+  --btn-focus: var(--focus-color);
+  --btn-size: var(--sm);
+  display: inline-flex;
+  align-items: center;
+  padding: calc(var(--btn-size) / 3) var(--btn-size);
+  font-family: var(--font-mono);
+  font-size: calc(var(--xs) + var(--btn-size) / 3);
+  line-height: var(--leading-tight);
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  background: var(--btn-subtle);
+  border: var(--border-width) solid var(--btn-border);
+  border-radius: var(--radius-md);
+  color: var(--btn-text);
+  transition: all var(--dur-fast) var(--ease);
+}
+
+:is(button, .button, .btn).pr { --btn: var(--pr); --btn-bg: var(--pr-bg); --btn-subtle: var(--pr-subtle); --btn-border: var(--pr-border); --btn-text: var(--pr-bg-text); --btn-focus: var(--pr); }
+:is(button, .button, .btn).sc { --btn: var(--sc); --btn-bg: var(--sc-bg); --btn-subtle: var(--sc-subtle); --btn-border: var(--sc-border); --btn-text: var(--sc-bg-text); --btn-focus: var(--sc); }
+:is(button, .button, .btn).da { --btn: var(--da); --btn-bg: var(--da-bg); --btn-subtle: var(--da-subtle); --btn-border: var(--da-border); --btn-text: var(--da-bg-text); --btn-focus: var(--da); }
+:is(button, .button, .btn).wr { --btn: var(--wr); --btn-bg: var(--wr-bg); --btn-subtle: var(--wr-subtle); --btn-border: var(--wr-border); --btn-text: var(--wr-bg-text); --btn-focus: var(--wr); }
+:is(button, .button, .btn).ac { --btn: var(--ac); --btn-bg: var(--ac-bg); --btn-subtle: var(--ac-subtle); --btn-border: var(--ac-border); --btn-text: var(--ac-bg-text); --btn-focus: var(--ac); }
+
+/* neutral naked is muted; neutral link takes the <a> colour */
+:is(button, .button, .btn).naked:not(.pr, .sc, .da, .wr, .ac) { --btn: var(--muted); }
+:is(button, .button, .btn).link:not(.pr, .sc, .da, .wr, .ac) { --btn: var(--ac); --btn-focus: var(--ac); }
+
+:is(button, .button, .btn).rounded { border-radius: calc(var(--radius-lg) * 99); }
+:is(button, .button, .btn).plain { border-color: transparent; }
+:is(button, .button, .btn).outline { background: transparent; border-color: var(--btn); color: var(--btn); }
+:is(button, .button, .btn).naked { background: none; border: 0; color: var(--btn); }
+:is(button, .button, .btn).link {
+  padding: 0;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: var(--btn);
+}
+
+/* size: one spacing token drives padding and type; default .sm.
+   Type grows at a third of the rate so .vxs stays readable. */
+:is(button, .button, .btn).vxs { --btn-size: var(--vxs); }
+:is(button, .button, .btn).xs { --btn-size: var(--xs); }
+:is(button, .button, .btn).sm { --btn-size: var(--sm); }
+:is(button, .button, .btn).md { --btn-size: var(--md); }
+:is(button, .button, .btn).lg { --btn-size: var(--lg); }
+:is(button, .button, .btn).xlg { --btn-size: var(--xlg); }
+/* .link keeps the text size it sits in, unless a size is asked for */
+:is(button, .button, .btn).link:is(.vxs, .xs, .sm, .md, .lg, .xlg) { font-size: calc(var(--xs) + var(--btn-size) / 3); }
+
+/* hover */
+:where(.btn, .button, button:is(.rounded, .plain, .outline, .naked, .link, .pr, .sc, .da, .wr, .ac, .vxs, .xs, .sm, .md, .lg, .xlg)):is(:hover, .is-hover):not(:disabled) {
+  background: var(--btn-bg);
+  border-color: var(--btn);
+  color: var(--btn-text);
+}
+:is(button, .button, .btn).plain:is(:hover, .is-hover):not(:disabled) { border-color: transparent; }
+:is(button, .button, .btn).naked:is(:hover, .is-hover):not(:disabled) { background: none; border: 0; color: var(--btn-text); }
+:is(button, .button, .btn).link:is(:hover, .is-hover):not(:disabled) {
+  background: none;
+  color: var(--fg);
+  text-decoration-line: underline;
+  text-decoration-color: var(--btn);
+}
+
+/* focus */
+:where(.btn, .button, button:is(.rounded, .plain, .outline, .naked, .link, .pr, .sc, .da, .wr, .ac, .vxs, .xs, .sm, .md, .lg, .xlg)):is(:focus-visible, .is-focus) {
+  outline: var(--focus-width) solid var(--btn-focus);
+  outline-offset: var(--focus-offset);
+}
+
+/* naked and link: no focus outline */
+:is(button, .button, .btn):is(.naked, .link):is(:focus-visible, .is-focus) { outline: none; }
+
+/* disabled — base.css covers <button>; this covers <a class="btn"> */
+:is(.btn, .button)[aria-disabled='true'] { opacity: .5; cursor: default; pointer-events: none; }

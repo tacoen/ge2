@@ -1,0 +1,212 @@
+{
+  "_comment": "Shared sidebar for the ge2 demo pages. js/ge-maker/menu.js builds the nav from this; a group's links point at its own page, and at plain #anchors when you are already on it. An entry with no items renders as a plain link rather than a foldable group. An item with an href instead of an anchor links straight to that file.",
+  "groups": [
+    {
+      "id": "home",
+      "label": "Home",
+      "page": "index.html",
+      "items": [
+        {
+          "anchor": "ge-maker",
+          "label": "ge-maker"
+        },
+        {
+          "anchor": "function-reference",
+          "label": "function"
+        }
+      ]
+    },
+    {
+      "id": "quick-start",
+      "label": "Quick start",
+      "page": "../index.html",
+      "items": [
+        {
+          "href": "../boiler.html",
+          "label": "boiler.html"
+        },
+        {
+          "href": "../boiler-config.js",
+          "label": "boiler-config.js"
+        },
+        {
+          "href": "../boiler-vars-overrides.css",
+          "label": "boiler-vars-overrides.css"
+        },
+        {
+          "href": "../favicon.ico",
+          "label": "favicon.ico"
+        },
+        {
+          "href": "../style.css",
+          "label": "style.css"
+        },
+        {
+          "href": "../script.js",
+          "label": "script.js"
+        }
+      ]
+    },
+    {
+      "id": "tokens",
+      "label": "Token",
+      "page": "token.html",
+      "items": [
+        {
+          "anchor": "theme",
+          "label": "theme"
+        },
+        {
+          "anchor": "tokens-type",
+          "label": "tokens · type"
+        },
+        {
+          "anchor": "tokens-typography",
+          "label": "tokens · typography"
+        },
+        {
+          "anchor": "tokens-colour",
+          "label": "tokens · colour"
+        },
+        {
+          "anchor": "buckets",
+          "label": "tokens · buckets"
+        }
+      ]
+    },
+    {
+      "id": "components",
+      "label": "Component",
+      "page": "component.html",
+      "items": [
+        {
+          "anchor": "buttons",
+          "label": "button"
+        },
+        {
+          "anchor": "button-sizes",
+          "label": "button · sizes"
+        },
+        {
+          "anchor": "toast",
+          "label": "toast"
+        },
+        {
+          "anchor": "tabs",
+          "label": "tabs"
+        },
+        {
+          "anchor": "accordion-multi",
+          "label": "accordion · multi-open"
+        },
+        {
+          "anchor": "accordion-single",
+          "label": "accordion · data-single"
+        },
+        {
+          "anchor": "modal",
+          "label": "modal"
+        },
+        {
+          "anchor": "copy",
+          "label": "copy"
+        },
+        {
+          "anchor": "onkey",
+          "label": "onKey"
+        },
+        {
+          "anchor": "dropdown",
+          "label": "dropdown"
+        },
+        {
+          "anchor": "contextmenu",
+          "label": "context menu"
+        }
+      ]
+    },
+    {
+      "id": "forms",
+      "label": "Forms",
+      "page": "basic.html",
+      "items": [
+        {
+          "anchor": "form-prepare",
+          "label": "prepareForm / handleForm"
+        }
+      ]
+    },
+    {
+      "id": "utils",
+      "label": "Utils",
+      "page": "basic.html",
+      "items": [
+        {
+          "anchor": "utils-flex",
+          "label": "utils · flex"
+        },
+        {
+          "anchor": "utils-responsive",
+          "label": "utils · responsive"
+        }
+      ]
+    },
+    {
+      "id": "icons",
+      "label": "icons",
+      "page": "icons.html",
+      "items": [
+        {
+          "anchor": "icons-svg",
+          "label": "icons · icx.svg() + tokens"
+        },
+        {
+          "anchor": "icons-edit",
+          "label": "icons · add / edit"
+        },
+        {
+          "anchor": "icons-hydrate",
+          "label": "icons · hydrate + observe"
+        }
+      ]
+    },
+    {
+      "id": "layout",
+      "label": "Layout",
+      "page": "layout.html",
+      "items": [
+        {
+          "anchor": "topbar",
+          "label": "topbar"
+        },
+        {
+          "anchor": "hero",
+          "label": "hero header"
+        },
+        {
+          "anchor": "drawer",
+          "label": "slide left"
+        },
+        {
+          "anchor": "sidemenu",
+          "label": "sidemenu"
+        },
+        {
+          "anchor": "dashboard",
+          "label": "dashboard"
+        }
+      ]
+    },
+    {
+      "id": "plugins",
+      "label": "Plugins",
+      "page": "plugins.html",
+      "items": [
+        {
+          "anchor": "editor-md",
+          "label": "Text Editor"
+        }
+      ]
+    }
+  ]
+}

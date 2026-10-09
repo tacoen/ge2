@@ -1,0 +1,226 @@
+/* css/ge2/vars.css — every ge2 token. Import first, layer(units).
+ * Palette, spacing and type families adopted verbatim from the ge project;
+ * groups marked "ge2" were added here.
+ * Theme is data-theme on <html>, set by js/ge2/ui.js on import. */
+
+:root {
+
+  /* Base Colors */
+  --white: #ffffff;
+  --black: #000000;
+
+  /* Spacing */
+  --vxs: .25rem;
+  --xs: .5rem;
+  --sm: .75rem;
+  --md: 1rem;
+  --lg: 1.5rem;
+  --xlg: 2rem;
+  --vlg: 2.5rem;
+  --scroll-width: 4px;
+
+  /* Typography */
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Courier New", monospace;
+  --font-serif: Georgia, "Times New Roman", serif;
+
+  /* ── ge2: type scale ──────────────────────────────────────
+     base.css sizes controls with --sm (the ge convention of reusing a
+     spacing token as a font size); these are for running text. */
+
+  --text-xs: .75rem;
+  --text-sm: .9rem;
+  --text-md: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --text-3xl: 2.5rem;
+
+  --h1: var(--text-2xl);
+  --h2: var(--text-xl);
+  --h3: var(--text-lg);
+  --h4: var(--text-md);
+  --h5: var(--text-sm);
+  --h6: var(--text-xs);
+
+  --leading: 1.5;
+  --leading-tight: 1.25;
+  --weight-thin: 200;
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-bold: 600;
+  --tracking-wide: .08em;
+
+  /* ── ge2: element typography ─────────────────────────────
+     Font, weight and colour per element; base.css reads them. The size of
+     h1–h6 is --h1…--h6 above. `initial` means "not set": the property then
+     inherits, exactly as if base.css had no rule for it. Defaults match the
+     browser's, so nothing looks different until a token is changed. */
+
+  --body-font: var(--font-sans);
+  --body-size: var(--text-md);
+  --body-weight: var(--weight-normal);
+  --body-color: var(--fg);
+
+  --h1-font: initial;  --h1-weight: bold;  --h1-color: initial;
+  --h2-font: initial;  --h2-weight: bold;  --h2-color: initial;
+  --h3-font: initial;  --h3-weight: bold;  --h3-color: initial;
+  --h4-font: initial;  --h4-weight: bold;  --h4-color: initial;
+  --h5-font: initial;  --h5-weight: bold;  --h5-color: initial;
+  --h6-font: initial;  --h6-weight: bold;  --h6-color: initial;
+
+  --small-font: initial;
+  --small-size: smaller;
+  --small-weight: initial;
+  --small-color: initial;
+
+  /* ── ge2: radius / border (base.css used 4/6/8px literals) ── */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --border-width: 1px;
+
+  /* ── ge2: motion (base.css used .15s / .3s ease) ─────────── */
+  --dur-fast: .15s;
+  --dur: .3s;
+  --ease: ease;
+
+  /* ── ge2: focus (base.css used 2px solid var(--pr), offset 2px) ── */
+  --focus-width: 1px;
+  --focus-offset: 1px;
+  --focus-color: var(--pr);
+
+  /* ── ge2: stacking (base.css used 1000 / 1001 / 2000) ────── */
+  --z-overlay: 1000;
+  --z-modal: 1001;
+  --z-toast: 2000;
+
+  /* ── ge2: icons ──────────────────────────────────────────
+     Applied by ui.css. Set --icon-size on any ancestor to rescale
+     everything beneath it; per-element overrides still win. */
+  --icon-size: 1.5rem;
+  --icon-size-sm: 1rem;
+  --icon-size-lg: 2rem;
+  --icon-stroke: currentColor;
+  --icon-stroke-width: 1.5;
+  --icon-fill: none;
+  --icon-linecap: round;
+  --icon-linejoin: round;
+
+  /* ── ge2: breakpoints (Bootstrap 5 scale; xs is 0, the base) ──
+     Unusable inside @media — queries resolve before custom properties do.
+     Repeat the literal: below sm is (max-width: 575.98px), from sm up is
+     (min-width: 576px). Rationale in css/ge2/readme.md. */
+  --bp-sm: 576px;
+  --bp-md: 768px;
+  --bp-lg: 992px;
+  --bp-xl: 1200px;
+  --bp-xxl: 1400px;
+
+  /* ── ge2: components ─────────────────────────────────────── */
+  --menu-min-width: 10rem;
+  --sidemenu-width: 200px;
+  --drawer-width: 280px;
+  --card-min: 180px;
+
+  --modal-min-width: 320px;
+  --modal-max-width: 480px;
+  --toast-max-width: 20rem;
+  --tab-indicator-width: 2px;
+}
+
+:root,
+[data-theme='light'] {
+  --bg: #f0f0f0;
+  --fg: #242323;
+  --gray: #7f7f7f;
+  --seed-pr: #00d1b2;
+  --seed-da: #ff6685;
+  --seed-sc: #4da34d;
+  --seed-wr: #ff9911;
+  --seed-ac: #4258ff;
+  
+  /* direction: surfaces rise toward --tint, inset sinks toward --sink (css/ge2/color.md) */
+  --tint: var(--black);
+  --sink: var(--white);
+  /* strength: --fg mixed into each seed; shadow opacity */
+  --tone-fg: 50%;
+  --shadow: color-mix(in srgb, var(--black), transparent 95%);
+}
+
+[data-theme='dark'] {
+  --bg: #181118;
+  --fg: #e7eee7;
+  --gray: #b0b0b0;
+  --seed-pr: #66ccee;
+  --seed-wr: #ffcc33;
+  --seed-ac: #4ca8e1;
+  --seed-da: #cc1111;
+  --seed-sc: #88cc66;
+  --tint: var(--white);
+  --sink: var(--black);
+  --tone-fg: 30%;
+  --shadow: color-mix(in srgb, var(--black), transparent 60%);
+}
+
+/* derived — one block for both themes. A theme sets only the seeds above;
+   nothing below is theme-specific. [data-theme] recomputes the lot on any
+   element carrying its own theme. See css/ge2/color.md. */
+:root,
+[data-theme] {
+  /* Core Foreground: --fg → --muted → --subtle, fading toward --gray */
+  --muted: color-mix(in srgb, var(--fg), var(--gray) 50%);
+  --subtle: color-mix(in srgb, var(--fg), var(--gray) 85%);
+
+  /* Core Backgrounds: rise toward --tint; --bg-inset sinks toward --sink */
+  --bg-subtle: color-mix(in srgb, var(--bg), var(--tint) 4%);
+  --bg-muted: color-mix(in srgb, var(--bg), var(--tint) 8%);
+  --bg-inset: color-mix(in srgb, var(--bg), var(--sink) 40%);
+  /* scrim only (modal, drawer): translucent, so the page dims, not vanishes */
+  --bg-overlay: color-mix(in srgb, var(--black), transparent 50%);
+
+  /* Core Borders: toward --fg, weakest → strongest; hover clears 3:1 */
+  --border-muted: color-mix(in srgb, var(--bg), var(--fg) 12%);
+  --border: color-mix(in srgb, var(--bg), var(--fg) 22%);
+  --border-hover: color-mix(in srgb, var(--bg), var(--fg) 50%);
+
+  /* Functional colours. On :root (not body) so :root-level tokens can
+     reference them — --focus-color needs --pr. */
+  --pr: color-mix(in srgb, var(--seed-pr), var(--fg) var(--tone-fg));
+  --sc: color-mix(in srgb, var(--seed-sc), var(--fg) var(--tone-fg));
+  --da: color-mix(in srgb, var(--seed-da), var(--fg) var(--tone-fg));
+  --wr: color-mix(in srgb, var(--seed-wr), var(--fg) var(--tone-fg));
+  --ac: color-mix(in srgb, var(--seed-ac), var(--fg) var(--tone-fg));
+
+  /* Tone variants: --bg tinted by the tone, weakest → strongest.
+     -subtle rest fill, -bg hover fill, -border outline; -bg-text sits on
+     either fill. */
+  --ac-subtle: color-mix(in srgb, var(--bg), var(--ac) 10%);
+  --ac-bg: color-mix(in srgb, var(--bg), var(--ac) 20%);
+  --ac-border: color-mix(in srgb, var(--bg), var(--ac) 40%);
+  --ac-bg-text: var(--fg);
+
+  --pr-subtle: color-mix(in srgb, var(--bg), var(--pr) 10%);
+  --pr-bg: color-mix(in srgb, var(--bg), var(--pr) 20%);
+  --pr-border: color-mix(in srgb, var(--bg), var(--pr) 40%);
+  --pr-bg-text: var(--fg);
+
+  --sc-subtle: color-mix(in srgb, var(--bg), var(--sc) 10%);
+  --sc-bg: color-mix(in srgb, var(--bg), var(--sc) 20%);
+  --sc-border: color-mix(in srgb, var(--bg), var(--sc) 40%);
+  --sc-bg-text: var(--fg);
+
+  --da-subtle: color-mix(in srgb, var(--bg), var(--da) 10%);
+  --da-bg: color-mix(in srgb, var(--bg), var(--da) 20%);
+  --da-border: color-mix(in srgb, var(--bg), var(--da) 40%);
+  --da-bg-text: var(--fg);
+
+  --wr-subtle: color-mix(in srgb, var(--bg), var(--wr) 10%);
+  --wr-bg: color-mix(in srgb, var(--bg), var(--wr) 20%);
+  --wr-border: color-mix(in srgb, var(--bg), var(--wr) 40%);
+  --wr-bg-text: var(--fg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-fast: 0s; --dur: 0s; }
+}

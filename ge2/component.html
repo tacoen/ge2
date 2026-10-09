@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ge2 · Component</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="stylesheet" href="../css/ge-maker.css">
+</head>
+<body data-page="component">
+<div class="shell">
+<!-- filled from ge2/menu.json by js/ge-maker/menu.js -->
+<nav class="sidebar" id="siteNav"></nav>
+<div class="page">
+
+  <h1>ge2 · Component</h1>
+  <p class="sub">The components <code>js/ge2/ui.js</code> drives.</p>
+
+  <h2 class="group-head" id="components">Component</h2>
+  <section id="buttons">
+    <h2>button · styles × tones × states</h2>
+    <p class="out" data-note>Each row is a colour token, each column a state. Classes live in <code>css/ge2/utils.css</code>: <code>.btn</code> (or a bare <code>button</code>) plus a style — <code>.rounded .plain .outline .naked .link</code> — and a tone — <code>.pr .sc .da .wr .ac</code>. The <code>:hover</code> / <code>:focus</code> columns are forced with <code>.is-hover</code> / <code>.is-focus</code>; the <em>live</em> column is a real button — hover it, Tab to it.</p>
+    <div class="controls" id="btnKinds" role="group" aria-label="button style"></div>
+    <div class="btn-scroll"><div class="btn-grid" id="btnGrid"></div></div>
+  </section>
+  <section id="button-sizes">
+    <h2>button · sizes</h2>
+    <p class="out" data-note>One spacing token per size — <code>.vxs .xs .sm .md .lg .xlg</code> — drives both padding and type; <code>.sm</code> is the default. <code>.link</code> keeps the surrounding text size until it is given one.</p>
+    <div class="btn-scroll"><div class="btn-grid btn-grid-sizes" id="btnSizes"></div></div>
+  </section>
+  <section id="toast">
+    <h2>toast</h2>
+    <div class="controls">
+      <button type="button" id="toast-info">info</button>
+      <button type="button" id="toast-success">success</button>
+      <button type="button" id="toast-error">error</button>
+      <button type="button" id="toast-warning">warning</button>
+      <button type="button" id="toastError">ui.error()</button>
+    </div>
+  </section>
+  <section id="tabs">
+    <h2>tabs</h2>
+    <ul class="tabmenu" data-scope="tabPanels">
+      <li data-tab="tab-one" class="active">One</li>
+      <li data-tab="tab-two">Two</li>
+      <li data-tab="tab-three">Three</li>
+    </ul>
+    <div id="tabPanels">
+      <section class="tab active" id="tab-one">First panel. Arrow keys / Home / End move between tabs.</section>
+      <section class="tab" id="tab-two">Second panel.</section>
+      <section class="tab" id="tab-three">Third panel.</section>
+    </div>
+  </section>
+  <section id="accordion-multi">
+    <h2>accordion · multi-open</h2>
+    <div class="accordion">
+      <div class="accordion-item">
+        <div class="accordion-header">First</div>
+        <div class="accordion-content">Both items can be open at once.</div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header">Second</div>
+        <div class="accordion-content">Enter / Space toggles, arrows move, Escape collapses.</div>
+      </div>
+    </div>
+  </section>
+  <section id="accordion-single">
+    <h2>accordion · data-single</h2>
+    <div class="accordion" data-single>
+      <div class="accordion-item active">
+        <div class="accordion-header">Alpha</div>
+        <div class="accordion-content">Opening another item closes this one.</div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header">Beta</div>
+        <div class="accordion-content">Only one open at a time.</div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header">Gamma</div>
+        <div class="accordion-content">Third item.</div>
+      </div>
+    </div>
+  </section>
+  <section id="modal">
+    <h2>modal</h2>
+    <div class="controls">
+      <button type="button" id="modalOpen">open</button>
+      <button type="button" id="modalMissing">open missing id (expect error toast)</button>
+    </div>
+    <p class="out" data-note>Tab must cycle inside the dialog. Escape or an overlay click closes it, and focus returns to the opener.</p>
+  </section>
+
+  <section id="dropdown">
+    <h2>dropdown</h2>
+    <p class="out" data-note>A button and a panel. <code>ui.dropdown()</code> handles the toggle, closes on an outside click, on <kbd>Escape</kbd>, and when an item is chosen — the click itself is yours to handle.</p>
+    <div class="controls">
+      <div class="dropdown">
+        <button class="dropdown-toggle" type="button">Actions</button>
+        <ul class="dropdown-menu" id="demoDropdown">
+          <li><button type="button" data-act="rename">Rename</button></li>
+          <li><button type="button" data-act="duplicate">Duplicate</button></li>
+          <li><hr></li>
+          <li><button type="button" class="menu-danger" data-act="delete">Delete</button></li>
+        </ul>
+      </div>
+      <span class="out" id="dropdownOut">nothing chosen</span>
+    </div>
+  </section>
+
+  <section id="contextmenu">
+    <h2>context menu</h2>
+    <p class="out" data-note>Right-click the panel below. The menu opens at the pointer and is clamped so it never hangs off the viewport.</p>
+    <div class="util-box p4" data-contextmenu="demoContext" id="contextTarget">
+      right-click anywhere in here
+    </div>
+    <p class="out" id="contextOut">nothing chosen</p>
+  </section>
+
+  <section id="copy">
+    <h2>copy</h2>
+    <label>textarea source
+      <textarea id="copySrcArea" rows="2">copy me from a textarea</textarea>
+    </label>
+    <div class="controls"><button type="button" id="copyArea">Copy textarea</button></div>
+    <pre id="copySrcPre">copy me from a &lt;pre&gt; (selection path)</pre>
+    <div class="controls"><button type="button" id="copyPre">Copy pre</button></div>
+  </section>
+  <section id="onkey">
+    <h2>onKey</h2>
+    <p class="out" data-note>Press <strong>Ctrl+K</strong>, or <strong>Shift+?</strong>. Typing in the fields above must stay unaffected.</p>
+    <div class="controls"><button type="button" id="keyUnbind">unbind Ctrl+K</button></div>
+    <p class="out" id="keyOut">nothing yet</p>
+  </section>
+
+</div>
+</div>
+
+<div class="modal" id="demoModal">
+  <h3>Demo dialog</h3>
+  <p>Focus is trapped here. Try Tab and Shift+Tab.</p>
+  <div class="controls">
+    <button type="button">no-op</button>
+    <button type="button" id="modalClose">close</button>
+  </div>
+</div>
+
+<ul class="contextmenu" id="demoContext">
+  <li><button type="button" data-act="open">Open</button></li>
+  <li><button type="button" data-act="rename">Rename</button></li>
+  <li><hr></li>
+  <li><button type="button" class="menu-danger" data-act="delete">Delete</button></li>
+</ul>
+
+<script type="module" src="../js/ge-maker.js"></script>
+</body>
+</html>

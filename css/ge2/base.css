@@ -1,0 +1,141 @@
+/* css/ge2/base.css — element styles. Import after vars.css, layer(base).
+ * Adopted from the ge project's /base.css with literals swapped for tokens;
+ * its UI Components block moved to ui.css. */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-sans);
+  font-size: 100%;
+  background: var(--bg);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--body-font);
+  font-size: var(--body-size);
+  font-weight: var(--body-weight);
+  color: var(--body-color);
+  line-height: var(--leading);
+}
+
+a {
+  color: var(--ac);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--fg);
+  text-decoration-line: underline;
+  text-decoration-color: var(--ac);
+}
+
+[hidden] { display: none !important; }
+
+h1 { font-family: var(--h1-font); font-size: var(--h1); font-weight: var(--h1-weight); color: var(--h1-color); }
+h2 { font-family: var(--h2-font); font-size: var(--h2); font-weight: var(--h2-weight); color: var(--h2-color); }
+h3 { font-family: var(--h3-font); font-size: var(--h3); font-weight: var(--h3-weight); color: var(--h3-color); }
+h4 { font-family: var(--h4-font); font-size: var(--h4); font-weight: var(--h4-weight); color: var(--h4-color); }
+h5 { font-family: var(--h5-font); font-size: var(--h5); font-weight: var(--h5-weight); color: var(--h5-color); }
+h6 { font-family: var(--h6-font); font-size: var(--h6); font-weight: var(--h6-weight); color: var(--h6-color); }
+
+/* the element-typography tokens in vars.css; `initial` there = inherit */
+small {
+  font-family: var(--small-font);
+  font-size: var(--small-size);
+  font-weight: var(--small-weight);
+  color: var(--small-color);
+}
+
+h4, h5, h6 {
+  margin: var(--md) 0 var(--vxs) 0;
+  line-height: var(--leading-tight);
+}
+
+p:first-child, h1:first-child, h2:first-child,
+h3:first-child, h4:first-child, h5:first-child, h6:first-child {
+  margin-top: 0;
+}
+
+img, video, svg, canvas {
+  display: block;
+  max-width: 100%;
+}
+
+code, pre, kbd, samp {
+  font-family: var(--font-mono);
+  font-size: .875em;
+}
+
+pre {
+  margin: 0;
+  overflow-x: auto;
+}
+
+input, textarea, select, button {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+button {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: var(--sm);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition: all var(--dur-fast) var(--ease);
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+button:disabled { opacity: .5; cursor: default; }
+
+input, textarea, select {
+  background: var(--bg-inset);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: var(--xs) var(--sm);
+  outline: none;
+  font-size: var(--sm);
+  transition: border-color var(--dur-fast) var(--ease);
+}
+
+input:hover, textarea:hover, select:hover { border-color: var(--border-hover); }
+input:focus, textarea:focus, select:focus { border-color: var(--border-hover); }
+
+textarea {
+  resize: vertical;
+  line-height: var(--leading);
+}
+
+/* Focus */
+:focus-visible {
+  outline: var(--focus-width) solid var(--focus-color);
+  outline-offset: var(--focus-offset);
+}
+
+hr {
+  border: none;
+  border-top: var(--border-width) solid var(--border-muted);
+  margin: 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar { width: var(--scroll-width); background: var(--bg-inset); }
+::-webkit-scrollbar-thumb { border-radius: var(--scroll-width); background: var(--border); }
+::-webkit-scrollbar-thumb:hover { background: var(--border-hover); }

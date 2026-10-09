@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ge2 · demo</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="stylesheet" href="../css/ge-maker.css">
+</head>
+<body data-page="index">
+<div class="shell">
+<!-- filled from ge2/menu.json by js/ge-maker/menu.js -->
+<nav class="sidebar" id="siteNav"></nav>
+<div class="page">
+
+  
+  <div class="cover">
+  <div><img src='favicon.ico'></div>
+  <div><h1 id="home">ge2</h1>
+  <p class="sub">Manual harness for the framework. One page per group; the
+  sidebar is shared and comes from <code>menu.json</code>.</p>
+
+  <!-- filled from ge2/menu.json by js/ge-maker/index.js -->
+  <div class="landing"></div>
+
+  </div>
+  </div>
+
+  <h2 id="ge-maker">ge-maker</h2>
+  <p class="sub">What this harness can do, and what it can hand you. Rendered
+  from <a href="ge-maker.md"><code>ge-maker.md</code></a>.</p>
+
+  <!-- filled by js/ge-maker/index.js -->
+  <article class="doc" id="gmref">
+    <p class="out">loading ge-maker.md…</p>
+  </article>
+
+  <h2 id="function-reference">Function reference</h2>
+  <p class="sub">Every export in <code>js/ge2/</code>. Rendered from
+  <a href="function.md"><code>function.md</code></a> — the file is the source,
+  this is just a view of it.</p>
+
+  <article class="doc" id="fnref">
+    <p class="out">loading function.md…</p>
+  </article>
+
+</div>
+</div>
+
+<script type="module" src="../js/ge-maker.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ge2 · Plugins</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="stylesheet" href="../css/ge-maker.css">
+</head>
+<body data-page="plugins">
+<div class="shell">
+<!-- filled from ge2/menu.json by js/ge-maker/menu.js -->
+<nav class="sidebar" id="siteNav"></nav>
+<div class="page">
+
+  <h1>ge2 · Plugins</h1>
+  <p class="sub">Drop-in components loaded from <code>js/ge2/config.js</code>.</p>
+
+  <h2 class="group-head" id="plugins">Plugins</h2>
+  <section id="editor-md">
+    <h2>Text Editor</h2>
+    <p class="out" data-note>Reads <code>demo-note.md</code> back on load, so a refresh shows what you saved — the markdown below is only the first-run seed. <strong>Edit</strong> swaps in the source, <strong>Save</strong> re-renders, writes the file and fires <code>tex:save</code>.
+    <br><code>data-mediapath="demo"</code> → appended to the configured media base; with none set, <code>uploads/demo/</code>.
+    <br><code>data-textpath="demo"</code> + <code>id="demo-note"</code> → <code>uploads/demo/demo-note.md</code>. Set <code>textEditor.textPath</code> in <code>js/ge2/config.js</code> and it becomes <code>&lt;base&gt;/demo/</code>.</p>
+    <div data-editor="" data-mediapath="demo" data-textpath="demo" id="demo-note">## Markdown editor
+
+Body text with **bold**, *italic*, `code` and a [link](https://example.com).
+
+- list item
+- another
+
+&gt; A quote.
+
+```js
+const x = 1;
+```
+</div>
+    <p class="out" id="editorOut">no save yet</p>
+  </section>
+
+</div>
+</div>
+
+
+<script type="module" src="../js/ge-maker.js"></script>
+</body>
+</html>

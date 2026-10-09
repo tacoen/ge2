@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ge2 · quick start</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="stylesheet" href="style.css">
+<script type="module" src="script.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <span class="topbar-brand">ge2</span>
+  <span class="topbar-spacer"></span>
+  <a href="ge2/index.html">demo &amp; reference →</a>
+</header>
+
+<div class="layout p4">
+
+<nav class="sidemenu">
+  <ul>
+    <li><a href="#start">1 · start a project</a></li>
+    <li><a href="#sync">2 · keep ge2 in sync</a></li>
+    <li><a href="#config">3 · configure</a></li>
+    <li><a href="#css">4 · write CSS</a></li>
+    <li><a href="#js">5 · write JS</a></li>
+    <li><a href="#module">6 · add a module</a></li>
+    <li><a href="#plugins">7 · add a plugin</a></li>
+    <li><a href="#rules">house rules</a></li>
+  </ul>
+  <p class="fsmall">starter files</p>
+  <ul>
+    <li><a href="boiler.html">boiler.html</a></li>
+    <li><a href="boiler-config.js">boiler-config.js</a></li>
+    <li><a href="boiler-vars-overrides.css">boiler-vars-overrides.css</a></li>
+    <li><a href="favicon.ico">favicon.ico</a></li>
+    <li><a href="style.css">style.css</a></li>
+    <li><a href="script.js">script.js</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<section class="hero">
+  <h1>Kick-start a ge2 app</h1>
+  <p>PHP or static HTML, CSS in <code>@layer</code>s, JS as ES modules.
+  No build step — files are served as they are.</p>
+  <div class="hero-actions">
+    <a href="ge2/index.html">open the demo</a>
+    <a href="ge2/index.html#function-reference">function reference</a>
+  </div>
+</section>
+
+<h2 id="start">1 · Start a project</h2>
+<p>Make a sibling folder next to <code>ge2/</code> and copy the starter files
+into it. <code>boiler.html</code> is the empty page; it becomes your
+<code>index.html</code> (or rename it <code>index.php</code>).</p>
+<pre><code>cd /var/www/dash
+mkdir -p myapp/css myapp/js
+cp ge2/boiler.html                 myapp/index.html
+cp ge2/style.css ge2/script.js     myapp/
+cp ge2/boiler-vars-overrides.css   myapp/css/vars-overrides.css
+cp -r ge2/css/ge2                  myapp/css/
+cp -r ge2/js/ge2                   myapp/js/
+cp ge2/boiler-config.js            myapp/js/ge2/config.js   # no plugins enabled
+cp ge2/favicon.ico                 myapp/</code></pre>
+<p>The <code>boiler-*</code> files are clean starters. <code>boiler-config.js</code>
+replaces ge2's own <code>config.js</code>, which enables the
+<code>text-editor</code> plugin for the demo — yours starts with an empty
+plugin list, and the sync never overwrites it.
+<code>boiler-vars-overrides.css</code> is an empty override sheet, so you
+start from the stock palette rather than ge2's.</p>
+<p>That is a working page: theme applied before first paint, icons hydrated,
+tabs and accordions wired — all from <code>script.js</code>.</p>
+
+<h2 id="sync">2 · Keep ge2 in sync</h2>
+<p><code>css/ge2/</code> and <code>js/ge2/</code> in your app are a
+<strong>vendored copy — never edit them</strong>. Pull upstream changes
+with:</p>
+<pre><code>../sync-ge2.sh -n   # dry run
+../sync-ge2.sh</code></pre>
+<p>The sync mirrors upstream with <code>--delete</code> but leaves
+<code>config.js</code> and <code>icons-list.js</code> alone — those two are
+yours. To keep any other file, list it in
+<code>myapp/.ge2-sync-exclude</code>.</p>
+<p>Need a framework change? Write
+<code>myapp/ge2-suggestions/YYYY-MM-DD-topic.md</code> (what, why, diff) and
+it gets reviewed and applied upstream here.</p>
+
+<h2 id="config">3 · Configure</h2>
+<p><code>js/ge2/config.js</code> is the one framework file meant to be
+edited per project:</p>
+<pre><code>export const config = {
+  theme: 'auto',                 // 'auto' | 'light' | 'dark'
+  themeStorageKey: 'myapp-theme', // unique per app on a shared origin
+  plugins: { /* see step 7 */ },
+};</code></pre>
+<p>Colours: tune them on the <a href="ge2/token.html">Token</a> page, then
+download the result as <code>css/vars-overrides.css</code>. Icons: edit the
+set on the <a href="ge2/icons.html">icons</a> page and export
+<code>js/ge2/icons-list.js</code>.</p>
+
+<h2 id="css">4 · Write CSS</h2>
+<p><code>style.css</code> is the single wiring point. It declares the layer
+order <em>before</em> the imports — keep it that way:</p>
+<pre><code>@layer units, base, ui, plugin, page, utils;</code></pre>
+<p>App-wide rules go in its <code>@layer page { }</code> block, app-wide
+utilities in <code>@layer utils { }</code>. Use tokens only —
+<code>var(--token)</code>; check <code>css/ge2/vars.css</code> before
+inventing one.</p>
+
+<h2 id="js">5 · Write JS</h2>
+<p>ES modules only — no inline <code>&lt;script&gt;</code>, no
+<code>onclick=</code>. Start from <code>script.js</code>:</p>
+<pre><code>import { ui } from './js/ge2/ui.js';
+import { icx } from './js/ge2/icons.js';
+
+icx.observe();
+ui.tabs();
+ui.accordion();
+// opt-in: ui.handleForm(form, fn) · ui.modal('open', id) · ui.onKey(...)</code></pre>
+<p><code>localStorage</code> only through <code>js/ge2/store.js</code> —
+raw access throws in a private window.</p>
+
+<h2 id="module">6 · Add a module</h2>
+<p>A module <code>&lt;name&gt;</code> is one CSS entry and one JS entry, each
+with an optional folder beside it:</p>
+<table>
+  <thead><tr><th>Path</th><th>Holds</th></tr></thead>
+  <tbody>
+    <tr><td><code>&lt;name&gt;/index.html</code></td><td>entry page + subpages; PHP in <code>&lt;name&gt;/php/</code></td></tr>
+    <tr><td><code>css/&lt;name&gt;.css</code></td><td><code>@import url('../style.css');</code> then <code>@layer page { … }</code></td></tr>
+    <tr><td><code>css/&lt;name&gt;/</code></td><td>extra sheets, only when one is not enough</td></tr>
+    <tr><td><code>js/&lt;name&gt;.js</code></td><td>JS entry</td></tr>
+    <tr><td><code>js/&lt;name&gt;/</code></td><td>submodules imported by the entry</td></tr>
+  </tbody>
+</table>
+<p>A module sheet never re-imports ge2 and never redeclares the layer
+order — <code>style.css</code> already did both.</p>
+
+<h2 id="plugins">7 · Add a plugin</h2>
+<p>Copy the folder in, then add one key to <code>config.plugins</code>:</p>
+<pre><code>cp -r ge2/ge2-plugins/text-editor myapp/ge2-plugins/
+
+// js/ge2/config.js
+plugins: { 'text-editor': {} },
+
+// script.js
+import { loadPlugins } from './js/ge2/plugins.js';
+await loadPlugins();</code></pre>
+<p>Its CSS lands in layer <code>plugin</code>, between <code>ui</code> and
+<code>page</code>. Comment the key out and nothing is fetched. Each plugin's
+<code>readme.md</code> covers its settings.</p>
+
+<h2 id="rules">House rules</h2>
+<ul>
+  <li>Paths always relative — no hardcoded host or domain.</li>
+  <li>CDN deps are fine: pin the version, keep the URL in
+  <code>js/ge2/config.js</code>.</li>
+  <li>Server code goes in <code>php/</code> (root) or
+  <code>&lt;name&gt;/php/</code>. No endpoint authenticates — gate them
+  yourself.</li>
+  <li>Framework and app code never mix.</li>
+</ul>
+
+</main>
+</div>
+
+</body>
+</html>

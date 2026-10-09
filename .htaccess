@@ -1,0 +1,14 @@
+# ge2 — no build step, so the browser is the only thing between you and the
+# file on disk. Without an explicit Cache-Control, Apache sends only
+# Last-Modified/ETag and the browser is free to reuse a cached copy without
+# asking; ES module graphs are held onto especially hard, so an edited
+# module can keep running the old code through several reloads.
+#
+# `no-cache` does not mean "do not store" — it means "revalidate before
+# reusing". The ETag makes that a 304 with no body, so the cost is one
+# conditional request per file and edits always show up.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(js|mjs|css|json|md|html)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ge2 · Token</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="stylesheet" href="../css/ge-maker.css">
+</head>
+<body data-page="token">
+<div class="shell">
+<!-- filled from ge2/menu.json by js/ge-maker/menu.js -->
+<nav class="sidebar" id="siteNav"></nav>
+<div class="page">
+
+  <h1>ge2 · Token</h1>
+  <p class="sub">Design tokens: the theme switch, the type and colour playgrounds, and saved buckets.</p>
+
+  <h2 class="group-head" id="tokens">Token</h2>
+  <section id="theme">
+    <h2>theme</h2>
+    <div class="controls">
+      <button type="button" id="themeLight">setTheme('light')</button>
+      <button type="button" id="themeDark">setTheme('dark')</button>
+      <button type="button" id="themeToggle">toggleTheme()</button>
+    </div>
+    <p class="out" id="themeOut"></p>
+  </section>
+  <section id="tokens-type">
+    <h2>tokens · type</h2>
+    <div class="token-controls">
+      <label>root font-size · <span class="mono" id="rootSizeVal">16px</span>
+        <input type="range" id="rootSize" min="11" max="24" step="1" value="16">
+      </label>
+      <label>--leading · <span class="mono" id="leadingVal">1.5</span>
+        <input type="range" id="leading" min="1" max="2.2" step="0.05" value="1.5">
+      </label>
+      <label>--font-sans
+        <select id="fontFamily">
+          <option value="">system-ui (default)</option>
+          <option value="var(--font-mono)">--font-mono</option>
+          <option value="var(--font-serif)">--font-serif</option>
+        </select>
+      </label>
+    </div>
+    <p class="out" data-note>Every size token is in <code>rem</code>, so root font-size scales the whole page. Sample:</p>
+    <p class="type-sample">
+      <span style="font-size:var(--text-xs)">--text-xs</span>
+      <span style="font-size:var(--text-sm)">--text-sm</span>
+      <span style="font-size:var(--text-md)">--text-md</span>
+      <span style="font-size:var(--text-xl)">--text-xl</span>
+      <span style="font-size:var(--text-2xl)">--text-2xl</span>
+      <span style="font-size:var(--text-3xl)">--text-3xl</span>
+    </p>
+  </section>
+  <section id="tokens-typography">
+    <h2>tokens · typography</h2>
+    <p class="out" data-note>Font, size, weight and colour for body text, <code>h1</code>–<code>h6</code> and <code>small</code>. Each element reads its own tokens — <code>--body-font</code>, <code>--h1-weight</code>, <code>--small-color</code>… — declared in <code>vars.css</code> and applied in <code>base.css</code>. Every option is another token, written as <code>var(--token)</code>; <strong>default</strong> drops the override and shows what the stylesheet gives. A default of <code>inherit</code> means the token is left at <code>initial</code>, so the element takes its parent's value. Heading sizes are the existing <code>--h1</code>…<code>--h6</code>. Changes persist, go into buckets, and are written to the <code>:root</code> block of <strong>download vars.css</strong>.</p>
+    <div id="typoEditors"></div>
+    <div class="controls" style="margin-block-start:var(--md)">
+      <button type="button" id="typoReset">reset typography</button>
+    </div>
+  </section>
+  <section id="tokens-colour">
+    <h2>tokens · colour</h2>
+    <p class="out" data-note>These are the seed tokens. Everything under Derived is computed from them with <code>color-mix()</code> and updates live.
+    <br><code>--gray</code> drives the foreground ramp (<code>--fg</code> → <code>--muted</code> 50% → <code>--subtle</code> 85%, fading toward <code>--gray</code>), the same formula in both themes. The three borders mix <code>--bg</code> toward <code>--fg</code> (12% / 22% / 50%), also shared. <code>--bg</code> drives the surfaces: <code>--bg-subtle</code> 4% and <code>--bg-muted</code> 8% rise toward <code>--tint</code>, <code>--bg-inset</code> 40% sinks toward <code>--sink</code> — the theme only picks the direction (light: black / white, dark: white / black). <code>--bg-overlay</code> is the modal/drawer scrim only — black at 50%, translucent, the same in both themes. Each <code>--seed-*</code> drives one system colour — <code>--seed-ac</code> the accent (<code>--ac</code>, which anchors take), the other four <code>--pr</code> / <code>--sc</code> / <code>--da</code> / <code>--wr</code>.
+    <br>Per row: the stylesheet's own value on the left — click it to copy into the override — then the picker, the value field, a live preview and a reset.
+    <br>The text field is the real control: it takes any CSS colour (<code>#1a2b3c</code>, <code>rebeccapurple</code>, <code>color-mix(…)</code>) and the picker mirrors whatever it resolves to. Empty falls back to the stylesheet, and the placeholder shows that value.</p>
+    <div id="colorEditors"></div>
+    <div class="controls" style="margin-block:var(--md)">
+      <button type="button" id="colorReset">reset to theme</button>
+      <span class="out" data-note id="colorNote">Overrides sit inline on &lt;html&gt; and persist across reloads. Everything <code>vars.css</code> declares inside a <code>[data-theme]</code> block is kept <strong>per theme</strong> — the three hues and the five <code>--seed-*</code> — so switching swaps them in rather than clearing them. Only <code>--white</code> and <code>--black</code> are shared, because only they sit in the theme-neutral <code>:root</code>.</span>
+    </div>
+
+    <h3 class="sub-h3">Derived</h3>
+    <div class="derived" id="derivedSwatches"></div>
+  </section>
+
+  <section id="buckets">
+    <h2>tokens · buckets</h2>
+    <p class="out" data-note>Every change is kept in <code>localStorage</code>, so a reload restores it. A bucket is a named snapshot of <em>both</em> themes — save, load, delete. <strong>download vars.css</strong> fetches the real sheet and appends your overrides, so the file is a drop-in replacement. Light and dark are both written, each scoped to its own <code>[data-theme]</code> block so neither leaks into the other.</p>
+    <div class="bucket-bar">
+      <input type="text" id="bucketName" placeholder="bucket name" autocomplete="off">
+      <button type="button" id="bucketSave">save</button>
+      <select id="bucketList"></select>
+      <button type="button" id="bucketLoad">load</button>
+      <button type="button" id="bucketDelete">delete</button>
+      <button type="button" id="bucketClear">clear overrides</button>
+      <button type="button" id="varsDownload">download vars.css</button>
+    </div>
+    <p class="out" id="bucketOut"></p>
+  </section>
+
+</div>
+</div>
+
+
+<script type="module" src="../js/ge-maker.js"></script>
+</body>
+</html>

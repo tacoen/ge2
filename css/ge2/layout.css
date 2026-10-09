@@ -1,0 +1,143 @@
+/* css/ge2/layout.css — page-level layout primitives.
+ * Import into layer(ui) after ui.css. Tokens only; every literal lives
+ * in vars.css. Selectors are :where()-wrapped so a page can override freely.
+ *
+ * topbar · hero · layout+sidemenu · drawer (slide-in) · dashboard
+ */
+
+/* ── topbar ── sticky strip across the top ── */
+:where(.topbar) {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-overlay);
+  display: flex;
+  align-items: center;
+  gap: var(--md);
+  padding: var(--xs) var(--md);
+  background: var(--bg-subtle);
+  border-block-end: var(--border-width) solid var(--border);
+}
+
+:where(.topbar-brand) {
+  font-family: var(--font-mono);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* pushes everything after it to the far edge */
+:where(.topbar-spacer) { margin-inline-start: auto; }
+
+/* ── hero ── banner block ── */
+:where(.hero) {
+  padding: var(--vlg) var(--lg);
+  background: var(--pr-subtle);
+  border: var(--border-width) solid var(--pr-border);
+  border-radius: var(--radius-lg);
+  text-align: center;
+}
+
+:where(.hero h1, .hero h2) { margin: 0 0 var(--xs); }
+:where(.hero p) { margin: 0 auto; max-width: 52ch; color: var(--muted); }
+:where(.hero-actions) {
+  display: flex;
+  justify-content: center;
+  gap: var(--xs);
+  margin-block-start: var(--md);
+}
+
+/* ── layout + sidemenu ── a fixed column beside the content ── */
+:where(.layout) {
+  display: grid;
+  grid-template-columns: var(--sidemenu-width) minmax(0, 1fr);
+  gap: var(--lg);
+  align-items: start;
+}
+
+:where(.sidemenu) {
+  position: sticky;
+  top: var(--md);
+  padding: var(--sm);
+  background: var(--bg-subtle);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+:where(.sidemenu ul) { margin: 0; padding: 0; list-style: none; }
+:where(.sidemenu a) {
+  display: block;
+  padding: var(--vxs) var(--xs);
+  border-radius: var(--radius-sm);
+  color: var(--muted);
+  font-size: var(--text-sm);
+  text-decoration: none;
+}
+:where(.sidemenu a:hover) { background: var(--bg-subtle); color: var(--fg); }
+
+@media (max-width: 767.98px) {
+  :where(.layout) { grid-template-columns: minmax(0, 1fr); }
+  :where(.sidemenu) { position: static; }
+}
+
+/* ── drawer ── slides in from the left, over the page ── */
+:where(.drawer-scrim) {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  background: var(--bg-overlay);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--dur) var(--ease), visibility var(--dur) var(--ease);
+}
+
+:where(.drawer-scrim.open) { opacity: 1; visibility: visible; }
+
+:where(.drawer) {
+  position: fixed;
+  inset-block: 0;
+  inset-inline-start: 0;
+  z-index: var(--z-modal);
+  width: min(var(--drawer-width), 85vw);
+  padding: var(--md);
+  overflow: auto;
+  background: var(--bg);
+  border-inline-end: var(--border-width) solid var(--border);
+  box-shadow: 0 var(--vxs) var(--md) var(--shadow);
+  transform: translateX(-100%);
+  transition: transform var(--dur) var(--ease);
+}
+
+:where(.drawer.open) { transform: translateX(0); }
+
+/* ── dashboard ── card grid with stat tiles ── */
+:where(.dashboard) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--card-min), 1fr));
+  gap: var(--md);
+}
+
+:where(.card) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--xs);
+  padding: var(--md);
+  background: var(--bg-subtle);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+:where(.card-title) {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+:where(.card-value) {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+}
+
+:where(.card-trend.up) { color: var(--sc); }
+:where(.card-trend.down) { color: var(--da); }

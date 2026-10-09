@@ -1,0 +1,17 @@
+{
+  "sandbox": {
+    "enabled": true
+  },
+  "permissions": {
+    "deny": [
+      "Edit(//var/www/dash/.log/**)",
+      "Edit(//var/www/dash/fm/**)",
+      "Edit(//var/www/dash/pop2wa/**)",
+      "Edit(//var/www/dash/sima/**)",
+      "Edit(//var/www/dash/tps/**)",
+      "Edit(//var/www/dash/vbiak/**)",
+      "Edit(//var/www/dash/ws/**)",
+      "Edit(//var/www/dash/wtv/**)"
+    ]
+  }
+}

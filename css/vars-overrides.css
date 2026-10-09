@@ -1,0 +1,17 @@
+
+/* ── exported from the token playground, 2026-09-20 ──────────
+   Changed values only; everything else falls back to vars.css.
+   style.css imports it into layer(units) right after vars.css, so it wins.
+   Don't need it? Delete just the file — the import stays and 404s. */
+
+:root {
+
+}
+
+:root[data-theme='light'] {
+
+}
+
+:root[data-theme='dark'] {
+
+}

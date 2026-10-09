@@ -1,0 +1,31 @@
+# ge2 — no build step, so nothing generated to ignore; just local state.
+
+# shell / tool dotfiles that can appear in the project root
+.bash_profile
+.bashrc
+.profile
+.zprofile
+.zshrc
+.gitconfig
+.ripgreprc
+.mcp.json
+.gitmodules
+
+# editors and OS
+.idea
+.vscode
+*.swp
+.DS_Store
+Thumbs.db
+
+# Claude Code: share the project settings, keep the rest local
+.claude/*
+!.claude/settings.json
+
+# Plugin uploads are runtime data. Keep each plugin's exec-guard .htaccess and
+# the text-editor demo note; ignore everything users write.
+ge2-plugins/*/uploads/*
+!ge2-plugins/*/uploads/.htaccess
+!ge2-plugins/text-editor/uploads/demo/
+ge2-plugins/text-editor/uploads/demo/*
+!ge2-plugins/text-editor/uploads/demo/demo-note.md

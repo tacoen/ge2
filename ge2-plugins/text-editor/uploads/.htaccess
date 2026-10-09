@@ -1,0 +1,29 @@
+# Uploaded media and saved markdown — never execute anything here.
+#
+# php_admin_flag is NOT valid in .htaccess (server/vhost context only) and
+# makes Apache return 500 for every file in this folder. php_flag is valid,
+# but only exists under mod_php — unguarded it 500s on PHP-FPM. Hence the
+# <IfModule>. Needs AllowOverride Options (or All) on the parent Directory.
+
+<IfModule mod_php.c>
+  php_flag engine off
+</IfModule>
+
+# Independent of how PHP is wired in: stop anything being handed to an
+# interpreter, and serve it as plain text if it is ever requested.
+<IfModule mod_mime.c>
+  RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .php8 .phps .pl .py .cgi .sh
+  RemoveType .php .phtml .php3 .php4 .php5 .php7 .php8 .phps
+  AddType text/plain .php .phtml .phps .pl .py .cgi .sh
+</IfModule>
+
+# Last line of defence: refuse to serve executables at all.
+<FilesMatch "\.(php|phtml|php[0-9]|phps|pl|py|cgi|sh)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+</FilesMatch>
+
+<IfModule mod_autoindex.c>
+  Options -Indexes
+</IfModule>

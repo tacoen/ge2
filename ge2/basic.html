@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ge2 · Basic</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="stylesheet" href="../css/ge-maker.css">
+</head>
+<body data-page="basic">
+<div class="shell">
+<!-- filled from ge2/menu.json by js/ge-maker/menu.js -->
+<nav class="sidebar" id="siteNav"></nav>
+<div class="page">
+
+  <h1>ge2 · Basic</h1>
+  <p class="sub">Form wiring and the utility classes.</p>
+
+  <h2 class="group-head" id="forms">Forms</h2>
+  <section id="form-prepare">
+    <h2>prepareForm / handleForm</h2>
+    <p class="out" data-note>Every layout below is built from <code>utils.css</code> classes — <code>.flex</code>, <code>.column</code>, <code>.middle</code>, <code>.w*</code> and the <code>-md</code> variants — plus three page-layer grouping classes that space by margin, never <code>gap</code>: <code>.stack</code> (vertical), <code>.cluster</code> (inline) and <code>.cluster-md</code> (stacked on phones, inline from md). A bare <code>&lt;label&gt;</code> stacks its text above the field; add <code>.flex.middle</code> to put them side by side.</p>
+    <form id="demoForm">
+      <div id="formFields" class="flex column stack">
+        <!-- deliberately no id= on any field: prepareForm must generate them -->
+
+        <fieldset class="p3">
+          <legend>block labels · bare &lt;label&gt;, text above the field</legend>
+          <label>Name
+            <input type="text" name="name" required placeholder="required">
+          </label>
+          <label>Email
+            <input type="email" name="email" required placeholder="required, must be valid">
+          </label>
+          <label>Password
+            <input type="password" name="password" autocomplete="new-password">
+          </label>
+          <label>Search
+            <input type="search" name="search">
+          </label>
+          <label>Role
+            <select name="role">
+              <option value="admin">admin</option>
+              <option value="editor">editor</option>
+            </select>
+          </label>
+          <label>Notes
+            <textarea name="notes" rows="2"></textarea>
+          </label>
+        </fieldset>
+
+        <fieldset class="p3">
+          <legend>inline labels · .flex.middle, text .w25 + field .w75</legend>
+          <label class="flex middle"><span class="w25">Number</span>
+            <input class="w75" type="number" name="number" min="0" max="100" step="1">
+          </label>
+          <label class="flex middle"><span class="w25">Tel</span>
+            <input class="w75" type="tel" name="tel" placeholder="+81 90 1234 5678">
+          </label>
+          <label class="flex middle"><span class="w25">URL</span>
+            <input class="w75" type="url" name="url" placeholder="https://example.com">
+          </label>
+          <label class="flex middle"><span class="w25">Color</span>
+            <input class="w75" type="color" name="color" value="#1989ae">
+          </label>
+          <label class="flex middle"><span class="w25">Range</span>
+            <input class="w75" type="range" name="range" min="0" max="100" value="50">
+          </label>
+          <label class="flex middle"><span class="w25">File</span>
+            <input class="w75" type="file" name="file">
+          </label>
+        </fieldset>
+
+        <fieldset class="p3">
+          <legend>inline group · .flex.column.row-md.cluster-md — stacked on phones, one row from md</legend>
+          <div class="flex column row-md cluster-md">
+            <label class="flex column flex-1">Date
+              <input type="date" name="date">
+            </label>
+            <label class="flex column flex-1">Time
+              <input type="time" name="time">
+            </label>
+            <label class="flex column flex-1">Month
+              <input type="month" name="month">
+            </label>
+            <label class="flex column flex-1">Week
+              <input type="week" name="week">
+            </label>
+          </div>
+          <label>Datetime-local
+            <input type="datetime-local" name="datetime">
+          </label>
+        </fieldset>
+
+        <div class="flex column row-md stack cluster-md">
+          <fieldset class="p3 flex-1">
+            <legend>checkboxes · inline group, .flex.wrap.cluster</legend>
+            <div class="flex wrap cluster">
+              <label class="flex middle"><input type="checkbox" name="news" value="yes"> newsletter</label>
+              <label class="flex middle"><input type="checkbox" name="terms" value="yes"> terms</label>
+              <label class="flex middle"><input type="checkbox" name="beta" value="yes"> beta</label>
+            </div>
+          </fieldset>
+
+          <fieldset class="p3 flex-1">
+            <legend>radios · block group, .flex.column</legend>
+            <div class="flex column">
+              <label class="flex middle"><input type="radio" name="size" value="s" checked> small</label>
+              <label class="flex middle"><input type="radio" name="size" value="m"> medium</label>
+              <label class="flex middle"><input type="radio" name="size" value="l"> large</label>
+            </div>
+          </fieldset>
+        </div>
+
+        <input type="hidden" name="hidden" value="from a hidden input">
+      </div>
+      <!-- secondary actions left, submits right; the primary sits last, at the far edge -->
+      <div class="form-actions flex middle between wrap cluster">
+        <div class="flex wrap cluster">
+          <input type="reset" value="Cancel">
+          <input type="button" value="input button">
+          <button type="button" id="formInject">inject field + prepareForm()</button>
+        </div>
+        <div class="flex wrap cluster end">
+          <input type="image" src="favicon.ico" alt="Submit (input image)">
+          <input type="submit" value="input submit">
+          <button type="submit">Submit</button>
+        </div>
+      </div>
+    </form>
+    <p class="out" id="formIds"></p>
+    <p class="out" id="formOut"></p>
+  </section>
+
+  <h2 class="group-head" id="utils">Utils</h2>
+  <section id="utils-flex">
+    <h2>utils · flex</h2>
+    <p class="out" data-note>Modifiers are scoped under <code>.flex</code>, so <code>.center</code> alone does nothing — by design.</p>
+
+    <div class="util-demo">
+      <div class="p1 flex row middle between gap-3 util-box">
+        <span class="p1 util-chip">row</span><span class="p1 util-chip">middle</span><span class="p1 util-chip">between</span>
+      </div>
+      <div class="p1 flex column gap-2 util-box">
+        <span class="p1 util-chip">column</span><span class="p1 util-chip">gap-2</span>
+      </div>
+      <div class="p1 flex row center gap-1 util-box">
+        <span class="p1 util-chip">center</span><span class="p1 util-chip">gap-1</span>
+      </div>
+      <div class="p1 flex row gap-4 util-box">
+        <span class="p1 util-chip flex-1">flex-1</span><span class="p1 util-chip noshrink">noshrink</span>
+      </div>
+    </div>
+
+    <h3 class="sub-h3">padding · .p1 – .p5</h3>
+    <div class="flex row wrap middle gap-2">
+      <span class="util-chip p1">p1</span>
+      <span class="util-chip p2">p2</span>
+      <span class="util-chip p3">p3</span>
+      <span class="util-chip p4">p4</span>
+      <span class="util-chip p5">p5</span>
+    </div>
+
+    <h3 class="sub-h3">width · .w10 – .w100 <span class="mono">(fixed at every size — opt into change with -sm/-md/-lg)</span></h3>
+    <div class="util-widths">
+      <div class="p1 w25 util-box">w25</div>
+      <div class="p1 w33 util-box">w33</div>
+      <div class="p1 w50 util-box">w50</div>
+      <div class="p1 w66 util-box">w66</div>
+      <div class="p1 w100 util-box">w100</div>
+    </div>
+
+    <p class="fsmall util-box">.fsmall — font-size uses the <code>--xs</code> spacing token (0.5rem / 8px)</p>
+  </section>
+  <section id="utils-responsive">
+    <h2>utils · responsive</h2>
+    <p class="out" data-note>Mobile-first: <code>-sm</code> applies from 576px <em>up</em>, <code>-md</code> from 768px, and so on. Resize the window — the live readout shows which breakpoint is active.</p>
+    <p class="out" id="bpNow">measuring…</p>
+
+    <h3 class="sub-h3">.w100 .w50-sm .w33-md .w25-lg</h3>
+    <div class="flex row wrap gap-2">
+      <div class="p1 w100 w50-sm w33-md w25-lg util-box">A</div>
+      <div class="p1 w100 w50-sm w33-md w25-lg util-box">B</div>
+      <div class="p1 w100 w50-sm w33-md w25-lg util-box">C</div>
+      <div class="p1 w100 w50-sm w33-md w25-lg util-box">D</div>
+    </div>
+
+    <h3 class="sub-h3">.flex.column.row-md.between-md</h3>
+    <div class="p1 flex column row-md between-md gap-2 util-box">
+      <span class="p1 util-chip">stacks below md</span>
+      <span class="p1 util-chip">spreads from md up</span>
+    </div>
+
+    <h3 class="sub-h3">.p1 .p3-md .p5-lg</h3>
+    <div class="p1 p3-md p5-lg util-box">padding grows with the viewport</div>
+  </section>
+
+</div>
+</div>
+
+
+<script type="module" src="../js/ge-maker.js"></script>
+</body>
+</html>

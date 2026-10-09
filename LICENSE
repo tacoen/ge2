@@ -1,0 +1,54 @@
+ge2 — licence and third-party notices
+=====================================
+
+Your own terms
+--------------
+
+The ge2 framework code (css/ge2/*.css, js/ge2/ui.js, and the hydration
+wrapper in js/ge2/icons.js) has no licence chosen yet. Replace this section
+with your terms before distributing the project. Until then, default
+copyright applies: no one else has permission to reuse it.
+
+This file exists because the section below is a legal obligation regardless
+of what you pick.
+
+
+Third-party: Hugeicons
+----------------------
+
+js/ge2/icons.js embeds SVG path data for 42 icons taken verbatim from
+@hugeicons/core-free-icons (Stroke Rounded, the free tier):
+
+    https://github.com/hugeicons
+    https://hugeicons.com
+
+That package is MIT licensed, and MIT requires the notice below to travel
+with any copy or substantial portion of the work — including every copy of
+ge2 made into another project. Keep this file alongside js/ge2/icons.js.
+
+Only the path data is Hugeicons'; the icx wrapper around it is ge2 code and
+falls under "Your own terms" above.
+
+---
+
+MIT License
+
+Copyright (c) 2025 Hugeicons
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

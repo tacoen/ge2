@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ge2 · Layout</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="stylesheet" href="../css/ge-maker.css">
+</head>
+<body data-page="layout">
+<div class="shell">
+<!-- filled from ge2/menu.json by js/ge-maker/menu.js -->
+<nav class="sidebar" id="siteNav"></nav>
+<div class="page">
+
+  <h1>ge2 · Layout</h1>
+  <p class="sub">Page-level primitives from <code>css/ge2/layout.css</code>.</p>
+
+  <h2 class="group-head" id="layout">Layout</h2>
+
+  <section id="topbar">
+    <h2>topbar</h2>
+    <p class="out" data-note>Sticky strip. <code>.topbar-spacer</code> pushes what follows to the far edge.</p>
+    <div class="topbar">
+      <span class="topbar-brand">ge2</span>
+      <span class="out">project</span>
+      <span class="topbar-spacer"></span>
+      <button type="button" data-drawer="demoDrawer">menu</button>
+      <button type="button" id="topbarTheme">theme</button>
+    </div>
+  </section>
+
+  <section id="hero">
+    <h2>hero header</h2>
+    <p class="out" data-note>Banner block. Colours come from the <code>--pr-*</code> family, so it retunes with the palette.</p>
+    <div class="hero">
+      <h2>Build it once</h2>
+      <p>A hero is a heading, a line of copy and somewhere to go next. Nothing here is a fixed size — it all reads from tokens.</p>
+      <div class="hero-actions">
+        <button type="button">Primary</button>
+        <button type="button">Secondary</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="drawer">
+    <h2>slide left</h2>
+    <p class="out" data-note>An off-canvas panel. <code>ui.drawer()</code> wires every <code>[data-drawer="id"]</code>; the scrim and <kbd>Escape</kbd> close it. Unlike <code>ui.modal()</code> it does not trap focus — it is navigation, not a dialog.</p>
+    <div class="controls">
+      <button type="button" data-drawer="demoDrawer">open drawer</button>
+      <span class="out" id="drawerOut">closed</span>
+    </div>
+  </section>
+
+  <section id="sidemenu">
+    <h2>sidemenu</h2>
+    <p class="out" data-note>A sticky column beside the content. Collapses to one column below <code>md</code>.</p>
+    <div class="layout">
+      <aside class="sidemenu">
+        <ul>
+          <li><a href="#topbar">Topbar</a></li>
+          <li><a href="#hero">Hero</a></li>
+          <li><a href="#drawer">Drawer</a></li>
+          <li><a href="#dashboard">Dashboard</a></li>
+        </ul>
+      </aside>
+      <div class="util-box p3">
+        <p>The content column. <code>minmax(0, 1fr)</code> on this side is what
+        stops a wide child — a long <code>&lt;pre&gt;</code>, say — from pushing
+        the grid wider than its container.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="dashboard">
+    <h2>dashboard</h2>
+    <p class="out" data-note>Auto-fitting card grid; the tiles reflow on their own, no breakpoints involved.</p>
+    <div class="dashboard">
+      <div class="card">
+        <span class="card-title">Uploads</span>
+        <span class="card-value">1,284</span>
+        <span class="card-trend up">▲ 12% this week</span>
+      </div>
+      <div class="card">
+        <span class="card-title">Storage</span>
+        <span class="card-value">7.4 GB</span>
+        <span class="card-trend down">▼ 3% this week</span>
+      </div>
+      <div class="card">
+        <span class="card-title">Notes</span>
+        <span class="card-value">96</span>
+        <span class="out">across 14 folders</span>
+      </div>
+      <div class="card">
+        <span class="card-title">Icons</span>
+        <span class="card-value">42</span>
+        <span class="out">Hugeicons, MIT</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+</div>
+
+<div class="drawer-scrim" data-drawer-for="demoDrawer"></div>
+<aside class="drawer" id="demoDrawer" aria-label="Demo navigation">
+  <h3>Drawer</h3>
+  <p class="out" data-note>Slides in from the left, over the page. Escape or a click on the scrim closes it.</p>
+  <ul class="sidemenu">
+    <li><a href="#topbar">Topbar</a></li>
+    <li><a href="#hero">Hero</a></li>
+    <li><a href="#sidemenu">Sidemenu</a></li>
+    <li><a href="#dashboard">Dashboard</a></li>
+  </ul>
+  <div class="controls">
+    <button type="button" data-drawer="demoDrawer">close</button>
+  </div>
+</aside>
+
+<script type="module" src="../js/ge-maker.js"></script>
+</body>
+</html>

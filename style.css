@@ -1,0 +1,20 @@
+/* style.css — root stylesheet, and the only place ge2 is wired up. */
+
+@layer units, base, ui, plugin, page, utils;
+
+/* Base */
+
+@import url('css/ge2/vars.css')  layer(units);
+@import url('css/vars-overrides.css') layer(units);
+@import url('css/ge2/base.css')  layer(base);
+@import url('css/ge2/ui.css')    layer(ui);
+@import url('css/ge2/layout.css') layer(ui);
+@import url('css/ge2/utils.css') layer(utils);
+
+@layer page {
+  /* app-wide rules go here; anything module-specific belongs in css/<name>.css */
+}
+
+@layer utils {
+  /* app-wide utils go here; anything module-specific belongs in css/<name>.css */
+}

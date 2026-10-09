@@ -1,0 +1,87 @@
+/* css/text-editor.css — styles for the js/text-editor.js plugin.
+ *
+ * A plugin sheet, not framework and not page: import it into layer(plugin),
+ * which sits after ui and before page, so ge2 components still win over
+ * element defaults and a page can still restyle the editor.
+ *
+ *   @layer units, base, ui, plugin, page, utils;
+ *   @import url('css/text-editor.css') layer(plugin);
+ *
+ * Tokens only — every value comes from css/ge2/vars.css.
+ */
+
+:where(.tex) {
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-subtle);
+}
+
+:where(.tex-bar) {
+  display: flex;
+  gap: var(--xs);
+  padding: var(--xs) var(--sm);
+  border-block-end: var(--border-width) solid var(--border-muted);
+}
+
+:where(.tex-btn) {
+  padding: var(--vxs) var(--xs);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--muted);
+}
+
+:where(.tex-btn:hover) { background: var(--bg-subtle); color: var(--fg); }
+:where(.tex-save) { border-color: var(--sc-border); background: var(--sc-bg); color: var(--fg); }
+
+:where(.tex-view),
+:where(.tex-input) {
+  padding: var(--sm) var(--md);
+  font-size: var(--text-md);
+}
+
+:where(.tex-view > :first-child) { margin-block-start: 0; }
+:where(.tex-view > :last-child)  { margin-block-end: 0; }
+:where(.tex-view img),
+:where(.tex-view video) { max-width: 100%; border-radius: var(--radius-sm); }
+:where(.tex-view audio) { width: 100%; margin-block: var(--xs); }
+
+:where(.tex-view pre) {
+  padding: var(--xs) var(--sm);
+  background: var(--bg-inset);
+  border-radius: var(--radius-sm);
+}
+
+:where(.tex-view blockquote) {
+  margin-inline: 0;
+  padding-inline-start: var(--sm);
+  border-inline-start: var(--tab-indicator-width) solid var(--border);
+  color: var(--muted);
+}
+
+:where(.tex-view th),
+:where(.tex-view td) {
+  padding: var(--vxs) var(--xs);
+  border: var(--border-width) solid var(--border-muted);
+  text-align: start;
+}
+
+:where(.tex-input) {
+  display: block;
+  width: 100%;
+  min-height: 12rem;
+  border: 0;
+  border-radius: 0;
+  background: var(--bg);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  resize: vertical;
+}
+
+:where(.tex.uploading)::after {
+  content: 'uploading…';
+  display: block;
+  padding: var(--vxs) var(--sm);
+  color: var(--muted);
+  font-size: var(--text-xs);
+}

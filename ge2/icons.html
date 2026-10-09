@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ge2 · Icons</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="stylesheet" href="../css/ge-maker.css">
+</head>
+<body data-page="icons">
+<div class="shell">
+<!-- filled from ge2/menu.json by js/ge-maker/menu.js -->
+<nav class="sidebar" id="siteNav"></nav>
+<div class="page">
+
+  <h1>ge2 · Icons</h1>
+  <p class="sub">The bundled icon set and the two ways to place one.</p>
+
+  <h2 class="group-head" id="icons">icons</h2>
+  <section id="icons-svg">
+    <h2>icons · icx.svg() + tokens</h2>
+    <p class="out" id="iconMeta"></p>
+
+    <div class="token-controls">
+      <label>--icon-size · <span class="mono" id="sizeVal">1.5rem</span>
+        <input type="range" id="iconSize" min="12" max="64" step="2" value="24">
+      </label>
+      <label>--icon-stroke-width · <span class="mono" id="strokeVal">1.5</span>
+        <input type="range" id="iconStroke" min="0.5" max="4" step="0.25" value="1.5">
+      </label>
+      <label>--icon-stroke
+        <select id="iconColor">
+          <option value="currentColor">currentColor</option>
+          <option value="var(--pr)">var(--pr)</option>
+          <option value="var(--sc)">var(--sc)</option>
+          <option value="var(--da)">var(--da)</option>
+          <option value="var(--wr)">var(--wr)</option>
+          <option value="var(--muted)">var(--muted)</option>
+          <option value="var(--ac)">var(--ac)</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="icons-grid" id="iconsGrid"></div>
+  </section>
+  <section id="icons-edit">
+    <h2>icons · add / edit</h2>
+    <p class="out" data-note>Author the set from the page. Every tile has an edit button; the last tile adds a new icon. Paste either a whole <code>&lt;svg&gt;</code> or just its contents — the wrapper is stripped, since <code>icons-list.js</code> stores the body only and <code>icx.svg()</code> supplies the rest. Changes live in <code>localStorage</code> and apply to this page immediately; <strong>export</strong> writes a complete <code>icons-list.js</code> for you to drop into <code>js/ge2/</code>.</p>
+    <div class="controls">
+      <button type="button" id="iconAdd">add icon</button>
+      <button type="button" id="iconExport">export icons-list.js</button>
+      <button type="button" id="iconReset">reset to bundled</button>
+    </div>
+    <p class="out" id="iconEditOut"></p>
+  </section>
+  <section id="icons-hydrate">
+    <h2>icons · hydrate + observe</h2>
+    <p class="out" data-note>These three exist in the markup at load, so <code>icx.observe()</code> hydrates them on its first pass. The middle two carry <code>data-icon-size</code>/<code>-stroke</code>, which ride on inline custom properties and so survive the token rules above:</p>
+    <div class="controls">
+      <span data-icon="star"></span>
+      <span data-icon="heart" data-icon-size="32"></span>
+      <span data-icon="moon" data-icon-size="16" data-icon-stroke="3"></span>
+    </div>
+    <div class="controls" style="margin-top:0.8rem">
+      <button type="button" id="iconInject">inject [data-icon] after load</button>
+      <button type="button" id="iconMissing">inject unknown icon name</button>
+    </div>
+    <div id="iconLive"></div>
+    <p class="out" id="iconOut"></p>
+  </section>
+
+</div>
+</div>
+
+
+<div class="modal" id="iconModal">
+  <h3 id="iconModalTitle">Add icon</h3>
+  <div class="icon-form">
+    <label for="iconNameField">name</label>
+    <input type="text" id="iconNameField" placeholder="my-icon" spellcheck="false" autocomplete="off">
+    <label for="iconSvgField">markup</label>
+    <textarea id="iconSvgField" rows="6" spellcheck="false"
+      placeholder="&lt;svg …&gt;&lt;path d=…/&gt;&lt;/svg&gt; or just &lt;path d=…/&gt;"></textarea>
+  </div>
+  <div class="icon-preview">
+    <span id="iconPreview"></span>
+    <span class="out" id="iconPreviewHint"></span>
+  </div>
+  <div class="controls">
+    <button type="button" id="iconDelete">delete</button>
+    <button type="button" id="iconCancel">cancel</button>
+    <button type="button" id="iconSave">save</button>
+  </div>
+</div>
+
+<script type="module" src="../js/ge-maker.js"></script>
+</body>
+</html>

@@ -1,0 +1,311 @@
+/* css/ge2/ui.css — the components js/ge2/ui.js drives, plus icon geometry.
+ * Import into layer(ui). Tokens only; every literal lives in vars.css.
+ * Overlay/modal/toast/accordion adopted from the ge project; tabs and icons
+ * are ge2. Layer ui already beats base.css, so selectors stay wrapped
+ * in :where() at zero specificity and a page rule can override any of them. */
+
+/* ── icons (ge2) ────────────────────────────────────────
+   icons.js tags every <svg> it makes with `icx`; geometry comes from the
+   --icon-* tokens, so redefining one on any ancestor restyles everything
+   beneath. `display` overrides base.css's `svg { display: block }` — by
+   layer, not specificity. */
+:where(.icx) {
+  display: inline-block;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  flex: none;
+  fill: var(--icon-fill);
+  vertical-align: middle;
+}
+
+/* Targets the shapes, not the <svg>: the Hugeicons paths carry stroke and
+   stroke-width as presentation attributes, which beat an inherited value. */
+:where(.icx) :where(path, circle, ellipse, rect, line, polyline, polygon) {
+  stroke: var(--icon-stroke);
+  stroke-width: var(--icon-stroke-width);
+  stroke-linecap: var(--icon-linecap);
+  stroke-linejoin: var(--icon-linejoin);
+}
+
+:where([data-icon]) {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+}
+
+:where(.icx-sm) { --icon-size: var(--icon-size-sm); }
+:where(.icx-lg) { --icon-size: var(--icon-size-lg); }
+
+/* ── overlay + modal ────────────────────────────────────
+   The .active rules are a ge2 addition: ui.js clears an inline display and
+   adds .active, so the shown value must live on .active — the ge original
+   defined only the hidden state and never appeared. */
+:where(.overlay) {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-overlay);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: var(--md);
+  z-index: var(--z-overlay);
+}
+
+:where(.overlay.active) { display: flex; }
+
+:where(.modal) {
+  position: relative;
+  background: var(--bg);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--md);
+  min-width: var(--modal-min-width);
+  max-width: var(--modal-max-width);
+  max-height: 100%;
+  overflow: auto;
+  box-shadow: 0 var(--vxs) var(--md) var(--shadow);
+  display: none;
+  z-index: var(--z-modal);
+}
+
+:where(.modal.active) { display: block; }
+
+/* ── toast ──────────────────────────────────────────────── */
+:where(.toast-container) {
+  position: fixed;
+  bottom: var(--md);
+  right: var(--md);
+  z-index: var(--z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: var(--xs);
+  pointer-events: none;
+}
+
+:where(.toast) {
+  padding: var(--sm) var(--md);
+  border-radius: var(--radius-md);
+  color: var(--fg);
+  font-size: var(--sm);
+  box-shadow: 0 var(--vxs) var(--md) var(--shadow);
+  opacity: 1;
+  transition: all var(--dur) var(--ease);
+  border: var(--border-width) solid;
+  max-width: var(--toast-max-width);
+  pointer-events: auto;
+}
+
+:where(.toast-success) { background: var(--sc-bg); border-color: var(--sc-border); color: var(--fg); }
+:where(.toast-error) { background: var(--da-bg); border-color: var(--da-border); color: var(--fg); }
+:where(.toast-info) { background: var(--pr-bg); border-color: var(--pr-border); color: var(--fg); }
+:where(.toast-warning) { background: var(--wr-bg); border-color: var(--wr-border); color: var(--fg); }
+
+/* below sm: --bp-sm minus .02, the Bootstrap 5 max-width form */
+@media (max-width: 575.98px) {
+  :where(.toast-container) { left: var(--md); }
+  :where(.toast) { max-width: none; }
+}
+
+/* ── accordion ── header/content from ge; container chrome and the +/−
+   marker are ge2 ── */
+:where(.accordion) {
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+:where(.accordion-item + .accordion-item) {
+  border-top: var(--border-width) solid var(--border-muted);
+}
+
+:where(.accordion-header) {
+  cursor: pointer;
+  padding: var(--sm) var(--md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--xs);
+  user-select: none;
+  transition: background var(--dur-fast) var(--ease);
+}
+
+:where(.accordion-header:hover) { background: var(--bg-subtle); }
+
+:where(.accordion-header)::after {
+  content: '+';
+  color: var(--muted);
+  line-height: var(--leading-tight);
+}
+
+:where(.accordion-item.active .accordion-header)::after { content: '\2212'; }
+
+:where(.accordion-content) {
+  display: none;
+  padding: var(--sm) var(--md);
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
+:where(.accordion-item.active .accordion-content) { display: block; }
+
+/* ── menus (ge2) ── dropdown and context menu share their look ── */
+:where(.dropdown) { position: relative; display: inline-block; }
+
+:where(.dropdown-menu),
+:where(.contextmenu) {
+  margin: 0;
+  padding: var(--vxs);
+  list-style: none;
+  min-width: var(--menu-min-width);
+  background: var(--bg);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 var(--vxs) var(--md) var(--shadow);
+}
+
+/* the dropdown hangs off its trigger; the context menu off the pointer */
+:where(.dropdown-menu) {
+  position: absolute;
+  inset-block-start: calc(100% + var(--vxs));
+  inset-inline-start: 0;
+  z-index: var(--z-modal);
+}
+
+:where(.contextmenu) {
+  position: fixed;
+  z-index: var(--z-modal);
+}
+
+:where(.dropdown-menu button, .dropdown-menu a),
+:where(.contextmenu button, .contextmenu a) {
+  display: block;
+  width: 100%;
+  padding: var(--vxs) var(--xs);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--fg);
+  font-size: var(--text-sm);
+  text-align: start;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+:where(.dropdown-menu button:hover, .dropdown-menu a:hover),
+:where(.contextmenu button:hover, .contextmenu a:hover) {
+  background: var(--pr-subtle);
+}
+
+:where(.dropdown-menu hr),
+:where(.contextmenu hr) { margin: var(--vxs) 0; }
+
+:where(.menu-danger) { color: var(--da); }
+
+/* ── sidebar (ge2) ── collapsible anchor rail; the page positions it ── */
+:where(.sidebar) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--xs);
+}
+
+:where(.sidebar-toggle) {
+  align-self: flex-start;
+  padding: var(--vxs) var(--xs);
+  color: var(--muted);
+  border-radius: var(--radius-sm);
+}
+
+:where(.sidebar-toggle:hover) { background: var(--bg-subtle); color: var(--fg); }
+
+:where(.sidebar-nav),
+:where(.sidebar-nav ul) {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+:where(.sidebar-nav a) {
+  display: block;
+  padding: var(--vxs) var(--xs);
+  border-radius: var(--radius-sm);
+  color: var(--muted);
+  font-size: var(--text-sm);
+  text-decoration: none;
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+
+:where(.sidebar-nav a:hover) { background: var(--bg-subtle); color: var(--fg); }
+
+:where(.sidebar-nav a.active) {
+  background: var(--pr-subtle);
+  color: var(--fg);
+  /* box-shadow: inset var(--tab-indicator-width) 0 0 var(--pr); */
+}
+
+/* top level reads as a heading; nested items are the detail */
+:where(.sidebar-nav > li > a) {
+  color: var(--fg);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+:where(.sidebar-nav ul) {
+  margin-inline-start: var(--sm);
+  border-inline-start: var(--border-width) solid var(--border-muted);
+}
+
+/* a plain link (no nested list) — Home, for instance: no fold marker, and
+   the active one is marked rather than opened */
+:where(.sidebar-link.current > a) {
+  background: var(--pr-subtle);
+  color: var(--fg);
+  box-shadow: inset var(--tab-indicator-width) 0 0 var(--pr);
+}
+
+/* a group folds until it is opened or holds the active link */
+:where(.sidebar-group > ul) { display: none; }
+:where(.sidebar-group.open > ul) { display: block; }
+
+:where(.sidebar-group > a)::after {
+  content: '+';
+  float: inline-end;
+  color: var(--muted);
+}
+
+:where(.sidebar-group.open > a)::after { content: '\2212'; }
+
+/* collapsed rail: keep the toggle, drop the list */
+:where(.sidebar.collapsed .sidebar-nav) { display: none; }
+
+/* ── tabs (ge2) ── no ge equivalent. `.tab[hidden]` needs no rule: base.css
+   carries `[hidden] { display: none !important }` ── */
+:where(.tabmenu) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--vxs);
+  margin: 0 0 var(--sm);
+  padding: 0 0 var(--vxs);
+  border-bottom: var(--border-width) solid var(--border);
+  list-style: none;
+}
+
+:where(.tabmenu > li) {
+  padding: var(--vxs) var(--sm);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  color: var(--muted);
+  font-size: var(--sm);
+  cursor: pointer;
+  user-select: none;
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+
+:where(.tabmenu > li:hover) { background: var(--bg-subtle); }
+
+:where(.tabmenu > li.active) {
+  background: var(--bg-subtle);
+  color: var(--fg);
+  box-shadow: inset 0 calc(-1 * var(--tab-indicator-width)) 0 var(--pr);
+}
