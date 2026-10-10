@@ -13,6 +13,8 @@ Front-end framework/project. PHP or static HTML, CSS via `@layer`, JS as ES modu
   `favicon.ico` → starters a new app copies (see the quick start in
   `index.html`). `boiler-config.js` is `js/ge2/config.js` with no plugins
   enabled — change one, change the other
+- `boiler-CLAUDE.md` → a new app's `CLAUDE.md`: the subset of these rules
+  that applies downstream. A rule change here that affects apps goes there too
 - `ge2-check.sh` → read-only check of ge2 and every synced project (drift,
   strict layer order, inline JS, raw `localStorage`, hardcoded colours).
   Run `./ge2-check.sh [project…]`; exits 1 on any FAIL. A rule added to
