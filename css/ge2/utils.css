@@ -69,7 +69,11 @@
 .w90 { width: 90%; }
 .w100 { width: 100%; }
 
-.fsmall { font-size: var(--xs); margin: var(--md) 0; padding: var(--xs); }
+.fsmall { font-size: var(--xs);  }
+p.fsmall { margin-top: var(--md); }
+aside p.fsmall,
+.sidemenu p.fsmall { padding: 0 0 0 var(--xs); }
+
 
 /* ═══ generated: responsive variants ═══
    Mobile-first (Bootstrap semantics): -<bp> applies from that breakpoint UP.

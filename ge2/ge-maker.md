@@ -41,14 +41,14 @@ its `[data-theme]` blocks. Switching theme swaps them in rather than clearing
 them, and the export writes both.
 
 **Typography** sets font, size, weight and colour for body text, `h1`–`h6`
-and `small`. Every option is a token (`var(--font-serif)`, `var(--text-lg)`,
+`small`, `pre` and `blockquote`. Every option is a token (`var(--font-serif)`, `var(--text-lg)`,
 `var(--w-medium)`, `var(--pr)`…), written onto the element's own token
 — `--body-font`, `--h1-weight`, `--small-color` — which `base.css` reads.
 These are theme-neutral, so they export into the plain `:root` block.
 
 - **buckets** — save the current state under a name, reload it, delete it
-- **download vars.css** — fetches the real sheet and appends your overrides,
-  so the result is a drop-in replacement rather than a fragment
+- **download vars-overrides.css** — the overrides shown in the preview box,
+  ready to drop in as an app's `css/vars-overrides.css`
 
 ### An icon set → `icons-list.js`
 

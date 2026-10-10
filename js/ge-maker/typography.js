@@ -1,6 +1,6 @@
 // js/ge-maker/typography.js — the element-typography table on the Token page.
 //
-// One row per element (body, h1–h6, small), one <select> per property. Every
+// One row per element (body, h1–h6, small, pre, blockquote), one <select> per property. Every
 // option is a token, so the choice is written as var(--token) onto <html> —
 // the same inline overrides token.js persists, buckets and exports. The
 // first option is "default": no override, the stylesheet value applies.
@@ -33,6 +33,19 @@ const ROWS = [
     label: 'small',
     sample: '<p><small>small print — terms apply</small></p>',
     tokens: { font: '--small-font', size: '--small-size', weight: '--small-weight', color: '--small-color' },
+  },
+  {
+    label: 'pre',
+    sample: '<pre>const x = 42;</pre>',
+    tokens: { font: '--pre-font', size: '--pre-size', weight: '--pre-weight', color: '--pre-color' },
+  },
+  {
+    label: 'blockquote',
+    sample: '<blockquote>Less, but better.</blockquote>',
+    tokens: {
+      font: '--blockquote-font', size: '--blockquote-size',
+      weight: '--blockquote-weight', color: '--blockquote-color',
+    },
   },
 ];
 

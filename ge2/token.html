@@ -72,7 +72,7 @@
   </section>
   <section id="tokens-typography">
     <h2>tokens · typography</h2>
-    <p class="out" data-note>Font, size, weight and colour for body text, <code>h1</code>–<code>h6</code> and <code>small</code>. Each element reads its own tokens — <code>--body-font</code>, <code>--h1-weight</code>, <code>--small-color</code>… — declared in <code>vars.css</code> and applied in <code>base.css</code>. Every option is another token, written as <code>var(--token)</code>; the option marked <code>*</code> drops the override and shows what the stylesheet gives. A <code>* inherit</code> means the token is left at <code>initial</code>, so the element takes its parent's value. Heading sizes are the existing <code>--h1</code>…<code>--h6</code>. Changes persist, go into buckets, and are written to the <code>:root</code> block of <strong>download vars.css</strong>.</p>
+    <p class="out" data-note>Font, size, weight and colour for body text, <code>h1</code>–<code>h6</code>, <code>small</code>, <code>pre</code> and <code>blockquote</code>. Each element reads its own tokens — <code>--body-font</code>, <code>--h1-weight</code>, <code>--small-color</code>… — declared in <code>vars.css</code> and applied in <code>base.css</code>. Every option is another token, written as <code>var(--token)</code>; the option marked <code>*</code> drops the override and shows what the stylesheet gives. A <code>* inherit</code> means the token is left at <code>initial</code>, so the element takes its parent's value. Heading sizes are the existing <code>--h1</code>…<code>--h6</code>. Changes persist, go into buckets, and are written to the <code>:root</code> block of <strong>download vars-overrides.css</strong>.</p>
     <div id="typoEditors"></div>
     <div class="controls" style="margin-block-start:var(--md)">
       <button type="button" id="typoReset">reset typography</button>
@@ -81,20 +81,22 @@
 
   <section id="buckets">
     <h2>tokens · buckets</h2>
-    <p class="out" data-note>Every change is kept in <code>localStorage</code>, so a reload restores it. A bucket is a named snapshot of <em>both</em> themes — save, load, delete. The block below shows the overrides as CSS, live. <strong>download vars.css</strong> fetches the real sheet and appends that block, so the file is a drop-in replacement. Light and dark are both written, each scoped to its own <code>[data-theme]</code> block so neither leaks into the other.</p>
+    <p class="out" data-note>Every change is kept in <code>localStorage</code>, so a reload restores it. A bucket is a named snapshot of <em>both</em> themes — save, load, delete. The block below shows the overrides as CSS, live. <strong>download vars-overrides.css</strong> saves that block as the app's <code>css/vars-overrides.css</code> — changed values only; <code>style.css</code> imports it right after <code>vars.css</code>, so it wins. Light and dark are both written, each scoped to its own <code>[data-theme]</code> block so neither leaks into the other.</p>
     <div class="bucket-bar">
       <input type="text" id="bucketName" placeholder="bucket name" autocomplete="off">
       <button type="button" id="bucketSave">save</button>
       <select id="bucketList"></select>
       <button type="button" id="bucketLoad">load</button>
       <button type="button" id="bucketDelete">delete</button>
-      <button type="button" id="bucketClear">clear overrides</button>
-      <button type="button" id="varsDownload">download vars.css</button>
     </div>
     <p class="out" id="bucketOut"></p>
     <div class="bucket-css">
       <pre><code id="bucketCss"></code></pre>
       <button type="button" id="bucketCopy">copy</button>
+    </div>
+    <div class="controls" style="margin-block-start:var(--sm)">
+      <button type="button" id="bucketClear">clear overrides</button>
+      <button type="button" id="varsDownload">download vars-overrides.css</button>
     </div>
   </section>
 

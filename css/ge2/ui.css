@@ -1,14 +1,7 @@
-/* css/ge2/ui.css — the components js/ge2/ui.js drives, plus icon geometry.
- * Import into layer(ui). Tokens only; every literal lives in vars.css.
- * Overlay/modal/toast/accordion adopted from the ge project; tabs and icons
- * are ge2. Layer ui already beats base.css, so selectors stay wrapped
- * in :where() at zero specificity and a page rule can override any of them. */
+/* css/ge2/ui.css — components js/ge2/ui.js drives, plus icons; layer(ui).
+   Layer beats base.css, so :where() keeps specificity 0 for page rules. */
 
-/* ── icons (ge2) ────────────────────────────────────────
-   icons.js tags every <svg> it makes with `icx`; geometry comes from the
-   --icon-* tokens, so redefining one on any ancestor restyles everything
-   beneath. `display` overrides base.css's `svg { display: block }` — by
-   layer, not specificity. */
+/* ── icons ── .icx svgs from icons.js, sized by --icon-* ── */
 :where(.icx) {
   display: inline-block;
   width: var(--icon-size);
@@ -18,8 +11,7 @@
   vertical-align: middle;
 }
 
-/* Targets the shapes, not the <svg>: the Hugeicons paths carry stroke and
-   stroke-width as presentation attributes, which beat an inherited value. */
+/* on the shapes: their stroke attributes beat an inherited value */
 :where(.icx) :where(path, circle, ellipse, rect, line, polyline, polygon) {
   stroke: var(--icon-stroke);
   stroke-width: var(--icon-stroke-width);
@@ -36,10 +28,7 @@
 :where(.icx-sm) { --icon-size: var(--icon-size-sm); }
 :where(.icx-lg) { --icon-size: var(--icon-size-lg); }
 
-/* ── overlay + modal ────────────────────────────────────
-   The .active rules are a ge2 addition: ui.js clears an inline display and
-   adds .active, so the shown value must live on .active — the ge original
-   defined only the hidden state and never appeared. */
+/* ── overlay + modal ── ui.js adds .active to show ── */
 :where(.overlay) {
   position: fixed;
   inset: 0;
@@ -70,7 +59,7 @@
 
 :where(.modal.active) { display: block; }
 
-/* ── toast ──────────────────────────────────────────────── */
+/* ── toast ── */
 :where(.toast-container) {
   position: fixed;
   bottom: var(--md);
@@ -100,14 +89,13 @@
 :where(.toast-info) { background: var(--pr-bg); border-color: var(--pr-border); color: var(--fg); }
 :where(.toast-warning) { background: var(--wr-bg); border-color: var(--wr-border); color: var(--fg); }
 
-/* below sm: --bp-sm minus .02, the Bootstrap 5 max-width form */
+/* below sm */
 @media (max-width: 575.98px) {
   :where(.toast-container) { left: var(--md); }
   :where(.toast) { max-width: none; }
 }
 
-/* ── accordion ── header/content from ge; container chrome and the +/−
-   marker are ge2 ── */
+/* ── accordion ── */
 :where(.accordion) {
   border: var(--border-width) solid var(--border);
   border-radius: var(--radius-md);
@@ -148,7 +136,7 @@
 
 :where(.accordion-item.active .accordion-content) { display: block; }
 
-/* ── menus (ge2) ── dropdown and context menu share their look ── */
+/* ── menus ── dropdown + context menu ── */
 :where(.dropdown) { position: relative; display: inline-block; }
 
 :where(.dropdown-menu),
@@ -163,7 +151,7 @@
   box-shadow: 0 var(--vxs) var(--md) var(--shadow);
 }
 
-/* the dropdown hangs off its trigger; the context menu off the pointer */
+/* dropdown hangs off its trigger, context menu off the pointer */
 :where(.dropdown-menu) {
   position: absolute;
   inset-block-start: calc(100% + var(--vxs));
@@ -202,7 +190,7 @@
 
 :where(.menu-danger) { color: var(--da); }
 
-/* ── sidebar (ge2) ── collapsible anchor rail; the page positions it ── */
+/* ── sidebar ── collapsible rail; the page positions it ── */
 :where(.sidebar) {
   display: flex;
   flex-direction: column;
@@ -243,7 +231,7 @@
   /* box-shadow: inset var(--tab-indicator-width) 0 0 var(--pr); */
 }
 
-/* top level reads as a heading; nested items are the detail */
+/* top level reads as a heading */
 :where(.sidebar-nav > li > a) {
   color: var(--fg);
   font-family: var(--font-mono);
@@ -257,15 +245,14 @@
   border-inline-start: var(--border-width) solid var(--border-muted);
 }
 
-/* a plain link (no nested list) — Home, for instance: no fold marker, and
-   the active one is marked rather than opened */
+/* plain link (no nested list): marked, not opened */
 :where(.sidebar-link.current > a) {
   background: var(--pr-subtle);
   color: var(--fg);
   box-shadow: inset var(--tab-indicator-width) 0 0 var(--pr);
 }
 
-/* a group folds until it is opened or holds the active link */
+/* a group folds until opened */
 :where(.sidebar-group > ul) { display: none; }
 :where(.sidebar-group.open > ul) { display: block; }
 
@@ -277,11 +264,10 @@
 
 :where(.sidebar-group.open > a)::after { content: '\2212'; }
 
-/* collapsed rail: keep the toggle, drop the list */
+/* collapsed: keep the toggle, drop the list */
 :where(.sidebar.collapsed .sidebar-nav) { display: none; }
 
-/* ── tabs (ge2) ── no ge equivalent. `.tab[hidden]` needs no rule: base.css
-   carries `[hidden] { display: none !important }` ── */
+/* ── tabs ── .tab[hidden] is handled by base.css ── */
 :where(.tabmenu) {
   display: flex;
   flex-wrap: wrap;
@@ -309,3 +295,8 @@
   color: var(--fg);
   box-shadow: inset 0 calc(-1 * var(--tab-indicator-width)) 0 var(--pr);
 }
+
+
+.hero h1,
+.hero h2,
+.hero h3 { font-weight: var(--w-bold)}

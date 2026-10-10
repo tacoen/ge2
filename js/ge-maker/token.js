@@ -376,7 +376,7 @@ function persist() {
   showCss();
 }
 
-// The override blocks, exactly as download vars.css appends them.
+// The override blocks — the preview, and the body of vars-overrides.css.
 function overridesCss() {
   const block = (sel, obj) => {
     const list = Object.entries(obj ?? {});
@@ -468,40 +468,31 @@ ui.on(ui.el('#bucketClear'), 'click', () => {
   ui.toast('Back to the stylesheet values, both themes', 'info', 1800);
 });
 
-ui.on(ui.el('#varsDownload'), 'click', async () => {
+ui.on(ui.el('#varsDownload'), 'click', () => {
   persist();
 
   const count = ['global', ...THEMES]
     .reduce((n, k) => n + Object.keys(state[k] ?? {}).length, 0);
   if (!count) { ui.toast('No overrides to export', 'warning', 1800); return; }
 
-  let base = '';
-  try {
-    const res = await fetch(new URL('../css/ge2/vars.css', import.meta.url).pathname, { cache: 'no-store' });
-    base = res.ok ? await res.text() : '';
-  } catch { }
-
   const stamp = new Date().toISOString().slice(0, 10);
-  const body = overridesCss();
-
-  const css = `${base}
-/* ── exported from the token playground, ${stamp} ──────────
-   Appended, so these win over the declarations above. The :root block holds
-   what vars.css declares outside a theme; the [data-theme] blocks hold the
-   rest. Both themes are written, so switching keeps working. */
-${body}`;
+  const css = `/* css/vars-overrides.css — exported from the ge2 token playground, ${stamp}.
+   Changed values only; everything else falls back to vars.css.
+   style.css imports it into layer(units) right after vars.css, so it wins.
+   The :root block holds what vars.css declares outside a theme; the
+   [data-theme] blocks hold the rest, so switching keeps working. */
+${overridesCss()}`;
 
   const url = URL.createObjectURL(new Blob([css], { type: 'text/css' }));
   const a = document.createElement('a');
   a.href = url;
-  a.download = base ? 'vars.css' : 'vars-overrides.css';
+  a.download = 'vars-overrides.css';
   a.click();
   URL.revokeObjectURL(url);
 
   const per = THEMES.filter((t) => Object.keys(state[t] ?? {}).length);
   out('bucketOut', `exported ${count} override${count === 1 ? '' : 's'}`
-    + (per.length ? ` (${per.join(' + ')})` : '')
-    + (base ? '' : ' — fragment, vars.css could not be read'));
+    + (per.length ? ` (${per.join(' + ')})` : ''));
 });
 
 const rootSize = ui.el('#rootSize');

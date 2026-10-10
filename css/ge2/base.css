@@ -1,6 +1,4 @@
-/* css/ge2/base.css — element styles. Import after vars.css, layer(base).
- * Adopted from the ge project's /base.css with literals swapped for tokens;
- * its UI Components block moved to ui.css. */
+/* css/ge2/base.css — element styles; layer(base). From ge, literals → tokens. */
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -44,7 +42,9 @@ h4 { font-family: var(--h4-font); font-size: var(--h4); font-weight: var(--h4-we
 h5 { font-family: var(--h5-font); font-size: var(--h5); font-weight: var(--h5-weight); color: var(--h5-color); }
 h6 { font-family: var(--h6-font); font-size: var(--h6); font-weight: var(--h6-weight); color: var(--h6-color); }
 
-/* the element-typography tokens in vars.css; `initial` there = inherit */
+h1,h2,h3,h4 { text-transform: capitalize; }
+h5,h6 { text-transform: uppercase; letter-spacing: 1px;}
+
 small {
   font-family: var(--small-font);
   font-size: var(--small-size);
@@ -67,14 +67,30 @@ img, video, svg, canvas {
   max-width: 100%;
 }
 
-code, pre, kbd, samp {
+code, kbd, samp {
   font-family: var(--font-mono);
   font-size: .875em;
 }
 
+code { color: var(--sc) }
+
 pre {
   margin: 0;
+  padding: var(--sm);
   overflow-x: auto;
+  border: var(--border-width) solid var(--border-muted);
+  background: var(--bg-inset);
+  font-family: var(--pre-font);
+  font-size: var(--pre-size);
+  font-weight: var(--pre-weight);
+  color: var(--pre-color);
+}
+
+blockquote {
+  font-family: var(--blockquote-font);
+  font-size: var(--blockquote-size);
+  font-weight: var(--blockquote-weight);
+  color: var(--blockquote-color);
 }
 
 input, textarea, select, button {
@@ -99,6 +115,8 @@ button {
 }
 
 button:disabled { opacity: .5; cursor: default; }
+[type=submit] { color: var(--ac); }
+[type=reset] { color: var(--da); }
 
 input, textarea, select {
   background: var(--bg-inset);
@@ -118,7 +136,7 @@ textarea {
   line-height: var(--leading);
 }
 
-/* Focus */
+/* focus */
 :focus-visible {
   outline: var(--focus-width) solid var(--focus-color);
   outline-offset: var(--focus-offset);
@@ -135,9 +153,7 @@ table {
   width: 100%;
 }
 
-pre {padding: var(--sm);border: 1px solid var(--border-muted);background: var(--bg-inset);}
-
-/* Scrollbars */
+/* scrollbars */
 ::-webkit-scrollbar { width: var(--scroll-width); background: var(--bg-inset); }
 ::-webkit-scrollbar-thumb { border-radius: var(--scroll-width); background: var(--border); }
 ::-webkit-scrollbar-thumb:hover { background: var(--border-hover); }
