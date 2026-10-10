@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ge2-check.sh — check every ge2-based project against the same rules.
-# Read-only: it reports, it never fixes. Lives beside sync-ge2.sh.
+# Read-only: it reports, it never fixes. Lives in ge2, the upstream; companion to ../sync-ge2.sh.
 #
 # Checks (FAIL = breaks a ge2 rule, WARN = worth a look):
 #   drift      css/ge2/, js/ge2/ differ from upstream          FAIL
