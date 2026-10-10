@@ -22,6 +22,9 @@ Front-end framework/project. PHP or static HTML, CSS via `@layer`, JS as ES modu
   or unpinned, inline JS, raw `localStorage`, hardcoded colours).
   Run `./ge2-check.sh [project…]`; exits 1 on any FAIL. A rule added to
   this file that can be checked mechanically belongs in it too
+- `ge2-pre-commit.sh` → git pre-commit hook that runs `ge2-check.sh` on
+  its own repo and blocks on FAIL. Installed here as a symlink in
+  `.git/hooks/`; the install line for an app is in the script
 - Paths always relative. No hardcoded host/domain. CDN deps OK (pin versions;
   keep the URLs in `js/ge2/config.js`, not scattered through the code)
 - Server-side code: `php/` at the root, `<name>/php/` for a module,

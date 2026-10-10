@@ -67,4 +67,6 @@ Each module `<name>`:
 - Minimal, scoped changes — flag over-engineering instead of adding abstraction
 - Unsure where something belongs → ask, don't guess
 - Before calling work done, have the user run `../ge2/ge2-check.sh <app>`
-  (it exits 1 on any FAIL) and fix what it reports
+  (it exits 1 on any FAIL) and fix what it reports. In a git repo,
+  `ln -s /var/www/dash/ge2/ge2-pre-commit.sh .git/hooks/pre-commit` runs
+  it on every commit
