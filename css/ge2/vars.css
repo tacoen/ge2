@@ -45,10 +45,10 @@
 
   --leading: 1.5;
   --leading-tight: 1.25;
-  --weight-thin: 200;
-  --weight-normal: 400;
-  --weight-medium: 500;
-  --weight-bold: 600;
+  --w-thin: 200;
+  --w-normal: 400;
+  --w-medium: 500;
+  --w-bold: 600;
   --tracking-wide: .08em;
 
   /* ── ge2: element typography ─────────────────────────────
@@ -59,7 +59,7 @@
 
   --body-font: var(--font-sans);
   --body-size: var(--text-md);
-  --body-weight: var(--weight-normal);
+  --body-weight: var(--w-normal);
   --body-color: var(--fg);
 
   --h1-font: initial;  --h1-weight: bold;  --h1-color: initial;
@@ -180,9 +180,9 @@
   --bg-overlay: color-mix(in srgb, var(--black), transparent 50%);
 
   /* Core Borders: toward --fg, weakest → strongest; hover clears 3:1 */
-  --border-muted: color-mix(in srgb, var(--bg), var(--fg) 12%);
-  --border: color-mix(in srgb, var(--bg), var(--fg) 22%);
-  --border-hover: color-mix(in srgb, var(--bg), var(--fg) 50%);
+  --border-muted: color-mix(in srgb, var(--bg), var(--tint) 15%);
+  --border: color-mix(in srgb, var(--bg), var(--tint) 30%);
+  --border-hover: color-mix(in srgb, var(--bg), var(--tint) 45%);
 
   /* Functional colours. On :root (not body) so :root-level tokens can
      reference them — --focus-color needs --pr. */

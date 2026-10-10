@@ -63,8 +63,29 @@ export async function buildMenu(nav = ui.el('.sidebar'), src = 'menu.json') {
   }).join('');
 
   nav.innerHTML =
-    '<button class="sidebar-toggle" type="button" aria-label="Toggle menu">menu</button>'
+    '<div class="sidebar-bar">'
+    + '<button class="sidebar-toggle" type="button" aria-label="Toggle menu">menu</button>'
+    + '<button class="sidebar-theme" type="button" aria-label="Toggle theme" title="Toggle theme"></button>'
+    + '</div>'
     + `<ul class="sidebar-nav">${groups}</ul>`;
+
+  // A page that keeps per-theme state (token.js) cancels the event and does
+  // the switch itself, so it can save before and restore after.
+  const theme = nav.querySelector('.sidebar-theme');
+  // A fresh span, not a changed attribute: icx hydrates each node only once.
+  // Watching data-theme keeps the icon right whichever button switched it.
+  const showIcon = () => {
+    const icon = ui.getTheme() === 'dark' ? 'moon' : 'sun';
+    theme.innerHTML = `<span data-icon="${icon}" data-icon-size="16"></span>`;
+  };
+  showIcon();
+  new MutationObserver(showIcon)
+    .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  ui.on(theme, 'click', () => {
+    if (document.dispatchEvent(new CustomEvent('ge-maker:theme', { cancelable: true }))) {
+      ui.toggleTheme();
+    }
+  });
 
   ui.sidebar(nav);
   return menu;

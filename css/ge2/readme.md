@@ -63,7 +63,7 @@ Every token. Adopted from ge verbatim, plus the ge2 groups marked in the file.
 | Fonts | `--font-sans` `--font-mono` `--font-serif` |
 | Palette | seeds `--bg` `--fg` `--gray` · direction `--tint` `--sink` · text `--muted` `--subtle` · surface `--bg-subtle` `--bg-muted` `--bg-inset` `--bg-overlay` · line `--border-muted` `--border` `--border-hover` |
 | Functional | `--seed-ac` `--seed-pr` `--seed-sc` `--seed-da` `--seed-wr` → `--ac` `--pr` `--sc` `--da` `--wr`, each with `-bg` / `-subtle` / `-border` / `-bg-text` |
-| ge2 · type | `--text-xs` `--text-sm` `--text-md` `--text-lg` `--text-xl` `--text-2xl` `--text-3xl` `--leading` `--leading-tight` `--weight-medium` `--weight-bold` `--tracking-wide` |
+| ge2 · type | `--text-xs` `--text-sm` `--text-md` `--text-lg` `--text-xl` `--text-2xl` `--text-3xl` `--leading` `--leading-tight` `--w-medium` `--w-bold` `--tracking-wide` |
 | ge2 · shape | `--radius-sm` `--radius-md` `--radius-lg` `--border-width` |
 | ge2 · motion | `--dur-fast` `--dur` `--ease` |
 | ge2 · focus | `--focus-width` `--focus-offset` `--focus-color` |

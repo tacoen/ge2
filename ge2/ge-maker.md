@@ -42,7 +42,7 @@ them, and the export writes both.
 
 **Typography** sets font, size, weight and colour for body text, `h1`–`h6`
 and `small`. Every option is a token (`var(--font-serif)`, `var(--text-lg)`,
-`var(--weight-medium)`, `var(--pr)`…), written onto the element's own token
+`var(--w-medium)`, `var(--pr)`…), written onto the element's own token
 — `--body-font`, `--h1-weight`, `--small-color` — which `base.css` reads.
 These are theme-neutral, so they export into the plain `:root` block.
 
@@ -67,7 +67,8 @@ the `viewBox` and the token-driven geometry.
 | Page | |
 |---|---|
 | **Home** | this file and the [function reference](function.md), rendered from markdown |
-| **Token** | theme switch, the type scale, element typography, the colour playground, buckets |
+| **Theme** | `setTheme` / `toggleTheme` and the `data-theme` readout (on the Token page) |
+| **Token** | the colour playground, the type scale, element typography, buckets |
 | **Component** | toast, tabs, accordion, modal, copy, onKey, dropdown, context menu |
 | **Forms** | `prepareForm` / `handleForm` — generated ids, wired labels, validation |
 | **Utils** | the flex and responsive utilities from `css/ge2/utils.css` |
@@ -91,6 +92,11 @@ the `viewBox` and the token-driven geometry.
 `js/ge-maker.js` does the same three framework calls as the root
 `script.js` — `icx.observe()`, `ui.tabs()`, `ui.accordion()` — builds the
 sidebar, folds the notes away, then imports `./ge-maker/<data-page>.js`.
+
+The sidebar carries a theme button beside its menu toggle. It fires a
+cancelable `ge-maker:theme` event on `document` and toggles the theme only
+if no page cancels it. The Token page cancels it and switches the theme
+itself, so the colour overrides it keeps for each theme swap along with it.
 
 **Adding a section** is a `menu.json` edit, not an edit to seven HTML files.
 The sidebar and the cards on `index.html` are both built from it. An item

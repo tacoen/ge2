@@ -11,7 +11,7 @@ const root = document.documentElement;
 
 const FONT = ['--font-sans', '--font-serif', '--font-mono'];
 const SIZE = ['--text-xs', '--text-sm', '--text-md', '--text-lg', '--text-xl', '--text-2xl', '--text-3xl'];
-const WEIGHT = ['--weight-thin', '--weight-normal', '--weight-medium', '--weight-bold'];
+const WEIGHT = ['--w-thin', '--w-normal', '--w-medium', '--w-bold'];
 const COLOR = ['--fg', '--muted', '--subtle', '--ac', '--pr', '--sc', '--da', '--wr'];
 
 // The heading size token is --h1 itself, so its options stay on --text-*:
@@ -48,9 +48,27 @@ export const TYPO_TOKENS = ROWS.flatMap((r) => Object.values(r.tokens));
 
 const esc = (s) => String(s).replace(/[<>&"]/g, (c) => `&#${c.charCodeAt(0)};`);
 
+// The value a token is declared with in a :root rule, as written — walking
+// imports, layers and @media. Last declaration wins; null when none is found
+// (or the sheet is cross-origin and its rules cannot be read).
+function declared(name, rules = [...document.styleSheets]) {
+  let v = null;
+  for (const r of rules) {
+    let inner;
+    try { inner = r.styleSheet?.cssRules ?? r.cssRules; } catch { continue; }
+    if (r.selectorText === ':root') v = r.style.getPropertyValue(name).trim() || v;
+    else if (inner) v = declared(name, [...inner]) ?? v;
+  }
+  return v;
+}
+
 // The value the stylesheet gives a token, with any override lifted for the
-// read. A token left at `initial` reads as empty: the property inherits.
+// read. A plain var(--token) reads as the token it names — --body-font shows
+// --font-sans, not the font stack it resolves to. A token left at `initial`
+// reads as empty: the property inherits.
 function sheetValue(name) {
+  const ref = declared(name)?.match(/^var\((--[\w-]+)\)$/);
+  if (ref) return ref[1];
   const inline = root.style.getPropertyValue(name);
   if (inline) root.style.removeProperty(name);
   const v = tokenValue(name);
@@ -93,7 +111,7 @@ export function mountTypography(host, onChange = () => {}) {
           .map((t) => `<option value="var(${t})">${t}</option>`).join('');
         return `<span role="cell" data-label="${label}"><select data-typo="${name}"`
           + ` aria-label="${row.label} ${label} (${name})" title="${name}">`
-          + `<option value="">default · ${esc(short(sheetValue(name)))}</option>${opts}`
+          + `<option value="">* ${esc(short(sheetValue(name)))}</option>${opts}`
           + '</select></span>';
       }).join('')
       + `<span class="typo-sample" role="cell">${row.sample}</span>`
@@ -136,7 +154,7 @@ export function mountTypography(host, onChange = () => {}) {
   // --fg, which changes with the theme.
   return function sync() {
     for (const sel of selects) {
-      sel.options[0].text = `default · ${short(sheetValue(sel.dataset.typo))}`;
+      sel.options[0].text = `* ${short(sheetValue(sel.dataset.typo))}`;
       const v = root.style.getPropertyValue(sel.dataset.typo).trim();
       if (v && ![...sel.options].some((o) => o.value === v)) {
         sel.add(new Option(v, v));

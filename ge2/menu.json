@@ -48,13 +48,24 @@
       ]
     },
     {
+      "id": "theme",
+      "label": "Theme",
+      "page": "token.html",
+      "items": [
+        {
+          "anchor": "theme-switch",
+          "label": "theme · switch"
+        }
+      ]
+    },
+    {
       "id": "tokens",
       "label": "Token",
       "page": "token.html",
       "items": [
         {
-          "anchor": "theme",
-          "label": "theme"
+          "anchor": "tokens-colour",
+          "label": "tokens · colour"
         },
         {
           "anchor": "tokens-type",
@@ -63,10 +74,6 @@
         {
           "anchor": "tokens-typography",
           "label": "tokens · typography"
-        },
-        {
-          "anchor": "tokens-colour",
-          "label": "tokens · colour"
         },
         {
           "anchor": "buckets",

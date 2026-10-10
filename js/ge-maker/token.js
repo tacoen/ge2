@@ -4,7 +4,11 @@ import { store } from '../ge2/store.js';
 import { out, tokenValue } from './util.js';
 import { mountTypography, TYPO_TOKENS } from './typography.js';
 
-const showTheme = () => out('themeOut', `data-theme = ${ui.getTheme()}`);
+// The colour heading names the theme its seeds belong to.
+const showTheme = () => {
+  out('themeOut', `data-theme = ${ui.getTheme()}`);
+  out('colourTheme', ui.getTheme() === 'dark' ? 'dark' : 'light');
+};
 
 function switchTheme(change) {
   persist();
@@ -17,6 +21,11 @@ function switchTheme(change) {
 ui.on(ui.el('#themeLight'),  'click', () => switchTheme(() => ui.setTheme('light')));
 ui.on(ui.el('#themeDark'),   'click', () => switchTheme(() => ui.setTheme('dark')));
 ui.on(ui.el('#themeToggle'), 'click', () => switchTheme(() => ui.toggleTheme()));
+// The sidebar's theme button — take it over so overrides swap with the theme.
+ui.on(document, 'ge-maker:theme', (e) => {
+  e.preventDefault();
+  switchTheme(() => ui.toggleTheme());
+});
 showTheme();
 
 const THEMES = ['light', 'dark'];
@@ -364,6 +373,24 @@ function persist() {
   state.global = global;
   state[themeNow()] = themed;
   store.setJSON(LIVE, state);
+  showCss();
+}
+
+// The override blocks, exactly as download vars.css appends them.
+function overridesCss() {
+  const block = (sel, obj) => {
+    const list = Object.entries(obj ?? {});
+    return list.length
+      ? `\n${sel} {\n${list.map(([p, v]) => `  ${p}: ${v};`).join('\n')}\n}\n` : '';
+  };
+  return block(':root', state.global)
+    + THEMES.map((t) => block(`:root[data-theme='${t}']`, state[t])).join('');
+}
+
+const bucketCss = ui.el('#bucketCss');
+ui.copy(ui.el('#bucketCopy'), bucketCss);
+function showCss() {
+  if (bucketCss) bucketCss.textContent = overridesCss().trim() || '/* no overrides */';
 }
 
 function applyState() {
@@ -419,6 +446,7 @@ ui.on(ui.el('#bucketLoad'), 'click', () => {
   state = migrate(values);
   applyState();
   store.setJSON(LIVE, state);
+  showCss();
   ui.toast(`Loaded "${name}"`, 'success', 1500);
 });
 
@@ -436,17 +464,12 @@ ui.on(ui.el('#bucketClear'), 'click', () => {
   state = empty();
   applyState();
   store.setJSON(LIVE, state);
+  showCss();
   ui.toast('Back to the stylesheet values, both themes', 'info', 1800);
 });
 
 ui.on(ui.el('#varsDownload'), 'click', async () => {
   persist();
-
-  const block = (sel, obj) => {
-    const list = Object.entries(obj ?? {});
-    return list.length
-      ? `\n${sel} {\n${list.map(([p, v]) => `  ${p}: ${v};`).join('\n')}\n}\n` : '';
-  };
 
   const count = ['global', ...THEMES]
     .reduce((n, k) => n + Object.keys(state[k] ?? {}).length, 0);
@@ -459,8 +482,7 @@ ui.on(ui.el('#varsDownload'), 'click', async () => {
   } catch { }
 
   const stamp = new Date().toISOString().slice(0, 10);
-  const body = block(':root', state.global)
-    + THEMES.map((t) => block(`:root[data-theme='${t}']`, state[t])).join('');
+  const body = overridesCss();
 
   const css = `${base}
 /* ── exported from the token playground, ${stamp} ──────────

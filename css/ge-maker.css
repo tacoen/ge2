@@ -7,9 +7,9 @@
   /* The demo's thin headings, as tokens rather than a rule — so the
      typography table on the Token page can still override them. */
   :root {
-    --h1-weight: var(--weight-thin);
-    --h2-weight: var(--weight-thin);
-    --h3-weight: var(--weight-thin);
+    --h1-weight: var(--w-thin);
+    --h2-weight: var(--w-thin);
+    --h3-weight: var(--w-thin);
   }
 
   .shell {
@@ -28,6 +28,21 @@
     border-inline-end: var(--border-width) solid var(--border);
   }
 
+  .sidebar-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .sidebar-theme {
+    display: inline-flex;
+    padding: var(--vxs) var(--xs);
+    color: var(--muted);
+    border-radius: var(--radius-sm);
+  }
+
+  .sidebar-theme:hover { background: var(--bg-subtle); color: var(--fg); }
+
   .page {
     min-width: 0;
     overflow-y: auto;
@@ -40,7 +55,7 @@
 
     font-family: var(--font-mono);
     font-size: var(--text-lg);
-    font-weight: var(--weight-bold);
+    font-weight: var(--w-bold);
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
     color: var(--wr);
@@ -87,7 +102,7 @@
     color: var(--ac);
     font-family: var(--font-mono);
     font-size: var(--text-xs);
-    font-weight: var(--weight-medium);
+    font-weight: var(--w-medium);
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
   }
@@ -215,7 +230,7 @@
     color: var(--muted);
     font-family: var(--font-mono);
     font-size: var(--text-sm);
-    font-weight: var(--weight-medium);
+    font-weight: var(--w-medium);
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
   }
@@ -225,7 +240,7 @@
     color: var(--muted);
     font-family: var(--font-mono);
     font-size: var(--text-xs);
-    font-weight: var(--weight-normal);
+    font-weight: var(--w-normal);
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
     opacity: 0.85;
@@ -284,7 +299,7 @@
 
   .token-row.changed .token-name code {
     color: var(--pr);
-    font-weight: var(--weight-bold);
+    font-weight: var(--w-bold);
   }
 
   .token-control {
@@ -514,6 +529,24 @@
   .bucket-bar select {
     width: auto;
     min-width: 9rem;
+    background: var(--bg);
+  }
+
+  .bucket-css {
+    position: relative;
+    margin-block-start: var(--sm);
+  }
+
+  .bucket-css pre {
+    margin: 0;
+    overflow-x: auto;
+    font-size: var(--text-sm);
+  }
+
+  .bucket-css button {
+    position: absolute;
+    inset-block-start: var(--xs);
+    inset-inline-end: var(--xs);
     background: var(--bg);
   }
 
@@ -833,11 +866,11 @@
     text-transform: uppercase;
   }
 
-  .typo-row select { max-width: 11rem; }
+  .typo-row select {max-width: 6rem;}
 
   .typo-row.changed .token-name code {
     color: var(--pr);
-    font-weight: var(--weight-bold);
+    font-weight: var(--w-bold);
   }
 
   /* the real elements, so base.css styles them; only the spacing is cut */

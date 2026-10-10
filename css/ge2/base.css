@@ -135,6 +135,8 @@ table {
   width: 100%;
 }
 
+pre {padding: var(--sm);border: 1px solid var(--border-muted);background: var(--bg-inset);}
+
 /* Scrollbars */
 ::-webkit-scrollbar { width: var(--scroll-width); background: var(--bg-inset); }
 ::-webkit-scrollbar-thumb { border-radius: var(--scroll-width); background: var(--border); }
