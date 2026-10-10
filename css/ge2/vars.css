@@ -137,6 +137,7 @@
   --seed-sc: #4da34d;
   --seed-wr: #ff9911;
   --seed-ac: #4258ff;
+  --seed-in: #66d1ff;
   /* surfaces rise toward --tint, inset sinks toward --sink */
   --tint: var(--black);
   --sink: var(--white);
@@ -154,6 +155,7 @@
   --seed-ac: #4ca8e1;
   --seed-da: #cc1111;
   --seed-sc: #88cc66;
+  --seed-in: #66d1ff;
   --tint: var(--white);
   --sink: var(--black);
   --tone-fg: 30%;
@@ -186,6 +188,7 @@
   --da: color-mix(in srgb, var(--seed-da), var(--fg) var(--tone-fg));
   --wr: color-mix(in srgb, var(--seed-wr), var(--fg) var(--tone-fg));
   --ac: color-mix(in srgb, var(--seed-ac), var(--fg) var(--tone-fg));
+  --in: color-mix(in srgb, var(--seed-in), var(--fg) var(--tone-fg));
 
   /* tones: -subtle rest, -bg hover, -border outline; -bg-text on either */
   --ac-subtle: color-mix(in srgb, var(--bg), var(--ac) 10%);
@@ -212,6 +215,11 @@
   --wr-bg: color-mix(in srgb, var(--bg), var(--wr) 20%);
   --wr-border: color-mix(in srgb, var(--bg), var(--wr) 40%);
   --wr-bg-text: var(--fg);
+
+  --in-subtle: color-mix(in srgb, var(--bg), var(--in) 10%);
+  --in-bg: color-mix(in srgb, var(--bg), var(--in) 20%);
+  --in-border: color-mix(in srgb, var(--bg), var(--in) 40%);
+  --in-bg-text: var(--fg);
 }
 
 @media (prefers-reduced-motion: reduce) {

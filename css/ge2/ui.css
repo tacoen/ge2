@@ -86,7 +86,7 @@
 
 :where(.toast-success) { background: var(--sc-bg); border-color: var(--sc-border); color: var(--fg); }
 :where(.toast-error) { background: var(--da-bg); border-color: var(--da-border); color: var(--fg); }
-:where(.toast-info) { background: var(--pr-bg); border-color: var(--pr-border); color: var(--fg); }
+:where(.toast-info) { background: var(--in-bg); border-color: var(--in-border); color: var(--fg); }
 :where(.toast-warning) { background: var(--wr-bg); border-color: var(--wr-border); color: var(--fg); }
 
 /* below sm */

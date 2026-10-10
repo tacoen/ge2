@@ -379,12 +379,12 @@ aside p.fsmall,
    stays unstyled (base.css) until it carries a style or tone class, so
    `button.naked`, `.button.naked` and `.btn.naked` are the same thing.
    Style: .rounded .plain .outline .naked .link
-   Tone:  .pr .sc .da .wr .ac — no tone is neutral
+   Tone:  .pr .sc .da .wr .ac .in — no tone is neutral
    Size:  .vxs .xs .sm .md .lg .xlg — default .sm
    Modifiers are scoped under button/.button/.btn, like .flex.center.
    .is-hover / .is-focus force the state, for docs and tests. */
 
-:where(.btn, .button, button:is(.rounded, .plain, .outline, .naked, .link, .pr, .sc, .da, .wr, .ac, .vxs, .xs, .sm, .md, .lg, .xlg)) {
+:where(.btn, .button, button:is(.rounded, .plain, .outline, .naked, .link, .pr, .sc, .da, .wr, .ac, .in, .vxs, .xs, .sm, .md, .lg, .xlg)) {
   --btn: var(--fg);
   --btn-bg: var(--bg-muted);
   --btn-subtle: var(--bg-subtle);
@@ -412,11 +412,12 @@ aside p.fsmall,
 :is(button, .button, .btn).sc { --btn: var(--sc); --btn-bg: var(--sc-bg); --btn-subtle: var(--sc-subtle); --btn-border: var(--sc-border); --btn-text: var(--sc-bg-text); --btn-focus: var(--sc); }
 :is(button, .button, .btn).da { --btn: var(--da); --btn-bg: var(--da-bg); --btn-subtle: var(--da-subtle); --btn-border: var(--da-border); --btn-text: var(--da-bg-text); --btn-focus: var(--da); }
 :is(button, .button, .btn).wr { --btn: var(--wr); --btn-bg: var(--wr-bg); --btn-subtle: var(--wr-subtle); --btn-border: var(--wr-border); --btn-text: var(--wr-bg-text); --btn-focus: var(--wr); }
+:is(button, .button, .btn).in { --btn: var(--in); --btn-bg: var(--in-bg); --btn-subtle: var(--in-subtle); --btn-border: var(--in-border); --btn-text: var(--in-bg-text); --btn-focus: var(--in); }
 :is(button, .button, .btn).ac { --btn: var(--ac); --btn-bg: var(--ac-bg); --btn-subtle: var(--ac-subtle); --btn-border: var(--ac-border); --btn-text: var(--ac-bg-text); --btn-focus: var(--ac); }
 
 /* neutral naked is muted; neutral link takes the <a> colour */
-:is(button, .button, .btn).naked:not(.pr, .sc, .da, .wr, .ac) { --btn: var(--muted); }
-:is(button, .button, .btn).link:not(.pr, .sc, .da, .wr, .ac) { --btn: var(--ac); --btn-focus: var(--ac); }
+:is(button, .button, .btn).naked:not(.pr, .sc, .da, .wr, .ac, .in) { --btn: var(--muted); }
+:is(button, .button, .btn).link:not(.pr, .sc, .da, .wr, .ac, .in) { --btn: var(--ac); --btn-focus: var(--ac); }
 
 :is(button, .button, .btn).rounded { border-radius: calc(var(--radius-lg) * 99); }
 :is(button, .button, .btn).plain { border-color: transparent; }
@@ -445,7 +446,7 @@ aside p.fsmall,
 :is(button, .button, .btn).link:is(.vxs, .xs, .sm, .md, .lg, .xlg) { font-size: calc(var(--xs) + var(--btn-size) / 3); }
 
 /* hover */
-:where(.btn, .button, button:is(.rounded, .plain, .outline, .naked, .link, .pr, .sc, .da, .wr, .ac, .vxs, .xs, .sm, .md, .lg, .xlg)):is(:hover, .is-hover):not(:disabled) {
+:where(.btn, .button, button:is(.rounded, .plain, .outline, .naked, .link, .pr, .sc, .da, .wr, .ac, .in, .vxs, .xs, .sm, .md, .lg, .xlg)):is(:hover, .is-hover):not(:disabled) {
   background: var(--btn-bg);
   border-color: var(--btn);
   color: var(--btn-text);
@@ -460,7 +461,7 @@ aside p.fsmall,
 }
 
 /* focus */
-:where(.btn, .button, button:is(.rounded, .plain, .outline, .naked, .link, .pr, .sc, .da, .wr, .ac, .vxs, .xs, .sm, .md, .lg, .xlg)):is(:focus-visible, .is-focus) {
+:where(.btn, .button, button:is(.rounded, .plain, .outline, .naked, .link, .pr, .sc, .da, .wr, .ac, .in, .vxs, .xs, .sm, .md, .lg, .xlg)):is(:focus-visible, .is-focus) {
   outline: var(--focus-width) solid var(--btn-focus);
   outline-offset: var(--focus-offset);
 }

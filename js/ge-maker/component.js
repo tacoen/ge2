@@ -6,7 +6,7 @@ import { out } from './util.js';
 // ── buttons ───────────────────────────────────────────
 // The utils.css button classes: a style class (solid = plain .btn) plus an
 // optional tone class; the grid is rebuilt per style.
-const tones = ['', 'pr', 'sc', 'da', 'wr', 'ac'];
+const tones = ['', 'pr', 'sc', 'da', 'wr', 'in', 'ac'];
 const kinds = ['solid', 'rounded', 'plain', 'outline', 'naked', 'link'];
 const states = [
   ['rest', ''],

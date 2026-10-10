@@ -46,7 +46,7 @@ flips between light and dark. See §4.
 
 ### Functional colours: tone
 
-Five hues, each a small family of its own:
+Six hues, each a small family of its own:
 
 | Tone | Meaning | Seed |
 |---|---|---|
@@ -54,6 +54,7 @@ Five hues, each a small family of its own:
 | `sc` | success | `--seed-sc` |
 | `da` | danger | `--seed-da` |
 | `wr` | warning | `--seed-wr` |
+| `in` | info | `--seed-in` |
 | `ac` | accent / links | `--seed-ac` |
 
 | Suffix | Paints | Role |
@@ -76,7 +77,7 @@ seeds (per theme)                 derived (per theme)          consumers
 ─────────────────                 ───────────────────          ─────────
 --bg  --fg  --gray        ──►     --muted/--subtle/--inset ──► base/ui/layout/utils.css
 --white --black (fixed)           --bg-* --border-* --shadow   page sheets, plugins
---seed-pr/sc/da/wr/ac     ──►     --pr … --ac  + -bg/-subtle/-border/-bg-text
+--seed-pr/sc/da/wr/in/ac  ──►     --pr … --ac  + -bg/-subtle/-border/-bg-text
 ```
 
 - **Theme switch:** `data-theme="light|dark"` on `<html>`, written by
@@ -100,6 +101,7 @@ seeds (per theme)                 derived (per theme)          consumers
 | `--seed-sc` | `#4da34d` | `#88cc66` |
 | `--seed-da` | `#9d4343` | `#cc1111` |
 | `--seed-wr` | `#ff9911` | `#ffcc33` |
+| `--seed-in` | `#66d1ff` | `#66d1ff` |
 | `--seed-ac` | `#181886` | `#4ca8e1` |
 
 `--gray` is a seed that exists only to feed the text tints and (in light) the

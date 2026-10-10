@@ -31,13 +31,13 @@ showTheme();
 const THEMES = ['light', 'dark'];
 const THEMED = new Set([
   '--bg', '--fg', '--gray', '--seed-ac',
-  '--seed-pr', '--seed-sc', '--seed-da', '--seed-wr',
+  '--seed-pr', '--seed-sc', '--seed-da', '--seed-wr', '--seed-in',
 ]);
 const themeNow = () => (ui.getTheme() === 'dark' ? 'dark' : 'light');
 
 const root = document.documentElement;
 
-// Two columns: left the neutrals the surfaces are built from, right the five
+// Two columns: left the neutrals the surfaces are built from, right the six
 // hues every system colour is mixed from. The grid is one table that fills
 // row-major, two tokens per row, so the flat list interleaves the columns.
 const COL_BASE = [
@@ -53,8 +53,10 @@ const COL_SEED = [
   ['--seed-sc', 'success'],
   ['--seed-da', 'danger'],
   ['--seed-wr', 'warning'],
+  ['--seed-in', 'info'],
 ];
-const SEEDS = COL_BASE.flatMap((row, i) => (COL_SEED[i] ? [row, COL_SEED[i]] : [row]));
+const SEEDS = Array.from({ length: Math.max(COL_BASE.length, COL_SEED.length) },
+  (_, i) => [COL_BASE[i], COL_SEED[i]]).flat().filter(Boolean);
 
 const DERIVED = [
   { section: 'interface', rows: [
@@ -68,14 +70,15 @@ const DERIVED = [
     { label: 'sc',   tokens: ['--sc', '--sc-bg', '--sc-subtle', '--sc-border'] },
     { label: 'da',   tokens: ['--da', '--da-bg', '--da-subtle', '--da-border'] },
     { label: 'wr',   tokens: ['--wr', '--wr-bg', '--wr-subtle', '--wr-border'] },
+    { label: 'in',   tokens: ['--in', '--in-bg', '--in-subtle', '--in-border'] },
     { label: 'pr',   tokens: ['--pr', '--pr-bg', '--pr-subtle', '--pr-border'] },
     { label: 'ac',   tokens: ['--ac', '--ac-bg', '--ac-subtle', '--ac-border'] },
   ] },
 ];
 
-// ge2's toast types, by system-colour label. `accent` has no type in ui.css —
-// css/ge-maker.css carries .toast-accent for the demo.
-const TOAST_TYPE = { sc: 'success', da: 'error', wr: 'warning', pr: 'info', ac: 'accent' };
+// ge2's toast types, by system-colour label. `primary` and `accent` have no
+// type in ui.css — css/ge-maker.css carries them for the demo.
+const TOAST_TYPE = { sc: 'success', da: 'error', wr: 'warning', pr: 'primary', in: 'info', ac: 'accent' };
 
 // The static `system` preview is trimmed to these two so it ends up about as
 // tall as the .dp-alt pass below it, which still carries every row. Declared

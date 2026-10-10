@@ -12,7 +12,7 @@ const root = document.documentElement;
 const FONT = ['--font-sans', '--font-serif', '--font-mono'];
 const SIZE = ['--text-xs', '--text-sm', '--text-md', '--text-lg', '--text-xl', '--text-2xl', '--text-3xl'];
 const WEIGHT = ['--w-thin', '--w-normal', '--w-medium', '--w-bold'];
-const COLOR = ['--fg', '--muted', '--subtle', '--ac', '--pr', '--sc', '--da', '--wr'];
+const COLOR = ['--fg', '--muted', '--subtle', '--ac', '--pr', '--sc', '--da', '--wr', '--in'];
 
 // The heading size token is --h1 itself, so its options stay on --text-*:
 // offering another --hN could close a loop (--h1: var(--h2), --h2: var(--h1)).

@@ -671,7 +671,13 @@
   .pv-btn:hover { border-color: var(--c); }
   .pv-btn:active { translate: 0 1px; }
 
-  /* ge2 ships success/error/info/warning toasts; accent has no type yet. */
+  /* ge2 ships success/error/info/warning toasts; primary and accent have no type yet. */
+  .toast-primary {
+    background: var(--pr-bg);
+    border-color: var(--pr-border);
+    color: var(--fg);
+  }
+
   .toast-accent {
     background: var(--ac-bg);
     border-color: var(--ac-border);
