@@ -16,7 +16,10 @@ Front-end framework/project. PHP or static HTML, CSS via `@layer`, JS as ES modu
 - `boiler-CLAUDE.md` → a new app's `CLAUDE.md`: the subset of these rules
   that applies downstream. A rule change here that affects apps goes there too
 - `ge2-check.sh` → read-only check of ge2 and every synced project (drift,
-  strict layer order, inline JS, raw `localStorage`, hardcoded colours).
+  strict layer order, one root entry, module sheet wiring, framework
+  boundary, plugin shape and paths, request data in filesystem calls,
+  root-absolute paths, CDN URLs outside `config.js`
+  or unpinned, inline JS, raw `localStorage`, hardcoded colours).
   Run `./ge2-check.sh [project…]`; exits 1 on any FAIL. A rule added to
   this file that can be checked mechanically belongs in it too
 - Paths always relative. No hardcoded host/domain. CDN deps OK (pin versions;
