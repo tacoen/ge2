@@ -95,15 +95,16 @@ Full markup contracts: `js/ge2/readme.md`. API reference: `ge2/function.md`.
 
    `css/ge2/` and `js/ge2/` are a vendored copy — never edit them; pull
    upstream changes with `../sync-ge2.sh`.
-2. Tune colours and type on the demo's **Token** page (`ge2/token.html`) and
+2. Tune colours and type on the demo's **Theme** page (`ge2/theme.html`) and
    download `vars-overrides.css` over yours.
 3. Put app rules in `@layer page`, app utilities in `@layer utils`.
 
 ## The demo
 
-`ge2/index.html` — one page per group (Theme, Token, Component, Forms, Utils,
+`ge2/index.html` — one page per group (Theme, Component, Forms, Utils,
 icons, Layout, Plugins), sharing a sidebar built from `ge2/menu.json`. The
-Token page edits tokens live, saves named buckets, and exports the overrides.
+Theme page edits colours and type live, saves named buckets, and exports the
+overrides.
 
 ## Checks
 

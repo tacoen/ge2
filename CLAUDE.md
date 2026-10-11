@@ -105,7 +105,7 @@ CSS and JS mirror each other: one entry file beside an optional folder. The CSS 
 ### Modules
 - `fm` — file manager: `css/fm.css` → `css/fm/{style,gallery}.css`, `js/fm.js` → `js/fm/{list,gallery}.js`
 - `ge2` demo — the framework's own harness, split one page per group:
-  `ge2/{index,token,ui-theme,component,basic,icons,layout,plugins}.html` (+ its `favicon.ico`),
+  `ge2/{index,theme,component,basic,icons,layout,plugins}.html` (+ its `favicon.ico`),
   `css/ge-maker.css`, `js/ge-maker.js` → `js/ge-maker/*.js`. The entry files keep
   the `ge-maker` name so they don't collide with `css/ge2/` and `js/ge2/`.
   The sidebar is shared: `ge2/menu.json` is the single source, built by

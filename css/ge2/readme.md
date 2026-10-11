@@ -77,8 +77,9 @@ which is the ge v1 convention; `--text-*` covers running text.
 
 Theming is `data-theme` on `<html>`, which `js/ge2/ui.js` writes on import.
 
-How the colours are derived, what subtle / muted / inset mean per role, and
-where the two themes disagree: see [`color.md`](color.md).
+How the colours are derived — the `--ac` scale, which step each neutral role
+uses, the component tones, resolved values and contrast, and the known rough
+edges: see [`color.md`](color.md).
 
 ### Changed while adopting
 
@@ -113,6 +114,9 @@ where the two themes disagree: see [`color.md`](color.md).
   `--border-muted` → `--ac-bg5`, `--border` → `--ac-bg4`, `--border-hover` →
   `--ac-bg3` (were `--bg` + 15 / 30 / 45% `--gray`), and `--focus-color` →
   `--ac-bg1` (was `--pr`).
+- **Links take `--pr`.** `<a>` and `[type=submit]` in `base.css` and the
+  neutral `.btn.link` in `utils.css` moved from `--ac` to `--pr`, so links read as the primary
+  colour and stay apart from the accent-tinted surfaces and text.
 - **Secondary text follows `--ac`.** `--muted` → `--ac-fg3` (label: text),
   `--subtle` → `--ac-fg2` (were `--fg` + 50 / 85% `--gray`). `--gray` now
   feeds nothing in ge.

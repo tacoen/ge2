@@ -1,8 +1,8 @@
-// js/ge-maker/typography.js — the element-typography table on the Token page.
+// js/ge-maker/typography.js — the element-typography table on the Theme page.
 //
 // One row per element (body, h1–h6, small, pre, blockquote), one <select> per property. Every
 // option is a token, so the choice is written as var(--token) onto <html> —
-// the same inline overrides token.js persists, buckets and exports. The
+// the same inline overrides type.js persists, buckets and exports. The
 // first option is "default": no override, the stylesheet value applies.
 import { ui } from '../ge2/ui.js';
 import { tokenValue } from './util.js';
@@ -56,7 +56,7 @@ const PROPS = [
   ['color', 'colour', COLOR],
 ];
 
-/** Every token the table can override — token.js clears these on reload. */
+/** Every token the table can override — type.js clears these on reset. */
 export const TYPO_TOKENS = ROWS.flatMap((r) => Object.values(r.tokens));
 
 const esc = (s) => String(s).replace(/[<>&"]/g, (c) => `&#${c.charCodeAt(0)};`);
@@ -92,7 +92,7 @@ function sheetValue(name) {
 const short = (v) => (v.length > 18 ? `${v.slice(0, 17)}…` : v);
 
 /**
- * Build the table into `host`. `onChange` runs after every edit (token.js
+ * Build the table into `host`. `onChange` runs after every edit (type.js
  * passes persist). Returns sync(), which re-reads the selects from <html>.
  */
 export function mountTypography(host, onChange = () => {}) {

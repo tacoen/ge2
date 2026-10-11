@@ -29,16 +29,20 @@ Two of the pages are authoring tools, not demos. Both keep their work in
 
 ### A palette → `vars.css`
 
-**Token** edits the ten seed colours the rest of the palette is mixed from —
-`--bg`, `--fg`, `--gray`, the five `--seed-*`, plus `--white` and
-`--black`. Type any CSS colour, not just hex: a keyword, a `color-mix()`, a
-`var()`. The derived tokens update live, and each group is previewed as real
-UI — surfaces with text on them, alerts, borders — so a change is judged on
-something that looks like a page rather than on a strip of colour.
+**Theme** holds the theme switch and the colour editor: `--ac`, `--bg`, `--fg` and the five
+component seeds (`--seed-pr` … `--seed-in`). Type any CSS colour, not just
+hex: a keyword, a `color-mix()`, a `var()`. An edit is a real override on
+`<html>`, so the whole page follows it, and the `--ac` scale and three demos
+— an app dashboard, a webpage, a docs article — show it on something that
+looks like a product rather than on a strip of colour.
 
 Overrides are kept **per theme**, because `vars.css` scopes those tokens to
 its `[data-theme]` blocks. Switching theme swaps them in rather than clearing
-them, and the export writes both.
+them, and the export writes both. They are applied on every demo page
+(`js/ge-maker/overrides.js`, loaded by `js/ge-maker.js`), so the rest of the
+demo is a further preview.
+
+Further down the same page, on the same overrides:
 
 **Typography** sets font, size, weight and colour for body text, `h1`–`h6`
 `small`, `pre` and `blockquote`. Every option is a token (`var(--font-serif)`, `var(--text-lg)`,
@@ -67,9 +71,7 @@ the `viewBox` and the token-driven geometry.
 | Page | |
 |---|---|
 | **Home** | this file and the [function reference](function.md), rendered from markdown |
-| **Theme** | `setTheme` / `toggleTheme` and the `data-theme` readout (on the Token page) |
-| **Token** | the colour playground, the type scale, element typography, buckets |
-| **UI theme** | one colour (`--co`), its five `color-mix()` shades, and buttons, alert, card and field drawn with them |
+| **Theme** | `setTheme` / `toggleTheme` and the `data-theme` readout; the colour editor (`--ac`, `--bg`, `--fg`, the five seeds), the `--ac` scale, and a dashboard, webpage and docs article painted from them; the type scale, element typography, buckets |
 | **Component** | toast, tabs, accordion, modal, copy, onKey, dropdown, context menu |
 | **Forms** | `prepareForm` / `handleForm` — generated ids, wired labels, validation |
 | **Utils** | the flex and responsive utilities from `css/ge2/utils.css` |
@@ -96,8 +98,9 @@ sidebar, folds the notes away, then imports `./ge-maker/<data-page>.js`.
 
 The sidebar carries a theme button beside its menu toggle. It fires a
 cancelable `ge-maker:theme` event on `document` and toggles the theme only
-if no page cancels it. The Token page cancels it and switches the theme
-itself, so the colour overrides it keeps for each theme swap along with it.
+if no one cancels it. `js/ge-maker/overrides.js`, loaded on every page,
+cancels it and switches the theme itself, so the overrides kept for each
+theme swap along with it.
 
 **Adding a section** is a `menu.json` edit, not an edit to seven HTML files.
 The sidebar and the cards on `index.html` are both built from it. An item

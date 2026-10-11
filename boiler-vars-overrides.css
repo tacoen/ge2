@@ -1,7 +1,7 @@
 /* css/vars-overrides.css — this app's token overrides.
    Changed values only; everything else falls back to vars.css.
    style.css imports it into layer(units) right after vars.css, so it wins.
-   Tune colours on ge2's Token page and paste its download over this file. */
+   Tune colours on ge2's Theme page and paste its download over this file. */
 
 :root {
 

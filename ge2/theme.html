@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ge · Theme</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="stylesheet" href="../css/ge-maker.css">
+</head>
+<body data-page="theme">
+<div class="shell">
+<!-- filled from ge2/menu.json by js/ge-maker/menu.js -->
+<nav class="sidebar" id="siteNav"></nav>
+<div class="page">
+
+  <h1>ge · Theme</h1>
+  <p class="sub">Switch between light and dark, set the colours and type each theme is built from, and save the result as buckets or <code>vars-overrides.css</code>.</p>
+
+  <section id="theme-switch">
+    <h2>theme · switch</h2>
+    <div class="controls">
+      <button type="button" id="themeLight">setTheme('light')</button>
+      <button type="button" id="themeDark">setTheme('dark')</button>
+      <button type="button" id="themeToggle">toggleTheme()</button>
+    </div>
+    <p class="out" id="themeOut"></p>
+  </section>
+
+
+  <section id="theme-colour">
+    <h2>theme · colour · <span id="colourTheme">light</span></h2>
+    <p class="out" data-note>The colour editor. <code>--ac</code>, <code>--bg</code>, <code>--fg</code> (Main) and the five component seeds (Swatch) start at the stylesheet's values for the current theme. Any edit is a real override, set on <code>&lt;html&gt;</code>: the whole page follows it, it is kept <strong>per theme</strong> (switching swaps it in), it applies on every demo page, and buckets save it. Clearing a field, typing the stylesheet's own value, or clicking the swatch drops the override; <strong>reset colours</strong> drops them all, in both themes. <strong>theme · buckets</strong> below shows what is changed, as the <code>vars-overrides.css</code> an app drops in after <code>vars.css</code>. Under Derived, the scale steps <code>--ac</code> toward <code>--bg</code> (<code>bg1</code>…<code>bg5</code>: 15, 30, 45, 60, 85%), toward <code>--fg</code> (<code>fg1</code>…<code>fg5</code>) and toward transparent (<code>tr1</code>…<code>tr4</code>), each labelled with what it is for. The demo beside it — an app dashboard, a webpage and a docs article, one per tab — is painted from those steps; its chips and callouts take the seeds. <strong>CSS</strong>, folded under the panel, lists the formulas in force. Every field takes any CSS colour.</p>
+
+    <div class="ge2-theme-panel w100 p3 flex column gap-6" id="themePanel">
+
+      <div class="theme-groups">
+        <div class="theme-group">
+          <h3 class="sub-h3">Main</h3>
+          <div class="ac-top">
+            <div>
+              <label for="mainAc" title="--ac">Accent</label>
+              <div class="ac-row"><span class="preview-color-box main" data-swatch="ac"></span><input type="text" id="mainAc" name="ac" spellcheck="false" autocomplete="off"><input type="color" name="ac-pick" aria-label="Pick --ac"></div>
+            </div>
+            <div>
+              <label for="mainBg" title="--bg">Background</label>
+              <div class="ac-row"><span class="preview-color-box main" data-swatch="bg"></span><input type="text" id="mainBg" name="bg" spellcheck="false" autocomplete="off"><input type="color" name="bg-pick" aria-label="Pick --bg"></div>
+            </div>
+            <div>
+              <label for="mainFg" title="--fg">Foreground</label>
+              <div class="ac-row"><span class="preview-color-box main" data-swatch="fg"></span><input type="text" id="mainFg" name="fg" spellcheck="false" autocomplete="off"><input type="color" name="fg-pick" aria-label="Pick --fg"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="theme-group">
+          <h3 class="sub-h3">Swatch</h3>
+          <!-- one labelled field per seed, filled by js/ge-maker/theme.js -->
+          <div class="ac-top" id="seedList"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion theme-derived">
+      <div class="accordion-item active" id="derivedItem">
+        <div class="accordion-header">Derived</div>
+        <div class="accordion-content">
+          <div class="flex gap-6 ac-split">
+            <!-- steps filled by js/ge-maker/theme.js -->
+            <div class="ac-scale w100 w30-md" role="img" aria-label="--ac toward --bg and --fg"></div>
+
+            <!-- the --ac scale and the seeds on three kinds of page: an app
+                 dashboard, a website and a docs article -->
+            <div class="ac-demo">
+              <ul class="tabmenu" data-scope="acDemoPanels">
+                <li data-tab="acDemoDash" class="active">Dashboard</li>
+                <li data-tab="acDemoWeb">Webpage</li>
+                <li data-tab="acDemoDoc">Article</li>
+              </ul>
+              <div id="acDemoPanels">
+                <section class="tab active" id="acDemoDash" aria-label="Dashboard">
+                  <div class="ac-frame ac-window">
+                    <header class="ac-appbar">
+                      <span class="ac-brand"><span class="ac-logo" aria-hidden="true"></span>Files</span>
+                      <div class="ac-search">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5"/></svg>
+                        <input type="search" placeholder="Search files" aria-label="Search files">
+                      </div>
+                      <button type="button" class="ac-btn ac-btn-solid">Upload</button>
+                      <span class="ac-avatar" aria-hidden="true">RK</span>
+                    </header>
+
+                    <nav class="ac-nav" aria-label="Folders">
+                      <a href="#theme-colour">Recent</a>
+                      <a href="#theme-colour" aria-current="page">Projects <span class="ac-count">12</span></a>
+                      <a href="#theme-colour">Shared with me</a>
+                      <a href="#theme-colour">Trash</a>
+                      <div class="ac-storage">
+                        <span>Storage</span>
+                        <div class="ac-meter" role="img" aria-label="62% used"><span></span></div>
+                        <small>6.2 of 10 GB used</small>
+                      </div>
+                    </nav>
+
+                    <div class="ac-main">
+                      <div class="ac-main-head">
+                        <strong class="ac-title">Projects</strong>
+                        <div class="ac-segment" role="group" aria-label="Show">
+                          <button type="button" aria-pressed="true">All</button>
+                          <button type="button" aria-pressed="false">Shared</button>
+                          <button type="button" aria-pressed="false">Pinned</button>
+                        </div>
+                      </div>
+
+                      <p class="ac-notice"><span><strong>ui.css was edited on another device.</strong> Keep both copies or choose one.</span> <a href="#theme-colour">Resolve</a></p>
+
+                      <table class="ac-files">
+                        <thead>
+                          <tr><th><input type="checkbox" aria-label="Select all"></th><th>Name</th><th>Status</th><th class="ac-wide">Size</th><th class="ac-wide">Modified</th></tr>
+                        </thead>
+                        <tbody>
+                          <tr aria-selected="true"><td><input type="checkbox" checked aria-label="Select vars.css"></td><td>vars.css</td><td><span class="ac-chip" data-tone="sc">Synced</span></td><td class="ac-wide">4 KB</td><td class="ac-wide">Just now</td></tr>
+                          <tr><td><input type="checkbox" aria-label="Select ui.css"></td><td>ui.css</td><td><span class="ac-chip" data-tone="wr">Conflict</span></td><td class="ac-wide">18 KB</td><td class="ac-wide">2 min ago</td></tr>
+                          <tr><td><input type="checkbox" aria-label="Select logo.svg"></td><td>logo.svg</td><td><span class="ac-chip" data-tone="in">Shared</span></td><td class="ac-wide">2 KB</td><td class="ac-wide">Yesterday</td></tr>
+                          <tr><td><input type="checkbox" aria-label="Select brief.pdf"></td><td>brief.pdf</td><td><span class="ac-chip" data-tone="pr">Pinned</span></td><td class="ac-wide">1.2 MB</td><td class="ac-wide">Monday</td></tr>
+                          <tr><td><input type="checkbox" aria-label="Select backup.zip"></td><td>backup.zip</td><td><span class="ac-chip" data-tone="da">Upload failed</span></td><td class="ac-wide">240 MB</td><td class="ac-wide">Monday</td></tr>
+                        </tbody>
+                      </table>
+
+                      <div class="ac-actionbar">
+                        <span>1 selected</span>
+                        <button type="button" class="ac-btn">Move</button>
+                        <button type="button" class="ac-btn ac-btn-danger">Delete</button>
+                        <button type="button" class="ac-btn ac-btn-solid">Share</button>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                <section class="tab" id="acDemoWeb" aria-label="Webpage" hidden>
+                  <div class="ac-frame ac-site">
+                    <header class="ac-site-nav">
+                      <span class="ac-brand"><span class="ac-logo" aria-hidden="true"></span>Files</span>
+                      <nav aria-label="Site">
+                        <a href="#theme-colour" aria-current="page">Features</a>
+                        <a href="#theme-colour">Pricing</a>
+                        <a href="#theme-colour">Docs</a>
+                      </nav>
+                      <button type="button" class="ac-btn">Sign in</button>
+                    </header>
+
+                    <div class="ac-hero">
+                      <span class="ac-chip" data-tone="pr">New: version history</span>
+                      <h3>Your files, on every device you own.</h3>
+                      <p>Files keeps your folders in sync across laptop, phone and server, and lets you share any of them with a link.</p>
+                      <div class="ac-hero-actions">
+                        <button type="button" class="ac-btn ac-btn-solid">Start free</button>
+                        <button type="button" class="ac-btn">See pricing</button>
+                      </div>
+                      <small>Free for 10 GB. No card needed.</small>
+                    </div>
+
+                    <div class="ac-features">
+                      <div>
+                        <strong>Sync</strong>
+                        <p>Change a file anywhere and every device has it within seconds.</p>
+                      </div>
+                      <div>
+                        <strong>Share</strong>
+                        <p>Send a link that expires, or invite people to edit with you.</p>
+                      </div>
+                      <div>
+                        <strong>Restore</strong>
+                        <p>Go back to any version from the last 30 days, even after deleting.</p>
+                      </div>
+                    </div>
+
+                    <div class="ac-plan">
+                      <div>
+                        <strong>Pro</strong> <span class="ac-chip" data-tone="sc">Most chosen</span>
+                        <p><span class="ac-price">$6</span> per month, billed yearly</p>
+                      </div>
+                      <ul>
+                        <li>1 TB of storage</li>
+                        <li>Version history for 30 days</li>
+                        <li>Shared folders with edit rights</li>
+                      </ul>
+                      <button type="button" class="ac-btn ac-btn-solid">Choose Pro</button>
+                    </div>
+
+                    <form class="ac-subscribe" action="#theme-colour">
+                      <label for="acSubscribe">Get product updates</label>
+                      <div>
+                        <input type="email" id="acSubscribe" placeholder="you@example.com" autocomplete="off">
+                        <button type="button" class="ac-btn ac-btn-solid">Subscribe</button>
+                      </div>
+                      <small>One email a month. Unsubscribe with one click.</small>
+                    </form>
+
+                    <footer class="ac-site-foot">
+                      <span>© Files</span>
+                      <a href="#theme-colour">Privacy</a>
+                      <a href="#theme-colour">Terms</a>
+                      <a href="#theme-colour">Status</a>
+                    </footer>
+                  </div>
+                </section>
+                <section class="tab" id="acDemoDoc" aria-label="Article" hidden>
+                  <div class="ac-frame ac-docs">
+                    <nav class="ac-toc" aria-label="On this page">
+                      <span>On this page</span>
+                      <a href="#theme-colour">Install</a>
+                      <a href="#theme-colour" aria-current="true">Share a folder</a>
+                      <a href="#theme-colour">Link options</a>
+                      <a href="#theme-colour">Revoke access</a>
+                    </nav>
+
+                    <article class="ac-article">
+                      <p class="ac-crumbs"><a href="#theme-colour">Docs</a> / <a href="#theme-colour">Sharing</a> / Share a folder</p>
+                      <h3>Share a folder</h3>
+                      <p class="ac-lead">Give someone access to a folder with a link, or invite them by email so they can edit with you.</p>
+
+                      <h4>Create a link</h4>
+                      <p>Select the folder, press <kbd>Ctrl</kbd> + <kbd>L</kbd>, and copy the link. Anyone with the link can view; to let them edit, turn on <a href="#theme-colour">edit rights</a>. From the command line, use <code>files share</code>:</p>
+                      <pre><code>files share ~/Projects/ge2 --expires 7d
+# https://files.example/s/4kq9 (view, expires in 7 days)</code></pre>
+
+                      <div class="ac-callout" data-tone="in">
+                        <strong>Note</strong>
+                        <p>Links to a folder include everything added to it later.</p>
+                      </div>
+
+                      <h4>Link options</h4>
+                      <table class="ac-doc-table">
+                        <thead><tr><th>Option</th><th>Default</th><th>What it does</th></tr></thead>
+                        <tbody>
+                          <tr><td><code>--expires</code></td><td>never</td><td>Turns the link off after a time, e.g. <code>7d</code></td></tr>
+                          <tr><td><code>--edit</code></td><td>off</td><td>Lets people with the link change files</td></tr>
+                          <tr><td><code>--password</code></td><td>none</td><td>Asks for a password before opening</td></tr>
+                        </tbody>
+                      </table>
+
+                      <div class="ac-callout" data-tone="wr">
+                        <strong>Before you share</strong>
+                        <p>Edit rights let people delete files. Deleted files stay in Trash for 30 days.</p>
+                      </div>
+
+                      <blockquote>Sharing a folder never moves it. It stays in your Files, and you can revoke access at any time.</blockquote>
+
+                      <div class="ac-pager">
+                        <a href="#theme-colour"><small>Previous</small>Install</a>
+                        <a href="#theme-colour"><small>Next</small>Revoke access</a>
+                      </div>
+                    </article>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion theme-css">
+      <div class="accordion-item" id="cssItem">
+        <div class="accordion-header">CSS</div>
+        <div class="accordion-content">
+          <pre class="out" id="themeCss"></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button type="button" id="colourReset">reset colours</button>
+      <span class="out">Every override, colour and type, is listed and exported under <a href="#theme-buckets">theme · buckets</a>.</span>
+    </div>
+  </section>
+
+  <section id="theme-type">
+    <h2>theme · type</h2>
+    <div class="token-controls">
+      <label>root font-size · <span class="mono" id="rootSizeVal">16px</span>
+        <input type="range" id="rootSize" min="11" max="24" step="1" value="16">
+      </label>
+      <label>--leading · <span class="mono" id="leadingVal">1.5</span>
+        <input type="range" id="leading" min="1" max="2.2" step="0.05" value="1.5">
+      </label>
+      <label>--font-sans
+        <select id="fontFamily">
+          <option value="">system-ui (default)</option>
+          <option value="var(--font-mono)">--font-mono</option>
+          <option value="var(--font-serif)">--font-serif</option>
+        </select>
+      </label>
+    </div>
+    <p class="out" data-note>Every size token is in <code>rem</code>, so root font-size scales the whole page. Sample:</p>
+    <p class="type-sample">
+      <span style="font-size:var(--text-xs)">--text-xs</span>
+      <span style="font-size:var(--text-sm)">--text-sm</span>
+      <span style="font-size:var(--text-md)">--text-md</span>
+      <span style="font-size:var(--text-xl)">--text-xl</span>
+      <span style="font-size:var(--text-2xl)">--text-2xl</span>
+      <span style="font-size:var(--text-3xl)">--text-3xl</span>
+    </p>
+  </section>
+  <section id="theme-typography">
+    <h2>theme · typography</h2>
+    <p class="out" data-note>Font, size, weight and colour for body text, <code>h1</code>–<code>h6</code>, <code>small</code>, <code>pre</code> and <code>blockquote</code>. Each element reads its own tokens — <code>--body-font</code>, <code>--h1-weight</code>, <code>--small-color</code>… — declared in <code>vars.css</code> and applied in <code>base.css</code>. Every option is another token, written as <code>var(--token)</code>; the option marked <code>*</code> drops the override and shows what the stylesheet gives. A <code>* inherit</code> means the token is left at <code>initial</code>, so the element takes its parent's value. Heading sizes are the existing <code>--h1</code>…<code>--h6</code>. Changes persist, go into buckets, and are written to the <code>:root</code> block of <strong>download vars-overrides.css</strong>.</p>
+    <div id="typoEditors"></div>
+    <div class="controls" style="margin-block-start:var(--md)">
+      <button type="button" id="typoReset">reset typography</button>
+    </div>
+  </section>
+
+  <section id="theme-buckets">
+    <h2>theme · buckets</h2>
+    <p class="out" data-note>Every change on this page — colours, type and typography — is kept in <code>localStorage</code> and applied on every demo page, so a reload restores it. A bucket is a named snapshot of <em>both</em> themes — save, load, delete. The block below shows the overrides as CSS, live. <strong>download vars-overrides.css</strong> saves that block as the app's <code>css/vars-overrides.css</code> — changed values only; <code>style.css</code> imports it right after <code>vars.css</code>, so it wins. Light and dark are both written, each scoped to its own <code>[data-theme]</code> block so neither leaks into the other.</p>
+    <div class="bucket-bar">
+      <input type="text" id="bucketName" placeholder="bucket name" autocomplete="off">
+      <button type="button" id="bucketSave">save</button>
+      <select id="bucketList"></select>
+      <button type="button" id="bucketLoad">load</button>
+      <button type="button" id="bucketDelete">delete</button>
+    </div>
+    <p class="out" id="bucketOut"></p>
+    <div class="bucket-css">
+      <pre><code id="bucketCss"></code></pre>
+      <button type="button" id="bucketCopy">copy</button>
+    </div>
+    <div class="controls" style="margin-block-start:var(--sm)">
+      <button type="button" id="bucketClear">clear all overrides</button>
+      <button type="button" id="varsDownload">download vars-overrides.css</button>
+    </div>
+  </section>
+
+</div>
+</div>
+
+
+<script type="module" src="../js/ge-maker.js"></script>
+</body>
+</html>

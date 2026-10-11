@@ -50,45 +50,27 @@
     {
       "id": "theme",
       "label": "Theme",
-      "page": "token.html",
+      "page": "theme.html",
       "items": [
         {
           "anchor": "theme-switch",
           "label": "theme · switch"
-        }
-      ]
-    },
-    {
-      "id": "tokens",
-      "label": "Token",
-      "page": "token.html",
-      "items": [
-        {
-          "anchor": "tokens-colour",
-          "label": "tokens · colour"
         },
         {
-          "anchor": "tokens-type",
-          "label": "tokens · type"
+          "anchor": "theme-colour",
+          "label": "theme · colour"
         },
         {
-          "anchor": "tokens-typography",
-          "label": "tokens · typography"
+          "anchor": "theme-type",
+          "label": "theme · type"
         },
         {
-          "anchor": "buckets",
-          "label": "tokens · buckets"
-        }
-      ]
-    },
-    {
-      "id": "ui-theme",
-      "label": "UI theme",
-      "page": "ui-theme.html",
-      "items": [
+          "anchor": "theme-typography",
+          "label": "theme · typography"
+        },
         {
-          "anchor": "ui-theme-panel",
-          "label": "ui theme · colour"
+          "anchor": "theme-buckets",
+          "label": "theme · buckets"
         }
       ]
     },

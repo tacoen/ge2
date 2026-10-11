@@ -23,14 +23,14 @@ body {
 }
 
 a {
-  color: var(--ac);
+  color: var(--pr);
   text-decoration: none;
 }
 
 a:hover {
   color: var(--fg);
   text-decoration-line: underline;
-  text-decoration-color: var(--ac);
+  text-decoration-color: var(--pr);
 }
 
 [hidden] { display: none !important; }
@@ -115,7 +115,7 @@ button {
 }
 
 button:disabled { opacity: .5; cursor: default; }
-[type=submit] { color: var(--ac); }
+[type=submit] { color: var(--pr); }
 [type=reset] { color: var(--da); }
 
 input, textarea, select {

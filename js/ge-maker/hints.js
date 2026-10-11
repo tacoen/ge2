@@ -53,7 +53,7 @@ export function hints(root = document) {
   const notes = ui.els(NOTE, root);
 
   notes.forEach((note, i) => {
-    // #colorNote already had one; a popovertarget needs an id either way
+    // a popovertarget needs an id; keep one the markup already gave
     note.id ||= `hint-${i}`;
     note.classList.add('hint-pop');
 

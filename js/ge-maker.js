@@ -8,6 +8,9 @@ import { ui } from './ge2/ui.js';
 import { icx } from './ge2/icons.js';
 import { buildMenu } from './ge-maker/menu.js';
 import { hints } from './ge-maker/hints.js';
+// Saved token overrides go on <html> before anything paints from them, and
+// the sidebar's theme button swaps the per-theme ones (see the module).
+import './ge-maker/overrides.js';
 
 // ── framework bootstrap — same three calls as the root script.js ──
 icx.observe();

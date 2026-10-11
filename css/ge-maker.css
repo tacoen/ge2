@@ -5,7 +5,7 @@
   body { margin: 0; padding: 0; }
 
   /* The demo's thin headings, as tokens rather than a rule — so the
-     typography table on the Token page can still override them. */
+     typography table on the Theme page can still override them. */
   :root {
     --h1-weight: var(--w-thin);
     --h2-weight: var(--w-thin);
@@ -108,7 +108,7 @@
     border-radius: var(--radius-lg);
   }
 
-  #buckets {  background: var(--border-muted); }
+  #theme-buckets {  background: var(--border-muted); }
 
   .page > section > h2 {
     margin: 0 0 var(--sm);
@@ -269,104 +269,9 @@
     color: var(--muted);
   }
 
-  .token-grid {
-    display: grid;
-    grid-template-columns: max-content max-content max-content minmax(0, 1fr);
-    align-items: center;
-    gap: var(--vxs) var(--xs);
-    font-size: var(--text-sm);
-  }
-
-  .token-head,
-  .token-row { display: contents; }
-
-  .token-head > * {
-    padding-block-end: var(--vxs);
-    border-block-end: var(--border-width) solid var(--border);
-    color: var(--muted);
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-  }
-
-  .token-head > .dup,
-  .token-gap { display: none; }
-  .token-gap > span { grid-column: span 4; }
-
-  @media (min-width: 992px) {
-    .token-grid {
-      grid-template-columns: repeat(2, max-content max-content max-content minmax(0, 1fr));
-    }
-
-    .token-head > .dup { display: block; }
-    .token-gap { display: contents; }
-
-    .token-head > *:nth-child(5),
-    .token-grid > .token-row:nth-child(odd) > .token-name {
-      padding-inline-start: var(--md);
-      border-inline-start: var(--border-width) solid var(--border-muted);
-    }
-  }
-
+  /* the typography table's row label and reset button */
   .token-name { white-space: nowrap; }
   .token-name code { font-size: var(--text-xs); }
-  .token-hint {color: var(--muted);font-size: var(--text-xs);}
-
-  .token-row.changed .token-name code {
-    color: var(--pr);
-    font-weight: var(--w-bold);
-  }
-
-  .token-control {
-    display: flex;
-    align-items: center;
-    gap: var(--vxs);
-  }
-
-  @media (max-width: 575.98px) {
-    .token-grid { grid-template-columns: minmax(0, 1fr); }
-    .token-head { display: none; }
-
-    .token-row {
-      display: grid;
-      grid-template-columns: max-content minmax(0, 1fr);
-      align-items: center;
-      gap: var(--vxs) var(--xs);
-      padding-block: var(--xs);
-      border-block-end: var(--border-width) solid var(--border-muted);
-    }
-
-    .token-hint { grid-column: 1 / -1; }
-    .token-control { grid-column: 1 / -1; }
-  }
-
-  .swatch-preview {
-    display: inline-block;
-    width: 1.5rem;
-    height: 1.5rem;
-    flex: none;
-    padding: 2px;
-    background: none;
-    border: var(--border-width) solid var(--border);
-    border-radius: var(--radius-sm);
-  }
-
-  .token-base .swatch-preview {
-    width: var(--icon-size-sm);
-    height: var(--icon-size-sm);
-    padding: 1px;
-  }
-
-  .swatch-copy { cursor: pointer; }
-  .swatch-copy:hover { border-color: var(--pr); }
-
-  .swatch-fill {
-    display: block;
-    width: 1.5rem;
-    height: 1rem;
-    border-radius: 1px;
-  }
 
   .swatch-reset {
     display: inline-flex;
@@ -379,23 +284,6 @@
 
   .swatch-reset:hover { border-color: var(--border); color: var(--fg); }
   .swatch-reset .icx { --icon-size: 0.9rem; }
-
-  .swatch-pick {
-    width: 2rem;
-    height: 1.6rem;
-    flex: none;
-    padding: 0;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-  }
-
-  .swatch-hex {
-    width: 5rem;
-    flex: none;
-    padding: var(--vxs) var(--xs);
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-  }
 
   .hint-btn {
     display: inline-flex;
@@ -568,182 +456,6 @@
 
   .bucket-bar button { background: var(--bg); }
   .bucket-bar button:hover:not(:disabled) { background: var(--ac-bg3); }
-
-  .derived-row {
-    display: grid;
-    grid-template-columns: 3.5rem minmax(0, 1fr);
-    align-items: center;
-    gap: var(--xs);
-    padding-block: 2px;
-  }
-
-  .derived-label {
-    color: var(--muted);
-    font-size: var(--text-xs);
-    text-align: end;
-  }
-
-  .derived-set {
-    display: flex;
-    flex-wrap: nowrap;
-    gap: var(--vxs);
-  }
-
-  .derived-set .swatch {
-    flex: 0 0 auto;
-    width: 1.25rem;
-    height: 1.25rem;
-  }
-
-  .derived {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--lg);
-    align-items: start;
-  }
-
-  @media (max-width: 767.98px) {
-    .derived { grid-template-columns: minmax(0, 1fr); gap: var(--md); }
-  }
-
-  .derived-group > .sub-h4:first-child { margin-block-start: 0; }
-
-  .derived-preview {
-    --c: var(--fg);
-    --c-bg: var(--bg-muted);
-    --c-border: var(--border);
-
-    display: flex;
-    flex-direction: column;
-    gap: var(--xs);
-    margin-block: var(--xs) var(--md);
-    font-size: var(--text-xs);
-  }
-   .derived-preview.sysc{
-	padding: var(--lg) 0;
-}
-.derived-preview.dp-alt{
-    --c: var(--fg);
-    --c-bg: var(--bg-inset);
-    --c-border: var(--border);
-    padding: var(--md) 0;
-}
-  .pv-slin {
-    display: flex;
-    align-items: stretch;
-    gap: var(--xs);
-  }
-
-  .pv-toast,
-  .pv-msg {
-    display: flex;
-    align-items: center;
-    gap: var(--xs);
-    padding: var(--vxs) var(--xs);
-    background: var(--c-bg);
-    border: var(--border-width) solid var(--c-border);
-    border-radius: var(--radius-sm);
-    color: var(--c);
-  }
-
-  .pv-toast {
-    flex: none;
-    min-width: 3rem;
-    justify-content: center;
-    font-family: var(--font-mono);
-  }
-
-  .pv-msg { flex: 1; }
-
-  .pv-text {
-    display: flex;
-    align-items: center;
-    flex: none;
-    padding-inline: var(--xs);
-    white-space: nowrap;
-  }
-
-  .pv-dot {
-    width: .6rem;
-    height: .6rem;
-    flex: none;
-    background: var(--c);
-    border-radius: 50%;
-  }
-
-  /* dp-alt: the same tokens as real controls. */
-  .pv-btn {
-    padding: var(--vxs) var(--sm);
-    background: var(--c-bg);
-    border: var(--border-width) solid var(--c-border);
-    border-radius: var(--radius-sm);
-    color: var(--c);
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    white-space: nowrap;
-    cursor: pointer;
-  }
-
-  .pv-btn:hover { border-color: var(--c); }
-  .pv-btn:active { translate: 0 1px; }
-
-  /* ge2 ships success/error/info/warning toasts; primary and accent have no type yet. */
-  .toast-primary {
-    background: var(--pr-bg);
-    border-color: var(--pr-border);
-    color: var(--fg);
-  }
-
-  .toast-accent {
-    background: var(--ac-bg5);
-    border-color: var(--ac-bg4);
-    color: var(--fg);
-  }
-
-  .pv-card {
-    padding: var(--md);
-    background: var(--bg-overlay);
-  }
-
-  .pv-div {
-    padding: var(--md);
-    background: var(--bg);
-    border: 1px solid var(--border);
-    box-shadow: 2px 4px var(--shadow);
-    border-radius: var(--radius-md);
- }
-
-  .pv-body {
-    margin: 0;
-    padding: var(--sm);
-    color: var(--fg);
-    border: var(--border-width) solid var(--border);
-  }
-  .pv-muted  { color: var(--muted); }
-  .pv-subtle { color: var(--subtle); }
-
-  .pv-surface { border-radius: var(--radius-sm); }
-  .pv-surface + .pv-surface {margin-block-start: var(--xs);}
-  .pv-surface:last-of-type { margin-block-end: var(--xs); }
-
-  .pv-borders {display: flex;gap: var(--vxs);margin-top: var(--md);}
-  .pv-borders > span {
-    flex: 1;
-    padding: var(--vxs);
-    text-align: center;
-    color: var(--muted);
-    border-radius: var(--radius-sm);
-  }
-  .pv-b1 { border: var(--border-width) solid var(--border-muted); }
-  .pv-b2 { border: var(--border-width) solid var(--border); }
-  .pv-b3 { border: var(--border-width) solid var(--border-hover); }
-
-  .swatch {
-    border: var(--border-width) solid var(--border);
-    border-radius: var(--radius-sm);
-  }
-
-  .swatch:hover { border-color: var(--border-hover); }
 
   .util-demo {
     display: grid;
@@ -958,15 +670,20 @@
   .btn-grid > .head { color: var(--muted); font-family: var(--font-mono); font-size: var(--text-xs); }
 
 
-  /* ui-theme.html — --ac and its scale. Overrides and the scale are set
-     inline on the panel by js/ge-maker/ui-theme.js. */
+  /* theme.html — the colour editor, the --ac scale and the demos
+     (js/ge-maker/theme.js) */
   .ac-split { align-items: flex-start; }
   /* label, --ac, --bg and --fg side by side, bottoms aligned (the label field has a
      <label> above it); they stack on narrow screens */
   .ac-top { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--md); }
   .ac-top > * { flex: 1 1 12rem; min-width: 0; }
-  /* an overridden --bg / --fg repaints the whole panel */
   .ge2-theme-panel { background: var(--bg); color: var(--fg); }
+  /* Derived and the CSS readout fold away under the panel, before Overrides */
+  .theme-derived,
+  .theme-css { margin-block: var(--md); }
+  .theme-css pre { margin: 0; }
+  /* a field holding an override, rather than the stylesheet's value */
+  .theme-group .ac-row.changed input[type='text'] { border-color: var(--ac); font-weight: var(--w-bold); }
   /* Main | Swatch: two columns, each a heading over its fields stacked one
      per line; one column on narrow screens */
   .theme-groups {
@@ -1025,7 +742,7 @@
     border: var(--border-width) solid var(--border);
     border-radius: var(--radius-sm);
   }
-  /* on the UI theme panel a swatch is a restore button (js/ge-maker/ui-theme.js) */
+  /* on the Theme page's colour panel a swatch is a restore button (js/ge-maker/theme.js) */
   .preview-color-box[role='button'] { cursor: pointer; }
   .preview-color-box[role='button']:focus-visible { outline: 2px solid var(--focus-color); outline-offset: 2px; }
   .preview-color-box.main,
@@ -1078,7 +795,8 @@
     --demo-on-solid: var(--ac-bg5);      /* text on --ac: the --bg end, light here */
     --demo-text: var(--fg);
     --demo-quiet: var(--ac-fg4);         /* secondary text: strong-text step, near --fg */
-    --demo-link: var(--ac-fg2);
+    --demo-link: var(--ac-fg2);          /* accent text: titles, ticks, avatar */
+    --demo-anchor: var(--pr);            /* links, as base.css paints <a> */
     --demo-ring: var(--ac-tr3);
   }
   /* dark: the --bg end is dark, so text on --ac (bg5) turns dark and stays
@@ -1097,6 +815,7 @@
     --demo-text: var(--fg);
     --demo-quiet: var(--ac-fg4);
     --demo-link: var(--ac-fg2);
+    --demo-anchor: var(--pr);
     --demo-ring: var(--ac-tr2);
   }
 
@@ -1210,7 +929,7 @@
     text-decoration: none;
   }
   .ac-nav a:hover { background: var(--demo-nav-hover); color: var(--demo-text); }
-  .ac-nav a[aria-current] { background: var(--demo-selected); color: var(--demo-link); font-weight: var(--w-medium); }
+  .ac-nav a[aria-current] { background: var(--demo-selected); color: var(--demo-anchor); font-weight: var(--w-medium); }
   .ac-count { color: var(--demo-quiet); font-size: var(--text-xs); }
   .ac-storage {
     display: flex;
@@ -1264,7 +983,7 @@
     border-radius: var(--radius-md);
     background: var(--wr-subtle);
   }
-  .ac-notice a { color: var(--demo-link); font-weight: var(--w-medium); white-space: nowrap; }
+  .ac-notice a { color: var(--demo-anchor); font-weight: var(--w-medium); white-space: nowrap; }
 
   .ac-files { font-size: var(--text-sm); }
   .ac-files :is(th, td) { padding: var(--xs) var(--sm); text-align: start; border-block-end: var(--border-width) solid var(--demo-border); }
@@ -1406,7 +1125,7 @@
     font-size: var(--text-xs);
   }
   .ac-site-foot a { color: var(--demo-quiet); }
-  .ac-site-foot a:hover { color: var(--demo-link); }
+  .ac-site-foot a:hover { color: var(--demo-anchor); }
 
   /* article: an "on this page" list beside a docs article. Prose keeps ge2's
      own base styles for pre, code, kbd and blockquote, so this tab shows
@@ -1429,12 +1148,12 @@
     text-decoration: none;
   }
   .ac-toc a:hover { color: var(--demo-text); }
-  .ac-toc a[aria-current] { border-inline-start-color: var(--demo-solid); color: var(--demo-link); font-weight: var(--w-medium); }
+  .ac-toc a[aria-current] { border-inline-start-color: var(--demo-solid); color: var(--demo-anchor); font-weight: var(--w-medium); }
 
   .ac-article { max-width: 62ch; padding: var(--md) var(--lg) var(--lg); line-height: var(--leading); }
   .ac-article > * { margin: 0 0 var(--sm); }
   .ac-crumbs { color: var(--demo-quiet); font-size: var(--text-xs); }
-  .ac-crumbs a { color: var(--demo-quiet); }
+  .ac-crumbs a { color: var(--demo-anchor); }
   .ac-article h3,
   .ac-article h4 {
     color: var(--demo-text);
@@ -1446,7 +1165,7 @@
   .ac-article h3 { font-size: var(--text-xl); }
   .ac-article h4 { margin-block-start: var(--md); font-size: var(--text-md); }
   .ac-lead { color: var(--demo-quiet); font-size: var(--text-md); }
-  .ac-article a { color: var(--demo-link); }
+  .ac-article a { color: var(--demo-anchor); }
   .ac-article kbd {
     padding: 0 var(--vxs);
     border: var(--border-width) solid var(--demo-border);
@@ -1486,7 +1205,7 @@
     padding: var(--xs) var(--sm);
     border: var(--border-width) solid var(--demo-border);
     border-radius: var(--radius-md);
-    color: var(--demo-link);
+    color: var(--demo-anchor);
     font-weight: var(--w-medium);
     text-decoration: none;
   }

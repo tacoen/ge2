@@ -417,7 +417,7 @@ aside p.fsmall,
 
 /* neutral naked is muted; neutral link takes the <a> colour */
 :is(button, .button, .btn).naked:not(.pr, .sc, .da, .wr, .ac, .in) { --btn: var(--muted); }
-:is(button, .button, .btn).link:not(.pr, .sc, .da, .wr, .ac, .in) { --btn: var(--ac); --btn-focus: var(--ac); }
+:is(button, .button, .btn).link:not(.pr, .sc, .da, .wr, .ac, .in) { --btn: var(--pr); --btn-focus: var(--pr); }
 
 :is(button, .button, .btn).rounded { border-radius: calc(var(--radius-lg) * 99); }
 :is(button, .button, .btn).plain { border-color: transparent; }

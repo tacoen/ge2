@@ -72,7 +72,7 @@ export async function buildMenu(nav = ui.el('.sidebar'), src = 'menu.json') {
     + '</div>'
     + `<ul class="sidebar-nav">${groups}</ul>`;
 
-  // A page that keeps per-theme state (token.js) cancels the event and does
+  // Something that keeps per-theme state (overrides.js) cancels the event and does
   // the switch itself, so it can save before and restore after.
   const theme = nav.querySelector('.sidebar-theme');
   // A fresh span, not a changed attribute: icx hydrates each node only once.
