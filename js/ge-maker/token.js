@@ -74,7 +74,7 @@ const DERIVED = [
     { label: 'wr',   tokens: ['--wr', '--wr-bg', '--wr-subtle', '--wr-border'] },
     { label: 'in',   tokens: ['--in', '--in-bg', '--in-subtle', '--in-border'] },
     { label: 'pr',   tokens: ['--pr', '--pr-bg', '--pr-subtle', '--pr-border'] },
-    { label: 'ac',   tokens: ['--ac', '--ac-bg', '--ac-subtle', '--ac-border'] },
+    { label: 'ac',   tokens: ['--ac', '--ac-bg3', '--ac-bg5', '--ac-bg4'] },
   ] },
 ];
 
@@ -232,6 +232,12 @@ function preview(section, rows) {
   return previewBox(section, rows);
 }
 
+// A tone's role as a var(). --ac has the scale instead of -bg / -subtle /
+// -border / -bg-text, so its roles map onto steps — the same ones
+// css/ge2/utils.css gives the .ac button.
+const AC_ROLE = { 'bg': 'bg3', 'subtle': 'bg5', 'border': 'bg4', 'bg-text': 'fg4' };
+const tone = (l, role) => `var(--${l}-${l === 'ac' ? AC_ROLE[role] : role})`;
+
 function previewBox(section, rows, variant) {
   const box = document.createElement('div');
   box.className = variant ? `derived-preview ${variant}` : 'derived-preview';
@@ -247,11 +253,11 @@ function previewBox(section, rows, variant) {
     box.innerHTML = rows.map(({ label: l }) => `
       <div class="pv-slin">
         <button type="button" class="pv-btn" data-toast="${l}"
-          style="--c: var(--${l}-bg-text); --c-bg: var(--${l}-bg);
-                 --c-border: var(--${l}-border)">${l} solid</button>
+          style="--c: ${tone(l, 'bg-text')}; --c-bg: ${tone(l, 'bg')};
+                 --c-border: ${tone(l, 'border')}">${l} solid</button>
         <button type="button" class="pv-btn" data-toast="${l}"
-          style="--c: var(--${l}); --c-bg: var(--${l}-subtle);
-                 --c-border: var(--${l}-border)">${l} subtle</button>
+          style="--c: var(--${l}); --c-bg: ${tone(l, 'subtle')};
+                 --c-border: ${tone(l, 'border')}">${l} subtle</button>
         <div class="pv-msg">
           <span class="pv-dot" style="background: var(--${l})"></span>
           click either — a ${l} toast drops in bottom-right
@@ -267,11 +273,11 @@ function previewBox(section, rows, variant) {
   } else if (section === 'system') {
     box.innerHTML = rows.map(({ label: l }) => `
       <div class="pv-slin">
-        <div class="pv-toast" style="--c: var(--${l}-bg-text);
-             --c-bg: var(--${l}-bg); --c-border: var(--${l}-border)">${l}</div>
+        <div class="pv-toast" style="--c: ${tone(l, 'bg-text')};
+             --c-bg: ${tone(l, 'bg')}; --c-border: ${tone(l, 'border')}">${l}</div>
         <div class="pv-text" style="color: var(--${l})">${l} as text</div>
-        <div class="pv-msg" style="--c: var(--${l}); --c-bg: var(--${l}-subtle);
-             --c-border: var(--${l}-bg)">
+        <div class="pv-msg" style="--c: var(--${l}); --c-bg: ${tone(l, 'subtle')};
+             --c-border: ${tone(l, 'bg')}">
           <span class="pv-dot"></span>${l} message, with text and icon
         </div>
       </div>`).join('');
@@ -471,7 +477,7 @@ ui.on(ui.el('#varsDownload'), 'click', () => {
   if (!count) { ui.toast('No overrides to export', 'warning', 1800); return; }
 
   const stamp = new Date().toISOString().slice(0, 10);
-  const css = `/* css/vars-overrides.css — exported from the ge2 token playground, ${stamp}.
+  const css = `/* css/vars-overrides.css — exported from the ge token playground, ${stamp}.
    Changed values only; everything else falls back to vars.css.
    style.css imports it into layer(units) right after vars.css, so it wins.
    The :root block holds what vars.css declares outside a theme; the

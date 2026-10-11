@@ -1,4 +1,4 @@
-# text-editor — a ge2 plugin
+# text-editor — a ge plugin
 
 Markdown view/editor. Shows rendered markdown; **Edit** swaps in the source,
 **Save** re-renders and writes the file. Pasting or dropping an image,
@@ -42,7 +42,7 @@ await loadPlugins();
 ```
 
 That is the whole install. The loader imports the JS and injects the CSS
-into layer `plugin`, which sits between `ui` and `page` — ge2 components
+into layer `plugin`, which sits between `ui` and `page` — ge components
 still beat the element defaults, and a page can still restyle the editor.
 **Comment the key out and nothing is fetched at all.**
 
@@ -114,7 +114,7 @@ An empty `{}` enables the plugin with empty bases, so files land in
 `uploads/` directly. Removing the key disables the
 plugin entirely.
 
-The dependency runs one way: the plugin reads ge2's config, ge2 never reads
+The dependency runs one way: the plugin reads ge's config, ge never reads
 the plugin. Remove the plugin and the key is simply ignored.
 
 **The storage root is not settable from JavaScript.** `MEDIA_DIR` and

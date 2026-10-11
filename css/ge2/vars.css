@@ -90,7 +90,7 @@
   /* ── ge2: focus ── */
   --focus-width: 1px;
   --focus-offset: 1px;
-  --focus-color: var(--pr);
+  --focus-color: var(--ac-bg1);   /* --ac scale label: focus ring */
 
   /* ── ge2: stacking ── */
   --z-overlay: 1000;
@@ -166,36 +166,51 @@
    element. See color.md */
 :root,
 [data-theme] {
-  /* foreground: --fg → --muted → --subtle, toward --gray */
-  --muted: color-mix(in srgb, var(--fg), var(--gray) 50%);
-  --subtle: color-mix(in srgb, var(--fg), var(--gray) 85%);
+  /* foreground: --fg → --muted → --subtle, by the --ac scale's labels:
+     muted is text (fg3), subtle the next step toward --ac (fg2) */
+  --muted: var(--ac-fg3);
+  --subtle: var(--ac-fg2);
 
   /* surfaces */
-  --bg-subtle: color-mix(in srgb, var(--bg), var(--tint) 4%);
-  --bg-muted: color-mix(in srgb, var(--bg), var(--tint) 8%);
-  --bg-inset: color-mix(in srgb, var(--bg), var(--sink) 40%);
+  --bg-subtle: var(--ac-bg5);  /* scale label: muted · subtle */
+  --bg-muted: var(--ac-bg5);   /* scale label: muted · subtle */
+  --bg-inset: var(--ac-bg3);   /* scale label: inset · hover */
   /* scrim (modal, drawer) */
-  --bg-overlay: color-mix(in srgb, var(--black), transparent 50%);
+  --bg-overlay: var(--ac-tr4); /* scale label: overlay */
 
-  /* borders, weakest → strongest; hover clears 3:1 */
-  --border-muted: color-mix(in srgb, var(--bg), var(--gray) 15%);
-  --border: color-mix(in srgb, var(--bg), var(--gray) 30%);
-  --border-hover: color-mix(in srgb, var(--bg), var(--gray) 45%);
+  /* borders, weakest → strongest, by the --ac scale's labels:
+     muted (bg5), border (bg4), hover (bg3) */
+  --border-muted: var(--ac-bg5);
+  --border: var(--ac-bg4);
+  --border-hover: var(--ac-bg3);
 
-  /* functional — on :root so --focus-color can use --pr */
+  /* functional — on :root so --focus-color can use the --ac scale */
   --pr: color-mix(in srgb, var(--seed-pr), var(--fg) var(--tone-fg));
   --sc: color-mix(in srgb, var(--seed-sc), var(--fg) var(--tone-fg));
   --da: color-mix(in srgb, var(--seed-da), var(--fg) var(--tone-fg));
   --wr: color-mix(in srgb, var(--seed-wr), var(--fg) var(--tone-fg));
-  --ac: color-mix(in srgb, var(--seed-ac), var(--fg) var(--tone-fg));
+  --ac: var(--seed-ac);
   --in: color-mix(in srgb, var(--seed-in), var(--fg) var(--tone-fg));
 
-  /* tones: -subtle rest, -bg hover, -border outline; -bg-text on either */
-  --ac-subtle: color-mix(in srgb, var(--bg), var(--ac) 10%);
-  --ac-bg: color-mix(in srgb, var(--bg), var(--ac) 20%);
-  --ac-border: color-mix(in srgb, var(--bg), var(--ac) 40%);
-  --ac-bg-text: var(--fg);
+  /* --ac scale: toward --bg (bg1…bg5), toward --fg (fg1…fg5) and toward
+     transparent (tr1…tr4). The number is how much --bg / --fg / transparent
+     goes in, so bg5 is nearest --bg and fg5 nearest --fg in either theme. */
+  --ac-bg1: color-mix(in srgb, var(--ac), var(--bg) 15%);
+  --ac-bg2: color-mix(in srgb, var(--ac), var(--bg) 30%);
+  --ac-bg3: color-mix(in srgb, var(--ac), var(--bg) 45%);
+  --ac-bg4: color-mix(in srgb, var(--ac), var(--bg) 60%);
+  --ac-bg5: color-mix(in srgb, var(--ac), var(--bg) 85%);
+  --ac-fg1: color-mix(in srgb, var(--ac), var(--fg) 15%);
+  --ac-fg2: color-mix(in srgb, var(--ac), var(--fg) 30%);
+  --ac-fg3: color-mix(in srgb, var(--ac), var(--fg) 45%);
+  --ac-fg4: color-mix(in srgb, var(--ac), var(--fg) 60%);
+  --ac-fg5: color-mix(in srgb, var(--ac), var(--fg) 85%);
+  --ac-tr1: color-mix(in srgb, var(--ac), transparent 25%);
+  --ac-tr2: color-mix(in srgb, var(--ac), transparent 50%);
+  --ac-tr3: color-mix(in srgb, var(--ac), transparent 75%);
+  --ac-tr4: color-mix(in srgb, var(--ac), transparent 95%);
 
+  /* tones: -subtle rest, -bg hover, -border outline; -bg-text on either */
   --pr-subtle: color-mix(in srgb, var(--bg), var(--pr) 10%);
   --pr-bg: color-mix(in srgb, var(--bg), var(--pr) 20%);
   --pr-border: color-mix(in srgb, var(--bg), var(--pr) 40%);

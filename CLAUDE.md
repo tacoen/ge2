@@ -1,4 +1,4 @@
-# CLAUDE.md — ge2
+# CLAUDE.md — ge
 
 Lean by design. Add sections only as new rules are actually needed — don't pre-scaffold.
 
@@ -15,7 +15,7 @@ Front-end framework/project. PHP or static HTML, CSS via `@layer`, JS as ES modu
   enabled — change one, change the other
 - `boiler-CLAUDE.md` → a new app's `CLAUDE.md`: the subset of these rules
   that applies downstream. A rule change here that affects apps goes there too
-- `ge2-check.sh` → read-only check of ge2 and every synced project (drift,
+- `ge2-check.sh` → read-only check of ge and every synced project (drift,
   strict layer order, one root entry, module sheet wiring, framework
   boundary, plugin shape and paths, request data in filesystem calls,
   root-absolute paths, CDN URLs outside `config.js`
@@ -64,10 +64,10 @@ plugin.
   `units` (vars + vars-overrides) → `base` (base) → `ui` (ui + layout)
   → `plugin` → `page` → `utils` (utilities, last)
 - App/page code goes in `page` (or `app`), between `plugin` and `utils`;
-  app-wide utilities go in `utils`, after ge2's own
+  app-wide utilities go in `utils`, after ge's own
 - `style.css` is the single wiring point: it declares layer order and imports
   `css/ge2/*`. A module sheet just does `@import url('../style.css');` — it
-  never re-imports ge2 and never redeclares the layer order
+  never re-imports ge and never redeclares the layer order
 - Layer order: `@layer units, base, ui, plugin, page, utils;` **before** the
   imports in `style.css` — declared after, `page` lands last and beats the utilities
 - Each boundary is deliberate: `ui` overrides element defaults (its

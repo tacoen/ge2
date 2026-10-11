@@ -1,6 +1,6 @@
 # ge-maker
 
-The harness that ships with ge2. It is not part of the framework — nothing in
+The harness that ships with ge. It is not part of the framework — nothing in
 `css/ge2/` or `js/ge2/` knows it exists — but it is where you *make* things:
 tune the palette, author icons, and take a real file away at the end.
 

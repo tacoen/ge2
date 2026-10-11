@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ge2 · quick start</title>
+<title>ge · quick start</title>
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="stylesheet" href="style.css">
 <script type="module" src="script.js"></script>
@@ -11,7 +11,7 @@
 <body>
 
 <header class="topbar">
-  <span class="topbar-brand">ge2</span>
+  <span class="topbar-brand">ge</span>
   <span class="topbar-spacer"></span>
   <a href="ge2/index.html">demo &amp; reference →</a>
 </header>
@@ -21,7 +21,7 @@
 <nav class="sidemenu">
   <ul>
     <li><a href="#start">1 · start a project</a></li>
-    <li><a href="#sync">2 · keep ge2 in sync</a></li>
+    <li><a href="#sync">2 · keep ge in sync</a></li>
     <li><a href="#config">3 · configure</a></li>
     <li><a href="#css">4 · write CSS</a></li>
     <li><a href="#js">5 · write JS</a></li>
@@ -43,7 +43,7 @@
 <main>
 
 <section class="hero">
-  <h1>Kick-start a ge2 app</h1>
+  <h1>Kick-start a ge app</h1>
   <p>PHP or static HTML, CSS in <code>@layer</code>s, JS as ES modules.
   No build step — files are served as they are.</p>
   <div class="hero-actions">
@@ -67,15 +67,15 @@ cp ge2/boiler-config.js            myapp/js/ge2/config.js   # no plugins enabled
 cp ge2/favicon.ico                 myapp/
 cp ge2/boiler-CLAUDE.md            myapp/CLAUDE.md          # rules for AI assistants</code></pre>
 <p>The <code>boiler-*</code> files are clean starters. <code>boiler-config.js</code>
-replaces ge2's own <code>config.js</code>, which enables the
+replaces ge's own <code>config.js</code>, which enables the
 <code>text-editor</code> plugin for the demo — yours starts with an empty
 plugin list, and the sync never overwrites it.
 <code>boiler-vars-overrides.css</code> is an empty override sheet, so you
-start from the stock palette rather than ge2's.</p>
+start from the stock palette rather than ge's.</p>
 <p>That is a working page: theme applied before first paint, icons hydrated,
 tabs and accordions wired — all from <code>script.js</code>.</p>
 
-<h2 id="sync">2 · Keep ge2 in sync</h2>
+<h2 id="sync">2 · Keep ge in sync</h2>
 <p><code>css/ge2/</code> and <code>js/ge2/</code> in your app are a
 <strong>vendored copy — never edit them</strong>. Pull upstream changes
 with:</p>
@@ -137,7 +137,7 @@ with an optional folder beside it:</p>
     <tr><td><code>js/&lt;name&gt;/</code></td><td>submodules imported by the entry</td></tr>
   </tbody>
 </table>
-<p>A module sheet never re-imports ge2 and never redeclares the layer
+<p>A module sheet never re-imports ge and never redeclares the layer
 order — <code>style.css</code> already did both.</p>
 
 <h2 id="plugins">7 · Add a plugin</h2>

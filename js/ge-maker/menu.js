@@ -6,6 +6,7 @@
 // section is a data edit, not seven HTML edits.
 
 import { ui } from '../ge2/ui.js';
+import { store } from '../ge2/store.js';
 
 // window.location, not the bare global: the latter is not guaranteed to
 // exist in every host that runs this module.
@@ -64,7 +65,9 @@ export async function buildMenu(nav = ui.el('.sidebar'), src = 'menu.json') {
 
   nav.innerHTML =
     '<div class="sidebar-bar">'
-    + '<button class="sidebar-toggle" type="button" aria-label="Toggle menu">menu</button>'
+    // the page's favicon is the rail toggle; every page sits beside ge2/favicon.ico
+    + '<button class="sidebar-toggle" type="button" aria-label="Toggle menu" title="Toggle menu">'
+    + '<img src="favicon.ico" alt="" width="20" height="20"></button>'
     + '<button class="sidebar-theme" type="button" aria-label="Toggle theme" title="Toggle theme"></button>'
     + '</div>'
     + `<ul class="sidebar-nav">${groups}</ul>`;
@@ -87,7 +90,16 @@ export async function buildMenu(nav = ui.el('.sidebar'), src = 'menu.json') {
     }
   });
 
+  // The rail remembers being toggled shut, across reloads and pages. Only a
+  // click on the toggle is saved — ui.sidebar() also collapses the rail by
+  // itself on narrow screens, and that must not stick on a wide one. The
+  // listener goes on after ui.sidebar()'s, so it reads the new state.
+  const COLLAPSED = 'ge2-test:sidebar-collapsed';
+  if (store.get(COLLAPSED) === '1') nav.classList.add('collapsed');
   ui.sidebar(nav);
+  ui.on(nav.querySelector('.sidebar-toggle'), 'click', () => {
+    store.set(COLLAPSED, nav.classList.contains('collapsed') ? '1' : '0');
+  });
   return menu;
 }
 

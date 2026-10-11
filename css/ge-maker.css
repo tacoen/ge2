@@ -24,7 +24,7 @@
     height: 100%;
     overflow-y: auto;
     padding: var(--md) var(--xs) var(--md) var(--md);
-    background: var(--bg-muted);
+    background: var(--ac-bg5);
     border-inline-end: var(--border-width) solid var(--border);
   }
 
@@ -34,14 +34,19 @@
     justify-content: space-between;
   }
 
+  /* the toggle (favicon) and the theme switch are bare icons: no border */
+  .sidebar-toggle,
   .sidebar-theme {
     display: inline-flex;
     padding: var(--vxs) var(--xs);
+    border: 0;
+    background: none;
     color: var(--muted);
     border-radius: var(--radius-sm);
   }
+  .sidebar-toggle img { display: block; width: 20px; height: 20px; }
 
-  .sidebar-theme:hover { background: var(--bg-subtle); color: var(--fg); }
+  .sidebar-theme:hover { background: var(--ac-bg3); color: var(--fg); }
 
   .page {
     min-width: 0;
@@ -62,6 +67,14 @@
   }
 
   .page > .group-head:first-of-type {margin-block-start: var(--md);}
+
+  /* toggled shut: the rail shrinks to its two icons, stacked. Not on narrow
+     screens, where the sidebar is a full-width bar above the page anyway. */
+  @media (min-width: 576px) {
+    .shell:has(> .sidebar.collapsed) { grid-template-columns: auto minmax(0, 1fr); }
+    .shell > .sidebar.collapsed { padding: var(--md) var(--xs); }
+    .sidebar.collapsed .sidebar-bar { flex-direction: column; gap: var(--xs); }
+  }
 
   @media (max-width: 575.98px) {
     .shell { grid-template-columns: minmax(0, 1fr); height: auto; }
@@ -90,7 +103,7 @@
   .page > section {
     margin-block-end: var(--md);
     padding: var(--md) var(--lg);
-    background: var(--bg-subtle);
+    background: var(--ac-bg5);
 
     border-radius: var(--radius-lg);
   }
@@ -129,7 +142,7 @@
     font-family: var(--font-mono);
     font-size: var(--sm);
     line-height: var(--leading-tight);
-    background: var(--bg-subtle);
+    background: var(--ac-bg5);
     border: var(--border-width) solid var(--border);
     border-radius: var(--radius-md);
     cursor: pointer;
@@ -149,7 +162,7 @@
 
   button:hover:not(:disabled),
   input:is([type='submit'], [type='reset'], [type='button'], [type='image']):hover {
-    background: var(--bg-muted);
+    background: var(--ac-bg3);
     border-color: var(--border-hover);
   }
 
@@ -212,7 +225,7 @@
   pre {
     margin: 0 0 var(--xs);
     padding: var(--xs) var(--sm);
-    background: var(--bg-inset);
+    background: var(--ac-bg5);
     border: var(--border-width) solid var(--border);
     border-radius: var(--radius-md);
   }
@@ -409,7 +422,7 @@
     overscroll-behavior: contain;
     margin: 0;
     padding: var(--sm);
-    background: var(--bg-subtle);
+    background: var(--ac-bg5);
     border: var(--border-width) solid var(--border);
     border-radius: var(--radius-md);
     box-shadow: 0 var(--vxs) var(--md) var(--shadow);
@@ -418,7 +431,7 @@
 
   .hint-inline {
     padding: var(--sm);
-    background: var(--bg-subtle);
+    background: var(--ac-bg5);
     border: var(--border-width) solid var(--border);
     border-radius: var(--radius-md);
   }
@@ -441,7 +454,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--vxs);
-    background: var(--bg-subtle);
+    background: var(--ac-bg5);
     border: var(--border-width) solid var(--border);
     border-radius: var(--radius-md);
     text-decoration: none;
@@ -449,7 +462,7 @@
   }
 
   .landing-card:hover {
-    background: var(--bg-muted);
+    background: var(--ac-bg3);
     border-color: var(--border-hover);
   }
 
@@ -474,7 +487,7 @@
 
   .doc pre {
     padding: var(--sm);
-    background: var(--bg-inset);
+    background: var(--ac-bg5);
     border: var(--border-width) solid var(--border-muted);
     border-radius: var(--radius-md);
     margin-block-end: var(--sm);
@@ -482,7 +495,7 @@
 
   .doc :not(pre) > code {
     padding: 0 var(--vxs);
-    background: var(--bg-inset);
+    background: var(--ac-bg5);
     border-radius: var(--radius-sm);
   }
 
@@ -500,7 +513,7 @@
     vertical-align: top;
   }
 
-  .doc th { background: var(--bg-subtle); }
+  .doc th { background: var(--ac-bg5); }
 
   .doc hr {
     margin-block: var(--xlg);
@@ -510,7 +523,7 @@
 
   .doc-raw {
     padding: var(--sm);
-    background: var(--bg-inset);
+    background: var(--ac-bg3);
     border: var(--border-width) solid var(--border-muted);
     border-radius: var(--radius-md);
     white-space: pre-wrap;
@@ -523,7 +536,7 @@
     gap: var(--xs);
     align-items: center;
     padding: var(--sm);
-    background: var(--bg-inset);
+    background: var(--ac-bg3);
     border: var(--border-width) solid var(--border-hover);
     border-radius: var(--radius-md);
   }
@@ -554,7 +567,7 @@
   }
 
   .bucket-bar button { background: var(--bg); }
-  .bucket-bar button:hover:not(:disabled) { background: var(--bg-subtle); }
+  .bucket-bar button:hover:not(:disabled) { background: var(--ac-bg3); }
 
   .derived-row {
     display: grid;
@@ -682,8 +695,8 @@
   }
 
   .toast-accent {
-    background: var(--ac-bg);
-    border-color: var(--ac-border);
+    background: var(--ac-bg5);
+    border-color: var(--ac-bg4);
     color: var(--fg);
   }
 
@@ -811,7 +824,7 @@
 
   .icon-add {
     justify-content: center;
-    background: var(--bg-muted);
+    background: var(--ac-bg5);
     border-style: dashed;
     color: var(--muted);
     cursor: pointer;
@@ -842,7 +855,7 @@
     min-height: 2.5rem;
     padding: var(--xs);
     margin-block-end: var(--sm);
-    background: var(--bg-muted);
+    background: var(--ac-bg5);
     border: var(--border-width) solid var(--border-muted);
     border-radius: var(--radius-sm);
   }
@@ -945,17 +958,32 @@
   .btn-grid > .head { color: var(--muted); font-family: var(--font-mono); font-size: var(--text-xs); }
 
 
-  /* ui-theme.html — one colour (--co) and its derived shades. The tokens
-     themselves are set inline on the panel by js/ge-maker/ui-theme.js. */
-  .co-split { align-items: flex-start; }
-  /* label and --co side by side, bottoms aligned (the label field has a
+  /* ui-theme.html — --ac and its scale. Overrides and the scale are set
+     inline on the panel by js/ge-maker/ui-theme.js. */
+  .ac-split { align-items: flex-start; }
+  /* label, --ac, --bg and --fg side by side, bottoms aligned (the label field has a
      <label> above it); they stack on narrow screens */
-  .co-top { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--md); }
-  .co-top > * { flex: 1 1 12rem; min-width: 0; }
+  .ac-top { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--md); }
+  .ac-top > * { flex: 1 1 12rem; min-width: 0; }
   /* an overridden --bg / --fg repaints the whole panel */
   .ge2-theme-panel { background: var(--bg); color: var(--fg); }
-  /* scale: one row per step, --bg end on top, --co in the middle */
-  .co-scale {
+  /* Main | Swatch: two columns, each a heading over its fields stacked one
+     per line; one column on narrow screens */
+  .theme-groups {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: var(--lg);
+  }
+  .theme-group > .sub-h3 { margin-block-start: 0; }
+  .theme-group > .ac-top { flex-direction: column; align-items: stretch; gap: var(--sm); }
+  .theme-group > .ac-top > * { flex: none; }
+  /* each field on one line: label on the left, control filling the rest */
+  .theme-group > .ac-top > div { display: flex; align-items: center; gap: var(--sm); }
+  .theme-group > .ac-top label { flex: 0 0 11rem; margin: 0; }
+  .theme-group > .ac-top .ac-row { flex: 1; min-width: 0; }
+  /* scale: one row per step, --bg end on top, --ac in the middle */
+  .ac-scale {
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -965,7 +993,7 @@
   /* each step: its name, then its role. Text takes the far end of the scale
      — --fg on the --bg side, --bg on the --fg side — so it reads in either
      theme. */
-  .co-scale > span {
+  .ac-scale > span {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
@@ -974,22 +1002,22 @@
     color: var(--fg);
     font-size: var(--text-xs);
   }
-  .co-scale > [data-co-step='co'] { color: var(--black); }
-  .co-scale > span { background: var(--step); }
-  .co-scale > [data-co-step^='co-fg'] { color: var(--bg); }
+  .ac-scale > [data-ac-step='ac'] { color: var(--black); }
+  .ac-scale > span { background: var(--step); }
+  .ac-scale > [data-ac-step^='ac-fg'] { color: var(--bg); }
   /* transparent steps sit on a checkerboard, so the see-through shows */
-  .co-scale > [data-co-step^='co-tr'] {
+  .ac-scale > [data-ac-step^='ac-tr'] {
     background:
       linear-gradient(var(--step), var(--step)),
-      repeating-conic-gradient(var(--bg-muted) 0 25%, var(--bg) 0 50%) 0 0 / 12px 12px;
+      repeating-conic-gradient(var(--ac-bg5) 0 25%, var(--bg) 0 50%) 0 0 / 12px 12px;
   }
-  .co-scale small { font-size: inherit; opacity: .8; }
-  .co-row {
+  .ac-scale small { font-size: inherit; opacity: .8; }
+  .ac-row {
     display: flex;
     align-items: center;
     gap: var(--vxs);
   }
-  .co-row input[type='text'] { flex: 1; min-width: 0; font-family: var(--font-mono); font-size: var(--text-xs); }
+  .ac-row input[type='text'] { flex: 1; min-width: 0; font-family: var(--font-mono); font-size: var(--text-xs); }
   .preview-color-box {
     flex: none;
     width: 1.5rem;
@@ -997,9 +1025,12 @@
     border: var(--border-width) solid var(--border);
     border-radius: var(--radius-sm);
   }
+  /* on the UI theme panel a swatch is a restore button (js/ge-maker/ui-theme.js) */
+  .preview-color-box[role='button'] { cursor: pointer; }
+  .preview-color-box[role='button']:focus-visible { outline: 2px solid var(--focus-color); outline-offset: 2px; }
   .preview-color-box.main,
-  .co-row input[type='color'] { width: 2rem; height: 2rem; }
-  .co-row input[type='color'] {
+  .ac-row input[type='color'] { width: 2rem; height: 2rem; }
+  .ac-row input[type='color'] {
     flex: none;
     min-height: 0;
     padding: 0;
@@ -1007,156 +1038,480 @@
     border-radius: var(--radius-sm);
     cursor: pointer;
   }
-  .co-row input[type='color']::-webkit-color-swatch-wrapper { padding: 0; }
-  .co-row input[type='color']::-webkit-color-swatch { border: 0; border-radius: var(--radius-sm); }
-  .co-row input[type='color']::-moz-color-swatch { border: 0; border-radius: var(--radius-sm); }
+  .ac-row input[type='color']::-webkit-color-swatch-wrapper { padding: 0; }
+  .ac-row input[type='color']::-webkit-color-swatch { border: 0; border-radius: var(--radius-sm); }
+  .ac-row input[type='color']::-moz-color-swatch { border: 0; border-radius: var(--radius-sm); }
 
-  /* --co's text field and picker read as one control: no gap, shared border */
-  .co-row input[type='text']:has(+ input[type='color']) {
+  /* a text field and its picker read as one control: no gap, shared border */
+  .ac-row input[type='text']:has(+ input[type='color']) {
     height: 2rem;
     padding-block: 0;
     border-start-end-radius: 0;
     border-end-end-radius: 0;
   }
-  .co-row input[type='text'] + input[type='color'] {
+  .ac-row input[type='text'] + input[type='color'] {
     margin-inline-start: calc(-1 * (var(--vxs) + var(--border-width)));
     border-start-start-radius: 0;
     border-end-start-radius: 0;
   }
-  .co-row input[type='text'] + input[type='color']::-webkit-color-swatch { border-radius: 0; }
-  .co-row input[type='text'] + input[type='color']::-moz-color-swatch { border-radius: 0; }
+  .ac-row input[type='text'] + input[type='color']::-webkit-color-swatch { border-radius: 0; }
+  .ac-row input[type='text'] + input[type='color']::-moz-color-swatch { border-radius: 0; }
 
-  /* demo pane: header across the top, then 2 × 2 — buttons | alert, card | field */
-  .co-demo {
-    flex: 1;
-    min-width: 0;
+  /* demo pane: a slice of a file manager. Its own container, so it lays out
+     by the width it gets, not the viewport's. */
+  .ac-demo { flex: 1; min-width: 0; container-type: inline-size; }
+
+  /* demo roles, one set per theme. Every value is a step of the --ac scale
+     (a color-mix() of --ac toward --bg, --fg or transparent) or a ge2 base
+     token; the rules below use only these roles. Light is also the fallback
+     when no data-theme is set. */
+  .ac-demo,
+  [data-theme='light'] .ac-demo {
+    --demo-canvas: var(--bg);            /* file list */
+    --demo-surface: var(--ac-bg5);       /* app bar, sidebar, table head, segment track */
+    --demo-border: var(--ac-bg4);
+    --demo-row-hover: var(--ac-bg5);     /* a row on the canvas */
+    --demo-nav-hover: var(--ac-bg4);     /* a link on the surface */
+    --demo-selected: var(--ac-tr3);      /* selected row, current folder */
+    --demo-solid: var(--ac);
+    --demo-solid-hover: var(--ac-fg1);
+    --demo-on-solid: var(--ac-bg5);      /* text on --ac: the --bg end, light here */
+    --demo-text: var(--fg);
+    --demo-quiet: var(--ac-fg4);         /* secondary text: strong-text step, near --fg */
+    --demo-link: var(--ac-fg2);
+    --demo-ring: var(--ac-tr3);
+  }
+  /* dark: the --bg end is dark, so text on --ac (bg5) turns dark and stays
+     readable on the lighter dark-theme accent; the ring takes one step more
+     to show on a dark canvas. */
+  [data-theme='dark'] .ac-demo {
+    --demo-canvas: var(--bg);
+    --demo-surface: var(--ac-bg5);
+    --demo-border: var(--ac-bg4);
+    --demo-row-hover: var(--ac-bg5);
+    --demo-nav-hover: var(--ac-bg4);
+    --demo-selected: var(--ac-tr3);
+    --demo-solid: var(--ac);
+    --demo-solid-hover: var(--ac-fg1);
+    --demo-on-solid: var(--ac-bg5);
+    --demo-text: var(--fg);
+    --demo-quiet: var(--ac-fg4);
+    --demo-link: var(--ac-fg2);
+    --demo-ring: var(--ac-tr2);
+  }
+
+  .ac-demo .tabmenu { margin-block-end: var(--sm); }
+
+  /* frame shared by both previews */
+  .ac-frame {
+    overflow: hidden;
+    border: var(--border-width) solid var(--demo-border);
+    border-radius: var(--radius-lg);
+    background: var(--demo-canvas);
+    color: var(--demo-text);
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    box-shadow: 0 var(--xs) var(--lg) var(--shadow);
+  }
+
+  /* dashboard: app bar across, sidebar | main below */
+  .ac-window {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: start;
-    gap: var(--md);
-  }
-  .co-demo-buttons { align-self: center; }
-
-  /* demo roles, one set per theme. Every value is a step of the scale, so
-     each one is a color-mix() of --co toward --bg, --fg or transparent; the
-     rules below use only these roles. Light is also the fallback when no
-     data-theme is set. */
-  .co-demo,
-  [data-theme='light'] .co-demo {
-    --demo-surface: var(--co-bg5);       /* alert, card body, badge, soft button */
-    --demo-bar: var(--co-bg4);           /* header, card head */
-    --demo-border: var(--co-bg4);
-    --demo-hover: var(--co-bg3);
-    --demo-current: var(--co-bg5);       /* current header link */
-    --demo-solid-hover: var(--co-fg1);
-    --demo-on-solid: var(--co-fg5);      /* text on --co */
-    --demo-text: var(--co-fg2);          /* text and links on a surface */
-    --demo-strong: var(--co-fg4);        /* header text, card head */
-    --demo-disabled: var(--co-bg4);
-    --demo-ring: var(--co-tr3);
-  }
-  /* dark: the --bg end is now dark and the --fg end light, so the same steps
-     keep their meaning; what changes is contrast. Text on --co takes the dark
-     end (bg5), solid hover lifts toward --fg, and disabled and the ring need
-     one step more to show on a dark surface. */
-  [data-theme='dark'] .co-demo {
-    --demo-surface: var(--co-bg5);
-    --demo-bar: var(--co-bg4);
-    --demo-border: var(--co-bg3);
-    --demo-hover: var(--co-bg3);
-    --demo-current: var(--co-bg5);
-    --demo-solid-hover: var(--co-fg1);
-    --demo-on-solid: var(--co-bg5);
-    --demo-text: var(--co-fg2);
-    --demo-strong: var(--co-fg4);
-    --demo-disabled: var(--co-bg3);
-    --demo-ring: var(--co-tr2);
+    grid-template-columns: 10rem minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
   }
 
-  .co-header {
+  .ac-appbar {
     grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: var(--sm);
+    padding: var(--xs) var(--sm);
+    border-block-end: var(--border-width) solid var(--demo-border);
+    background: var(--demo-surface);
+  }
+  .ac-brand { display: flex; align-items: center; gap: var(--xs); min-width: 9rem; font-weight: var(--w-bold); }
+  .ac-logo {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, var(--ac), var(--ac-fg2));
+  }
+  .ac-search { position: relative; flex: 1; min-width: 0; }
+  .ac-search svg {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: var(--xs);
+    width: 1rem;
+    height: 100%;
+    fill: none;
+    stroke: var(--demo-quiet);
+    stroke-width: 2;
+    stroke-linecap: round;
+    pointer-events: none;
+  }
+  .ac-demo .ac-search input {
+    width: 100%;
+    padding: var(--vxs) var(--sm) var(--vxs) calc(var(--xs) + 1.5rem);
+    border-color: var(--demo-border);
+    border-radius: var(--radius-md);
+    background: var(--demo-canvas);
+    font-size: var(--text-sm);
+  }
+  .ac-demo .ac-search input:focus { border-color: var(--demo-solid); box-shadow: 0 0 0 3px var(--demo-ring); }
+  .ac-avatar {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    background: var(--demo-link);
+    color: var(--demo-on-solid);
+    font-size: var(--text-xs);
+    font-weight: var(--w-bold);
+  }
+
+  /* buttons: quiet by default, one solid for the main action */
+  .ac-demo .ac-btn {
+    padding: var(--vxs) var(--sm);
+    border: var(--border-width) solid var(--demo-border);
+    border-radius: var(--radius-md);
+    background: var(--demo-canvas);
+    color: var(--demo-text);
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: var(--w-medium);
+    white-space: nowrap;
+  }
+  .ac-demo .ac-btn:hover:not(:disabled) { background: var(--demo-row-hover); border-color: var(--demo-border); }
+  .ac-demo .ac-btn-solid { border-color: var(--demo-solid); background: var(--demo-solid); color: var(--demo-on-solid); }
+  .ac-demo .ac-btn-solid:hover:not(:disabled) { border-color: var(--demo-solid-hover); background: var(--demo-solid-hover); }
+  .ac-demo .ac-btn-danger { color: var(--da); }
+  .ac-demo .ac-btn-danger:hover:not(:disabled) { border-color: var(--da-border); background: var(--da-subtle); }
+  .ac-demo :is(.ac-btn, .ac-segment button, .ac-nav a):focus-visible { outline: 2px solid var(--demo-solid); outline-offset: 2px; }
+
+  /* sidebar */
+  .ac-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: var(--sm) var(--xs);
+    border-inline-end: var(--border-width) solid var(--demo-border);
+    background: var(--demo-surface);
+  }
+  .ac-nav a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--vxs) var(--xs);
+    border-radius: var(--radius-md);
+    color: var(--demo-text);
+    text-decoration: none;
+  }
+  .ac-nav a:hover { background: var(--demo-nav-hover); color: var(--demo-text); }
+  .ac-nav a[aria-current] { background: var(--demo-selected); color: var(--demo-link); font-weight: var(--w-medium); }
+  .ac-count { color: var(--demo-quiet); font-size: var(--text-xs); }
+  .ac-storage {
+    display: flex;
+    flex-direction: column;
+    gap: var(--vxs);
+    margin-block-start: auto;
+    padding: var(--md) var(--xs) 0;
+    color: var(--demo-quiet);
+    font-size: var(--text-xs);
+  }
+  .ac-meter { height: 6px; overflow: hidden; border-radius: 3px; background: var(--demo-border); }
+  .ac-meter > span { display: block; width: 62%; height: 100%; background: var(--demo-solid); }
+
+  /* main: title and filter, notice, file table, action bar */
+  .ac-main { display: flex; flex-direction: column; gap: var(--sm); min-width: 0; padding: var(--sm) var(--md) var(--md); }
+  .ac-main-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sm); }
+  .ac-title { font-size: var(--text-lg); }
+  .ac-segment {
+    display: flex;
+    gap: 2px;
+    padding: 2px;
+    border-radius: var(--radius-md);
+    background: var(--demo-surface);
+  }
+  .ac-demo .ac-segment button {
+    padding: 2px var(--sm);
+    border: 0;
+    border-radius: calc(var(--radius-md) - 2px);
+    background: none;
+    color: var(--demo-quiet);
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+  }
+  .ac-demo .ac-segment button:hover:not(:disabled) { background: none; color: var(--demo-text); }
+  .ac-demo .ac-segment button[aria-pressed='true'] {
+    background: var(--demo-canvas);
+    color: var(--demo-text);
+    font-weight: var(--w-medium);
+    box-shadow: 0 1px 2px var(--shadow);
+  }
+
+  .ac-notice {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--xs) var(--sm);
+    margin: 0;
+    padding: var(--xs) var(--sm);
+    border: var(--border-width) solid var(--wr-border);
+    border-radius: var(--radius-md);
+    background: var(--wr-subtle);
+  }
+  .ac-notice a { color: var(--demo-link); font-weight: var(--w-medium); white-space: nowrap; }
+
+  .ac-files { font-size: var(--text-sm); }
+  .ac-files :is(th, td) { padding: var(--xs) var(--sm); text-align: start; border-block-end: var(--border-width) solid var(--demo-border); }
+  .ac-files :is(th, td):first-child { width: 1rem; padding-inline-end: 0; }
+  .ac-files th { color: var(--demo-quiet); font-size: var(--text-xs); font-weight: var(--w-medium); }
+  .ac-files tbody tr:hover { background: var(--demo-row-hover); }
+  .ac-files tbody tr[aria-selected='true'] { background: var(--demo-selected); }
+  .ac-files tbody tr:last-child td { border-block-end: 0; }
+  .ac-files td:nth-child(2) { font-weight: var(--w-medium); }
+  .ac-files td.ac-wide { color: var(--demo-quiet); white-space: nowrap; }
+  .ac-demo .ac-files input[type='checkbox'] {
+    width: 1rem;
+    height: 1rem;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+    accent-color: var(--demo-solid);
+  }
+
+  /* status chips take the seeds: --t / --t-subtle / --t-border per tone */
+  .ac-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--vxs);
+    padding: 1px var(--xs);
+    border: var(--border-width) solid var(--t-border);
+    border-radius: 999px;
+    background: var(--t-subtle);
+    color: var(--t);
+    font-size: var(--text-xs);
+    font-weight: var(--w-medium);
+    white-space: nowrap;
+  }
+  .ac-chip::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .ac-chip[data-tone='pr'] { --t: var(--pr); --t-subtle: var(--pr-subtle); --t-border: var(--pr-border); }
+  .ac-chip[data-tone='sc'] { --t: var(--sc); --t-subtle: var(--sc-subtle); --t-border: var(--sc-border); }
+  .ac-chip[data-tone='wr'] { --t: var(--wr); --t-subtle: var(--wr-subtle); --t-border: var(--wr-border); }
+  .ac-chip[data-tone='da'] { --t: var(--da); --t-subtle: var(--da-subtle); --t-border: var(--da-border); }
+  .ac-chip[data-tone='in'] { --t: var(--in); --t-subtle: var(--in-subtle); --t-border: var(--in-border); }
+
+  .ac-actionbar {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
-    gap: var(--sm);
-    padding: var(--xs) var(--sm);
-    border-radius: var(--radius-sm);
-    background: var(--demo-bar);
-    color: var(--demo-strong);
+    gap: var(--xs);
+    padding-block-start: var(--sm);
+    border-block-start: var(--border-width) solid var(--demo-border);
   }
-  .co-header-nav a {
-    padding: var(--vxs) var(--xs);
-    border-radius: var(--radius-sm);
-    color: var(--demo-strong);
-    text-decoration: none;
-  }
-  .co-header-nav a:hover { background: var(--demo-hover); color: var(--fg); }
-  .co-header-nav a[aria-current] { background: var(--demo-current); color: var(--demo-text); }
+  .ac-actionbar > span { margin-inline-end: auto; color: var(--demo-quiet); }
 
-  .co-btn { --co-btn-border: var(--co); background: var(--co); color: var(--demo-on-solid); }
-  .co-btn-soft { --co-btn-border: var(--demo-border); background: var(--demo-surface); color: var(--demo-text); }
-  .co-btn-outline { --co-btn-border: var(--co); background: none; color: var(--demo-text); }
-  .co-btn, .co-btn-soft, .co-btn-outline { border-color: var(--co-btn-border); }
-  /* :not(:disabled) matches the page's own button:hover:not(:disabled) above,
-     which would otherwise win on specificity and paint --bg-muted and
-     --border-hover. */
-  :is(.co-btn-soft, .co-btn-outline):hover:not(:disabled) {
-    background: var(--demo-hover);
-    border-color: var(--co-btn-border);
-    color: var(--demo-strong);
+  /* webpage: nav, hero, three features, a plan, a sign-up, footer — one
+     centred column, as a marketing page reads */
+  .ac-site { display: flex; flex-direction: column; }
+  .ac-site-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--md);
+    padding: var(--sm) var(--md);
+    border-block-end: var(--border-width) solid var(--demo-border);
   }
-  .co-btn:hover:not(:disabled) {
-    background: var(--demo-solid-hover);
-    border-color: var(--demo-solid-hover);
-    color: var(--demo-on-solid);
+  .ac-site-nav nav { display: flex; gap: var(--sm); margin-inline-start: auto; }
+  .ac-site-nav nav a { color: var(--demo-quiet); text-decoration: none; }
+  .ac-site-nav nav a:hover { color: var(--demo-text); }
+  .ac-site-nav nav a[aria-current] { color: var(--demo-text); font-weight: var(--w-medium); }
+  .ac-site-nav .ac-brand { min-width: 0; }
+
+  .ac-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sm);
+    padding: var(--lg) var(--md);
+    background: linear-gradient(180deg, var(--demo-surface), var(--demo-canvas));
   }
-  /* disabled: text and border in the disabled role. base.css fades a disabled
-     button to .5 opacity; reset that so the token is what you see. */
-  :is(.co-btn, .co-btn-soft, .co-btn-outline):disabled {
-    color: var(--demo-disabled);
-    border-color: var(--demo-disabled);
-    opacity: 1;
-    cursor: default;
+  .ac-hero h3 {
+    max-width: 18ch;
+    margin: 0;
+    color: var(--demo-text);
+    font-family: var(--font-sans);
+    font-size: var(--text-2xl);
+    font-weight: var(--w-bold);
+    line-height: var(--leading-tight);
+    letter-spacing: -0.02em;
+    text-transform: none;
   }
-  .co-badge {
-    align-self: center;
-    padding: 0 var(--xs);
-    border-radius: var(--radius-sm);
+  .ac-hero p { max-width: 46ch; margin: 0; color: var(--demo-quiet); font-size: var(--text-md); }
+  .ac-hero small { color: var(--demo-quiet); }
+  .ac-hero-actions { display: flex; flex-wrap: wrap; gap: var(--xs); }
+
+  .ac-features {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--md);
+    padding: var(--md);
+    border-block: var(--border-width) solid var(--demo-border);
+  }
+  .ac-features strong { color: var(--demo-link); }
+  .ac-features p { margin: var(--vxs) 0 0; color: var(--demo-quiet); }
+
+  .ac-plan {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: var(--md);
+    margin: var(--md);
+    padding: var(--md);
+    border: 2px solid var(--demo-solid);
+    border-radius: var(--radius-lg);
     background: var(--demo-surface);
-    color: var(--demo-strong);
+  }
+  .ac-plan p { margin: var(--vxs) 0 0; color: var(--demo-quiet); }
+  .ac-price { color: var(--demo-text); font-size: var(--text-xl); font-weight: var(--w-bold); }
+  .ac-plan ul { margin: 0; padding: 0; list-style: none; }
+  .ac-plan li::before { content: '\2713'; margin-inline-end: var(--xs); color: var(--demo-link); font-weight: var(--w-bold); }
+
+  .ac-subscribe { display: flex; flex-direction: column; gap: var(--vxs); padding: 0 var(--md) var(--md); }
+  .ac-demo .ac-subscribe label { margin: 0; color: var(--demo-text); font-weight: var(--w-medium); }
+  .ac-subscribe > div { display: flex; gap: var(--xs); }
+  .ac-demo .ac-subscribe input {
+    flex: 1;
+    min-width: 0;
+    padding: var(--vxs) var(--sm);
+    border-color: var(--demo-border);
+    border-radius: var(--radius-md);
+    background: var(--demo-canvas);
+    font-size: var(--text-sm);
+  }
+  .ac-demo .ac-subscribe input:focus { border-color: var(--demo-solid); box-shadow: 0 0 0 3px var(--demo-ring); }
+  .ac-subscribe small { color: var(--demo-quiet); }
+
+  .ac-site-foot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--md);
+    padding: var(--sm) var(--md);
+    border-block-start: var(--border-width) solid var(--demo-border);
+    background: var(--demo-surface);
+    color: var(--demo-quiet);
     font-size: var(--text-xs);
   }
-  .co-alert {
-    padding: var(--sm);
-    border: var(--border-width) solid var(--demo-border);
-    border-inline-start-width: 4px;
-    border-inline-start-color: var(--co);
-    border-radius: var(--radius-sm);
+  .ac-site-foot a { color: var(--demo-quiet); }
+  .ac-site-foot a:hover { color: var(--demo-link); }
+
+  /* article: an "on this page" list beside a docs article. Prose keeps ge2's
+     own base styles for pre, code, kbd and blockquote, so this tab shows
+     what the theme does to them; only layout and the callouts are added. */
+  .ac-docs { display: grid; grid-template-columns: 9rem minmax(0, 1fr); }
+  .ac-toc {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: var(--md) var(--xs);
+    border-inline-end: var(--border-width) solid var(--demo-border);
     background: var(--demo-surface);
+    font-size: var(--text-xs);
+  }
+  .ac-toc span { padding: 0 var(--xs) var(--xs); color: var(--demo-quiet); font-weight: var(--w-medium); }
+  .ac-toc a {
+    padding: var(--vxs) var(--xs);
+    border-inline-start: 2px solid transparent;
+    color: var(--demo-quiet);
+    text-decoration: none;
+  }
+  .ac-toc a:hover { color: var(--demo-text); }
+  .ac-toc a[aria-current] { border-inline-start-color: var(--demo-solid); color: var(--demo-link); font-weight: var(--w-medium); }
+
+  .ac-article { max-width: 62ch; padding: var(--md) var(--lg) var(--lg); line-height: var(--leading); }
+  .ac-article > * { margin: 0 0 var(--sm); }
+  .ac-crumbs { color: var(--demo-quiet); font-size: var(--text-xs); }
+  .ac-crumbs a { color: var(--demo-quiet); }
+  .ac-article h3,
+  .ac-article h4 {
     color: var(--demo-text);
+    font-family: var(--font-sans);
+    font-weight: var(--w-bold);
+    letter-spacing: normal;
+    text-transform: none;
   }
-  .co-card {
-    overflow: hidden;
+  .ac-article h3 { font-size: var(--text-xl); }
+  .ac-article h4 { margin-block-start: var(--md); font-size: var(--text-md); }
+  .ac-lead { color: var(--demo-quiet); font-size: var(--text-md); }
+  .ac-article a { color: var(--demo-link); }
+  .ac-article kbd {
+    padding: 0 var(--vxs);
     border: var(--border-width) solid var(--demo-border);
+    border-block-end-width: 2px;
     border-radius: var(--radius-sm);
     background: var(--demo-surface);
   }
-  .co-card-head {
-    padding: var(--xs) var(--sm);
-    background: var(--demo-bar);
-    color: var(--demo-strong);
-    font-weight: var(--w-bold);
+  .ac-article pre { border-radius: var(--radius-md); }
+  .ac-article blockquote {
+    padding-inline-start: var(--sm);
+    border-inline-start: 3px solid var(--demo-border);
+    color: var(--demo-quiet);
+    font-style: italic;
   }
-  .co-card p { margin: 0; padding: var(--sm); }
-  .co-link { color: var(--demo-text); }
-  .co-field { display: flex; flex-direction: column; gap: var(--vxs); }
-  .co-input,
-  .co-input:focus { border-color: var(--co); outline: 2px solid var(--demo-ring); }
+
+  /* callouts take a seed: --in for a note, --wr for a caution */
+  .ac-callout {
+    padding: var(--xs) var(--sm);
+    border: var(--border-width) solid var(--t-border);
+    border-inline-start: 3px solid var(--t);
+    border-radius: var(--radius-md);
+    background: var(--t-subtle);
+  }
+  .ac-callout strong { color: var(--t); }
+  .ac-callout p { margin: var(--vxs) 0 0; }
+  .ac-callout[data-tone='in'] { --t: var(--in); --t-subtle: var(--in-subtle); --t-border: var(--in-border); }
+  .ac-callout[data-tone='wr'] { --t: var(--wr); --t-subtle: var(--wr-subtle); --t-border: var(--wr-border); }
+
+  .ac-doc-table { font-size: var(--text-sm); }
+  .ac-doc-table :is(th, td) { padding: var(--vxs) var(--xs); text-align: start; border-block-end: var(--border-width) solid var(--demo-border); }
+  .ac-doc-table th { background: var(--demo-surface); font-weight: var(--w-medium); }
+
+  .ac-pager { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sm); }
+  .ac-pager a {
+    display: flex;
+    flex-direction: column;
+    padding: var(--xs) var(--sm);
+    border: var(--border-width) solid var(--demo-border);
+    border-radius: var(--radius-md);
+    color: var(--demo-link);
+    font-weight: var(--w-medium);
+    text-decoration: none;
+  }
+  .ac-pager a:last-child { text-align: end; }
+  .ac-pager a:hover { border-color: var(--demo-solid); background: var(--demo-row-hover); }
+  .ac-pager small { color: var(--demo-quiet); font-weight: normal; }
+
+  /* narrow pane: no sidebar, no size/modified columns, no brand text room;
+     the webpage stacks its features and plan; the article drops its list */
+  @container (max-width: 34rem) {
+    .ac-window { grid-template-columns: minmax(0, 1fr); }
+    .ac-nav { display: none; }
+    .ac-brand { min-width: 0; }
+    .ac-files .ac-wide { display: none; }
+    .ac-features { grid-template-columns: minmax(0, 1fr); }
+    .ac-plan { grid-template-columns: minmax(0, 1fr); }
+    .ac-site-nav nav { display: none; }
+    .ac-site-nav .ac-btn { margin-inline-start: auto; }
+    .ac-docs { grid-template-columns: minmax(0, 1fr); }
+    .ac-toc { display: none; }
+  }
 
   @media (max-width: 767.98px) {
-    .co-split { flex-direction: column; align-items: stretch; }
-    .co-demo { grid-template-columns: minmax(0, 1fr); }
+    .theme-groups { grid-template-columns: minmax(0, 1fr); }
+    .ac-split { flex-direction: column; align-items: stretch; }
   }
 
 }

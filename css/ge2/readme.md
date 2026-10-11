@@ -1,14 +1,14 @@
 # css/ge2/ — framework internals
 
-Framework-only CSS, adopted from the ge project's `/vars.css`, `/base.css`
-and `/utils.css`. ge2 owns `units`, `base` and `ui`; the app owns `page`; `utils` is
-shared — ge2's utilities first, then the app's.
+Framework-only CSS, adopted from the ge v1 project's `/vars.css`, `/base.css`
+and `/utils.css`. ge owns `units`, `base` and `ui`; the app owns `page`; `utils` is
+shared — ge's utilities first, then the app's.
 
 No file declares a layer of its own — `/style.css` assigns them, and it is
-the only place layer order is written. Every page reaches ge2 through it:
+the only place layer order is written. Every page reaches ge through it:
 root pages link it directly, module sheets `@import url('../style.css');`
 and add their own `@layer page` rules. Nested `@import` paths resolve
-relative to the sheet that contains them, so ge2 is found correctly either
+relative to the sheet that contains them, so ge is found correctly either
 way.
 
 ```css
@@ -23,7 +23,7 @@ way.
 @import url('css/ge2/utils.css')         layer(utils);
 
 @layer page  { /* … */ }
-@layer utils { /* app-wide utilities, after ge2's */ }
+@layer utils { /* app-wide utilities, after ge's */ }
 ```
 
 | Layer | Holds | Beats |
@@ -33,7 +33,7 @@ way.
 | `ui` | framework components (`ui.css`, `layout.css`) | element defaults |
 | `plugin` | drop-in plugin sheets | components |
 | `page` | the app/page sheet | components (customisation) |
-| `utils` | ge2 utilities, then app utilities | everything |
+| `utils` | ge utilities, then app utilities | everything |
 
 **The `@layer` statement has to come before the imports.** Layer order follows
 first appearance: declared afterwards, the imported layers already hold the
@@ -53,7 +53,7 @@ That block lives in `/style.css`. Working consumer: `css/ge-maker.css` — a sin
 
 ## vars.css
 
-Every token. Adopted from ge verbatim, plus the ge2 groups marked in the file.
+Every token. Adopted from ge v1 verbatim, plus the groups ge added, marked in the file.
 
 | Group | Tokens |
 |---|---|
@@ -62,18 +62,18 @@ Every token. Adopted from ge verbatim, plus the ge2 groups marked in the file.
 | Spacing | `--vxs` `--xs` `--sm` `--md` `--lg` `--xlg` `--vlg` `--scroll-width` |
 | Fonts | `--font-sans` `--font-mono` `--font-serif` |
 | Palette | seeds `--bg` `--fg` `--gray` · direction `--tint` `--sink` · text `--muted` `--subtle` · surface `--bg-subtle` `--bg-muted` `--bg-inset` `--bg-overlay` · line `--border-muted` `--border` `--border-hover` |
-| Functional | `--seed-ac` `--seed-pr` `--seed-sc` `--seed-da` `--seed-wr` `--seed-in` → `--ac` `--pr` `--sc` `--da` `--wr` `--in`, each with `-bg` / `-subtle` / `-border` / `-bg-text` |
-| ge2 · type | `--text-xs` `--text-sm` `--text-md` `--text-lg` `--text-xl` `--text-2xl` `--text-3xl` `--leading` `--leading-tight` `--w-medium` `--w-bold` `--tracking-wide` |
-| ge2 · shape | `--radius-sm` `--radius-md` `--radius-lg` `--border-width` |
-| ge2 · motion | `--dur-fast` `--dur` `--ease` |
-| ge2 · focus | `--focus-width` `--focus-offset` `--focus-color` |
-| ge2 · stacking | `--z-overlay` `--z-modal` `--z-toast` |
-| ge2 · icon | `--icon-size` `--icon-size-sm` `--icon-size-lg` `--icon-stroke` `--icon-stroke-width` `--icon-fill` `--icon-linecap` `--icon-linejoin` |
-| ge2 · components | `--modal-min-width` `--modal-max-width` `--toast-max-width` `--tab-indicator-width` |
-| ge2 · breakpoints | `--bp-sm` `--bp-md` `--bp-lg` `--bp-xl` `--bp-xxl` (Bootstrap 5 scale; `xs` is 0, the unqualified base) |
+| Functional | `--seed-ac` `--seed-pr` `--seed-sc` `--seed-da` `--seed-wr` `--seed-in` → `--ac` `--pr` `--sc` `--da` `--wr` `--in`. Each but `--ac` has `-bg` / `-subtle` / `-border` / `-bg-text`; `--ac` is its seed as is, with the scale `-bg1`…`-bg5` / `-fg1`…`-fg5` / `-tr1`…`-tr3` |
+| ge · type | `--text-xs` `--text-sm` `--text-md` `--text-lg` `--text-xl` `--text-2xl` `--text-3xl` `--leading` `--leading-tight` `--w-medium` `--w-bold` `--tracking-wide` |
+| ge · shape | `--radius-sm` `--radius-md` `--radius-lg` `--border-width` |
+| ge · motion | `--dur-fast` `--dur` `--ease` |
+| ge · focus | `--focus-width` `--focus-offset` `--focus-color` |
+| ge · stacking | `--z-overlay` `--z-modal` `--z-toast` |
+| ge · icon | `--icon-size` `--icon-size-sm` `--icon-size-lg` `--icon-stroke` `--icon-stroke-width` `--icon-fill` `--icon-linecap` `--icon-linejoin` |
+| ge · components | `--modal-min-width` `--modal-max-width` `--toast-max-width` `--tab-indicator-width` |
+| ge · breakpoints | `--bp-sm` `--bp-md` `--bp-lg` `--bp-xl` `--bp-xxl` (Bootstrap 5 scale; `xs` is 0, the unqualified base) |
 
 Spacing tokens double as font sizes for controls (`font-size: var(--sm)`),
-which is the ge convention; `--text-*` covers running text.
+which is the ge v1 convention; `--text-*` covers running text.
 
 Theming is `data-theme` on `<html>`, which `js/ge2/ui.js` writes on import.
 
@@ -82,7 +82,7 @@ where the two themes disagree: see [`color.md`](color.md).
 
 ### Changed while adopting
 
-- **Light is now the default.** ge keyed light only on `[data-theme='light']`,
+- **Light is now the default.** ge v1 keyed light only on `[data-theme='light']`,
   so a document without the attribute had no `--bg` / `--fg` at all. The light
   block is now `:root, [data-theme='light']`, with dark after it.
 - **Seeds extracted.** The four functional colours hardcoded their seed inside
@@ -98,14 +98,32 @@ where the two themes disagree: see [`color.md`](color.md).
   which is declared on `<html>` — the same element as `:root` — so they resolve
   identically, but are now visible to `<html>` and to other `:root`-level
   tokens. `--focus-color: var(--pr)` needs this.
+- **`--ac` moved to a scale.** `--ac` is now `--seed-ac` itself, no longer
+  toned toward `--fg`, and its `-bg` / `-subtle` / `-border` / `-bg-text` are
+  gone. In their place: `--ac-bg1`…`-bg5` (`--ac` with 15 / 30 / 45 / 60 / 85%
+  `--bg`), `--ac-fg1`…`-fg5` (same toward `--fg`) and `--ac-tr1`…`-tr4` (25 /
+  50 / 75 / 95% transparent). The `.ac` button maps rest → `bg5`, hover → `bg3`,
+  border → `bg4`, text → `fg4`. Apps that used the old names must move.
+- **`--bg-*` surfaces follow the `--ac` scale**, by the scale's role labels:
+  `--bg-subtle` and `--bg-muted` → `--ac-bg5` (were `--bg` + 4 / 8% `--tint`),
+  `--bg-inset` → `--ac-bg3` (was 40% `--sink`), `--bg-overlay` → `--ac-tr4`
+  (was `--black` at 50%). Every surface now takes the accent's hue, and
+  subtle and muted are the same colour.
+- **Borders and focus follow the `--ac` scale too**, by label:
+  `--border-muted` → `--ac-bg5`, `--border` → `--ac-bg4`, `--border-hover` →
+  `--ac-bg3` (were `--bg` + 15 / 30 / 45% `--gray`), and `--focus-color` →
+  `--ac-bg1` (was `--pr`).
+- **Secondary text follows `--ac`.** `--muted` → `--ac-fg3` (label: text),
+  `--subtle` → `--ac-fg2` (were `--fg` + 50 / 85% `--gray`). `--gray` now
+  feeds nothing in ge.
 
 ## base.css
 
-Element styles, adopted from ge's `/base.css` with literals swapped for
+Element styles, adopted from ge v1's `/base.css` with literals swapped for
 tokens. Reset, `html`/`body`, links, headings, media, code, form controls,
 `:focus-visible`, `hr`, `table`, scrollbars.
 
-Its "UI Components" block moved to `ui.css`, which is where ge2 keeps
+Its "UI Components" block moved to `ui.css`, which is where ge keeps
 component styling.
 
 Two rules worth knowing, because they outrank zero-specificity selectors:
@@ -125,14 +143,14 @@ Components `js/ge2/ui.js` drives, plus icon geometry.
 `.dropdown` `.dropdown-toggle` `.dropdown-menu` · `.contextmenu` ·
 `.menu-danger`
 
-Overlay, modal, toast and accordion come from ge; tabs and icons are ge2.
+Overlay, modal, toast and accordion come from ge v1; tabs and icons are new in ge.
 Most selectors are wrapped in `:where()` so page rules win on equal
 specificity.
 
 ### Added while adopting
 
 The `.overlay.active` / `.modal.active` rules. `ui.js` toggles both an inline
-`display` and the `.active` class, but the ge original defined only the hidden
+`display` and the `.active` class, but the ge v1 original defined only the hidden
 state — so clearing the inline style fell back to `display: none` and the
 modal never appeared. The shown display value has to live on `.active`.
 
@@ -161,7 +179,7 @@ that load `icons.js` without `ui.css`.
 
 ## utils.css
 
-Adopted from the ge project, content unchanged.
+Adopted from the ge v1 project, content unchanged.
 
 `.flex` plus modifiers (`row` `column` `top` `bottom` `middle` `base` `stretch`
 `left` `right` `center` `between` `around` `evenly` `wrap` `nowrap`
@@ -263,7 +281,7 @@ literals), since the icons grid exists only in JS.
 
 ### Width behaviour changed on adoption
 
-The ge original carried two desktop-first `max-width` blocks that silently
+The ge v1 original carried two desktop-first `max-width` blocks that silently
 rewrote the width utilities below 768px and below 480px — `.w25` was not 25%
 on a phone, whether you wanted that or not. **Those blocks are removed.**
 
@@ -277,11 +295,11 @@ Widths are now literal at every viewport, and you opt into a change:
 Markup that relied on the automatic collapse needs the explicit classes
 added. Only `ge2/index.html` used them in this project.
 
-### Known rough edges (unchanged from ge)
+### Known rough edges (unchanged from ge v1)
 
 - `.fsmall` sets `font-size: var(--xs)` — 0.5rem / 8px. `--xs` is a *spacing*
-  token; the ge convention of reusing spacing for type sizes lands well below
-  readable here. `var(--text-sm)` would be the ge2 equivalent.
+  token; the ge v1 convention of reusing spacing for type sizes lands well below
+  readable here. `var(--text-sm)` would be the ge equivalent.
 - Gap names (`gap-1 2 3 4 6 8`) don't map onto the token names
   (`vxs xs sm md lg xlg`), so you have to remember the translation.
 
@@ -309,7 +327,7 @@ the value exactly:
 ```
 
 Range syntax (`@media (width < 576px)`) reads better and means the same thing,
-but needs Safari 16.4+. ge2 ships source with no build step, and the rest of
+but needs Safari 16.4+. ge ships source with no build step, and the rest of
 the CSS only needs Safari 16.2 for `color-mix()`, so the `max-width` form
 keeps the support floor where it already is. A test enforces this, and
 another checks every query value is on the scale.

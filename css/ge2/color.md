@@ -1,4 +1,4 @@
-# css/ge2/color.md — how ge2 colours work
+# css/ge2/color.md — how ge colours work
 
 Notes for turning into a directive. Sections 1–4 describe the current
 `css/ge2/vars.css` as it is. Section 5 is a suggestion. Section 6 is a draft
@@ -77,7 +77,8 @@ seeds (per theme)                 derived (per theme)          consumers
 ─────────────────                 ───────────────────          ─────────
 --bg  --fg  --gray        ──►     --muted/--subtle/--inset ──► base/ui/layout/utils.css
 --white --black (fixed)           --bg-* --border-* --shadow   page sheets, plugins
---seed-pr/sc/da/wr/in/ac  ──►     --pr … --ac  + -bg/-subtle/-border/-bg-text
+--seed-pr/sc/da/wr/in     ──►     --pr … --in  + -bg/-subtle/-border/-bg-text
+--seed-ac                 ──►     --ac (as is) + -bg1…5 / -fg1…5 / -tr1…3
 ```
 
 - **Theme switch:** `data-theme="light|dark"` on `<html>`, written by
@@ -252,19 +253,19 @@ change *seeds*, plus two direction seeds. They do not change formulas.
 /* derived: ONE block, no theme selector */
 :root, [data-theme] {
   /* fg: text, strongest → weakest */
-  --muted:  color-mix(in srgb, var(--fg), var(--gray) 50%);   /* secondary text   */
-  --subtle: color-mix(in srgb, var(--fg), var(--gray) 85%);   /* tertiary, hints  */
+  --muted:  var(--ac-fg3);   /* secondary text   */
+  --subtle: var(--ac-fg2);   /* tertiary, hints  */
 
   /* bg: surfaces */
-  --bg-subtle:  color-mix(in srgb, var(--bg), var(--tint) 4%);  /* hover wash, card     */
-  --bg-muted:   color-mix(in srgb, var(--bg), var(--tint) 8%);  /* panel, active/select */
-  --bg-inset:   color-mix(in srgb, var(--bg), var(--sink) 40%); /* input, code, well    */
-  --bg-overlay: color-mix(in srgb, var(--black), transparent 50%); /* scrim only       */
+  --bg-subtle:  var(--ac-bg5);  /* hover wash, card — was mix(bg, tint 4%) */
+  --bg-muted:   var(--ac-bg5);  /* panel, active/select — was mix(bg, tint 8%) */
+  --bg-inset:   var(--ac-bg3);  /* input, code, well — was mix(bg, sink 40%) */
+  --bg-overlay: var(--ac-tr4);  /* scrim only — was black at 50% */
 
   /* border: weakest → strongest */
-  --border-muted: color-mix(in srgb, var(--bg), var(--fg) 12%); /* inner divider      */
-  --border:       color-mix(in srgb, var(--bg), var(--fg) 22%); /* component outline  */
-  --border-hover: color-mix(in srgb, var(--bg), var(--fg) 50%); /* hover/focus, 3:1   */
+  --border-muted: var(--ac-bg5); /* inner divider     */
+  --border:       var(--ac-bg4); /* component outline */
+  --border-hover: var(--ac-bg3); /* hover             */
 
   /* tones: same shape for every X, same in both themes */
   --X-subtle: color-mix(in srgb, var(--bg), var(--X) 10%);
@@ -410,7 +411,7 @@ sample text in `js/ge-maker/token.js` (the `pv-inset` span), removed with it.
     the `fg` row in `js/ge-maker/token.js` (`DERIVED`), and the prose in
     `ge2/token.html` line ~57
   - **or rename** to `--fg-strong` in the same four places
-- On screen: only the token preview (no ge2 component uses `--subtle` or
+- On screen: only the token preview (no ge component uses `--subtle` or
   `--inset`). Dark `--subtle` goes from near-`--fg` to near-`--gray`.
 
 ### Step 5: surfaces ⚑ (fixes §4.4, completes §4.1) ✅ done 2026-09-28

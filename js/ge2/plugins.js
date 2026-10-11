@@ -43,7 +43,7 @@ export async function loadPlugins(names = Object.keys(config.plugins ?? {})) {
       loaded[name] = mod;
     } catch (e) {
       // One broken plugin must not take the page down with it.
-      console.error(`[ge2] plugin "${name}" failed to load`, e);
+      console.error(`[ge] plugin "${name}" failed to load`, e);
     }
   }
 

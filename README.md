@@ -1,4 +1,4 @@
-# ge2
+# ge
 
 A small front-end framework with no build step. Plain PHP or static HTML,
 CSS organised with `@layer`, JS as ES modules — every file is served as-is.

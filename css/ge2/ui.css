@@ -32,7 +32,7 @@
 :where(.overlay) {
   position: fixed;
   inset: 0;
-  background: var(--bg-overlay);
+  background: var(--ac-tr4);
   display: none;
   align-items: center;
   justify-content: center;
@@ -117,7 +117,7 @@
   transition: background var(--dur-fast) var(--ease);
 }
 
-:where(.accordion-header:hover) { background: var(--bg-subtle); }
+:where(.accordion-header:hover) { background: var(--ac-bg3); }
 
 :where(.accordion-header)::after {
   content: '+';
@@ -204,7 +204,7 @@
   border-radius: var(--radius-sm);
 }
 
-:where(.sidebar-toggle:hover) { background: var(--bg-subtle); color: var(--fg); }
+:where(.sidebar-toggle:hover) { background: var(--ac-bg3); color: var(--fg); }
 
 :where(.sidebar-nav),
 :where(.sidebar-nav ul) {
@@ -223,7 +223,7 @@
   transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
 }
 
-:where(.sidebar-nav a:hover) { background: var(--bg-subtle); color: var(--fg); }
+:where(.sidebar-nav a:hover) { background: var(--ac-bg3); color: var(--fg); }
 
 :where(.sidebar-nav a.active) {
   background: var(--pr-subtle);
@@ -288,10 +288,10 @@
   transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
 }
 
-:where(.tabmenu > li:hover) { background: var(--bg-subtle); }
+:where(.tabmenu > li:hover) { background: var(--ac-bg3); }
 
 :where(.tabmenu > li.active) {
-  background: var(--bg-subtle);
+  background: var(--ac-bg2);
   color: var(--fg);
   box-shadow: inset 0 calc(-1 * var(--tab-indicator-width)) 0 var(--pr);
 }

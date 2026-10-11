@@ -42,7 +42,7 @@ sandboxed frames — and an unguarded call takes the caller's whole `try` block
 with it. Every method here degrades to the fallback instead, so a page that
 cannot remember things still works.
 
-**It is the only place in ge2 that touches `localStorage`**; a test fails if
+**It is the only place in ge that touches `localStorage`**; a test fails if
 another module reaches for it directly. Two bugs came from the raw access it
 replaced: a failed write reported *"Failed to set theme"* even though the
 theme had been applied, and an unreadable read skipped the `config.theme`
@@ -63,13 +63,13 @@ export const config = {
 `ui.toggleTheme`) is remembered and always beats `config.theme`; `'auto'`
 defers to `prefers-color-scheme`.
 
-Change `themeStorageKey` when several ge2 projects share one origin —
+Change `themeStorageKey` when several ge projects share one origin —
 localStorage is per-origin, not per-directory, so they would otherwise share
 a theme.
 
 ## ui.js
 
-UI helpers, exported as `ui` (and as the default). Ported from the ge project's `js/geui.js`.
+UI helpers, exported as `ui` (and as the default). Ported from the ge v1 project's `js/geui.js`.
 
 ```js
 import { ui } from './ge2/ui.js';

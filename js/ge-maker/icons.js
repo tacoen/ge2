@@ -208,7 +208,7 @@ ui.on(ui.el('#iconExport'), 'click', () => {
   const body = list.map((n) => `  '${n}': \`${escapeBody(ICONS[n])}\`,`).join('\n');
   const file = `// js/ge2/icons-list.js — the icon data for icons.js. No logic here.
 //
-// ${list.length} icons. Exported from the ge2 icons harness.
+// ${list.length} icons. Exported from the ge icons harness.
 // Entries taken from @hugeicons/core-free-icons (Stroke Rounded, MIT) keep
 // the notice in /LICENSE, which must travel with this file.
 //

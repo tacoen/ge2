@@ -6,14 +6,14 @@ Lean by design. Add sections only as new rules are actually needed — don't pre
 <one line: what this app does>. Built on ge2: PHP or static HTML, CSS via
 `@layer`, JS as ES modules. No build step — files are served as-is.
 
-## ge2 is vendored — never edit it
+## ge is vendored — never edit it
 - `css/ge2/` and `js/ge2/` are a synced copy of upstream (`../ge2`). Never
   edit them; `../sync-ge2.sh` overwrites them with `--delete`
 - Project-owned, never synced: `js/ge2/config.js`, `js/ge2/icons-list.js`,
   `css/vars-overrides.css`, and anything listed in `.ge2-sync-exclude`
 - Need a framework change? Write `ge2-suggestions/YYYY-MM-DD-topic.md`
   (what, why, diff against upstream) and stop. It is reviewed upstream
-- Before writing new CSS or JS, check what ge2 already has:
+- Before writing new CSS or JS, check what ge already has:
   `css/ge2/readme.md`, `js/ge2/readme.md`, `js/ge2/icons.md`,
   `css/ge2/vars.css`. The function reference is `../ge2/ge2/function.md`
   (read-only)
@@ -32,9 +32,9 @@ Lean by design. Add sections only as new rules are actually needed — don't pre
 - Layer order, declared in `style.css` **before** the imports:
   `@layer units, base, ui, plugin, page, utils;` — never change or redeclare it
 - App code goes in `page`; app-wide utilities in `utils`. Never write into
-  `units`, `base`, `ui` or `plugin` — those belong to ge2 and plugins
+  `units`, `base`, `ui` or `plugin` — those belong to ge and plugins
 - A module sheet starts with `@import url('../style.css');` then
-  `@layer page { … }`. It never re-imports ge2
+  `@layer page { … }`. It never re-imports ge
 - Import syntax: `@import url('path') layer(name);`
 - Tokens only: `var(--token-name)`, no hardcoded colours. Check
   `css/ge2/vars.css` first; palette changes go in `css/vars-overrides.css`
@@ -42,7 +42,7 @@ Lean by design. Add sections only as new rules are actually needed — don't pre
 ## JS
 - ES modules only. No inline `<script>` / `onclick=`
 - `localStorage` only via `js/ge2/store.js`
-- Use ge2's `ui` / `icx` helpers (`js/ge2/readme.md`) before writing your own
+- Use ge's `ui` / `icx` helpers (`js/ge2/readme.md`) before writing your own
 - Plugins: copy `../ge2/ge2-plugins/<name>/` in, add its key to
   `config.plugins`, configure it there. Don't edit plugin code — suggest
   changes upstream like a framework change

@@ -1,4 +1,4 @@
-# ge2 — function syntax
+# ge — function syntax
 
 Quick reference for everything exported from `js/ge2/`. One line per call,
 the markup a component expects, and the gotcha where there is one.
@@ -261,7 +261,7 @@ store.remove(key)                    // -> boolean
 store.available                      // -> boolean (probes)
 ```
 
-**The only place in ge2 that touches `localStorage`.** Raw access throws in
+**The only place in ge that touches `localStorage`.** Raw access throws in
 a private window, with site data blocked, and in some sandboxed frames — and
 it takes the caller's whole `try` block with it. Here every failure degrades
 to the fallback, and writes report success as a boolean you may ignore.
@@ -275,17 +275,17 @@ The one file in `js/ge2/` meant to be edited per project.
 ```js
 export const config = {
   theme: 'auto',              // 'auto' | 'light' | 'dark' — a stored choice wins
-  themeStorageKey: 'theme',   // change when ge2 projects share an origin
+  themeStorageKey: 'theme',   // change when ge projects share an origin
   plugins: {
     'text-editor': { textPath: '', mediaPath: '' },
   },
 };
 ```
 
-`localStorage` is per-origin, not per-directory, so two ge2 projects on one
+`localStorage` is per-origin, not per-directory, so two ge projects on one
 host share a theme unless they use different keys.
 
-A new app does not copy ge2's own `config.js`, which enables `text-editor`
+A new app does not copy ge's own `config.js`, which enables `text-editor`
 for the demo — it copies `boiler-config.js` over it: the same file with an
 empty plugin list. The sync never overwrites `config.js`, so the app's edits
 stick. Keep the two in step when a setting is added here.

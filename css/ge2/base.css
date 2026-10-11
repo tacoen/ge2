@@ -72,14 +72,14 @@ code, kbd, samp {
   font-size: .875em;
 }
 
-code { color: var(--sc) }
+code { color: var(--sc); background: var(--ac-bg5); }
 
 pre {
   margin: 0;
   padding: var(--sm);
   overflow-x: auto;
   border: var(--border-width) solid var(--border-muted);
-  background: var(--bg-inset);
+  background: var(--ac-bg5);
   font-family: var(--pre-font);
   font-size: var(--pre-size);
   font-weight: var(--pre-weight);
@@ -119,7 +119,7 @@ button:disabled { opacity: .5; cursor: default; }
 [type=reset] { color: var(--da); }
 
 input, textarea, select {
-  background: var(--bg-inset);
+  background: var(--ac-bg5);
   border: var(--border-width) solid var(--border);
   border-radius: var(--radius-sm);
   padding: var(--xs) var(--sm);
@@ -154,6 +154,6 @@ table {
 }
 
 /* scrollbars */
-::-webkit-scrollbar { width: var(--scroll-width); background: var(--bg-inset); }
-::-webkit-scrollbar-thumb { border-radius: var(--scroll-width); background: var(--border); }
-::-webkit-scrollbar-thumb:hover { background: var(--border-hover); }
+::-webkit-scrollbar { width: var(--scroll-width); background: var(--ac-bg5); }
+::-webkit-scrollbar-thumb { border-radius: var(--scroll-width); background: var(--ac-bg3); }
+::-webkit-scrollbar-thumb:hover { background: var(--ac-bg2); }

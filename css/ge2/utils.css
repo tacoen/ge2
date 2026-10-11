@@ -386,8 +386,8 @@ aside p.fsmall,
 
 :where(.btn, .button, button:is(.rounded, .plain, .outline, .naked, .link, .pr, .sc, .da, .wr, .ac, .in, .vxs, .xs, .sm, .md, .lg, .xlg)) {
   --btn: var(--fg);
-  --btn-bg: var(--bg-muted);
-  --btn-subtle: var(--bg-subtle);
+  --btn-bg: var(--ac-bg3);
+  --btn-subtle: var(--ac-bg5);
   --btn-border: var(--border);
   --btn-text: var(--fg);
   --btn-focus: var(--focus-color);
@@ -413,7 +413,7 @@ aside p.fsmall,
 :is(button, .button, .btn).da { --btn: var(--da); --btn-bg: var(--da-bg); --btn-subtle: var(--da-subtle); --btn-border: var(--da-border); --btn-text: var(--da-bg-text); --btn-focus: var(--da); }
 :is(button, .button, .btn).wr { --btn: var(--wr); --btn-bg: var(--wr-bg); --btn-subtle: var(--wr-subtle); --btn-border: var(--wr-border); --btn-text: var(--wr-bg-text); --btn-focus: var(--wr); }
 :is(button, .button, .btn).in { --btn: var(--in); --btn-bg: var(--in-bg); --btn-subtle: var(--in-subtle); --btn-border: var(--in-border); --btn-text: var(--in-bg-text); --btn-focus: var(--in); }
-:is(button, .button, .btn).ac { --btn: var(--ac); --btn-bg: var(--ac-bg); --btn-subtle: var(--ac-subtle); --btn-border: var(--ac-border); --btn-text: var(--ac-bg-text); --btn-focus: var(--ac); }
+:is(button, .button, .btn).ac { --btn: var(--ac); --btn-bg: var(--ac-bg3); --btn-subtle: var(--ac-bg5); --btn-border: var(--ac-bg4); --btn-text: var(--ac-fg4); --btn-focus: var(--ac); }
 
 /* neutral naked is muted; neutral link takes the <a> colour */
 :is(button, .button, .btn).naked:not(.pr, .sc, .da, .wr, .ac, .in) { --btn: var(--muted); }
