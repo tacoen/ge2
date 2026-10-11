@@ -69,6 +69,7 @@ the `viewBox` and the token-driven geometry.
 | **Home** | this file and the [function reference](function.md), rendered from markdown |
 | **Theme** | `setTheme` / `toggleTheme` and the `data-theme` readout (on the Token page) |
 | **Token** | the colour playground, the type scale, element typography, buckets |
+| **UI theme** | one colour (`--co`), its five `color-mix()` shades, and buttons, alert, card and field drawn with them |
 | **Component** | toast, tabs, accordion, modal, copy, onKey, dropdown, context menu |
 | **Forms** | `prepareForm` / `handleForm` — generated ids, wired labels, validation |
 | **Utils** | the flex and responsive utilities from `css/ge2/utils.css` |

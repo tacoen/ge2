@@ -1,7 +1,7 @@
 // js/ge-maker/token.js — theme switch, token playground and buckets.
 import { ui } from '../ge2/ui.js';
 import { store } from '../ge2/store.js';
-import { out, tokenValue } from './util.js';
+import { out, tokenValue, resolveColor, toHex } from './util.js';
 import { mountTypography, TYPO_TOKENS } from './typography.js';
 
 // The colour heading names the theme its seeds belong to.
@@ -39,7 +39,8 @@ const root = document.documentElement;
 
 // Two columns: left the neutrals the surfaces are built from, right the six
 // hues every system colour is mixed from. The grid is one table that fills
-// row-major, two tokens per row, so the flat list interleaves the columns.
+// row-major, two tokens per row, so the flat list interleaves the columns;
+// a column that runs short leaves a gap (null) so the other keeps its side.
 const COL_BASE = [
   ['--bg', 'page background'],
   ['--fg', 'foreground text'],
@@ -55,8 +56,9 @@ const COL_SEED = [
   ['--seed-wr', 'warning'],
   ['--seed-in', 'info'],
 ];
-const SEEDS = Array.from({ length: Math.max(COL_BASE.length, COL_SEED.length) },
-  (_, i) => [COL_BASE[i], COL_SEED[i]]).flat().filter(Boolean);
+const GRID = Array.from({ length: Math.max(COL_BASE.length, COL_SEED.length) },
+  (_, i) => [COL_BASE[i] ?? null, COL_SEED[i] ?? null]).flat();
+const SEEDS = GRID.filter(Boolean);
 
 const DERIVED = [
   { section: 'interface', rows: [
@@ -85,22 +87,6 @@ const TOAST_TYPE = { sc: 'success', da: 'error', wr: 'warning', pr: 'primary', i
 // up here because the DERIVED loop calls preview() while this module runs.
 const STATIC_ROWS = new Set(['pr', 'ac']);
 
-const probe = document.createElement('span');
-probe.style.display = 'none';
-document.body.appendChild(probe);
-
-function resolve(value) {
-  probe.style.color = '';
-  probe.style.color = value;
-  return getComputedStyle(probe).color || 'rgb(0, 0, 0)';
-}
-
-function toHex(value) {
-  const n = resolve(value).match(/[\d.]+/g);
-  if (!n) return '#000000';
-  return '#' + n.slice(0, 3).map((v) => Math.round(+v).toString(16).padStart(2, '0')).join('');
-}
-
 function sheetValue(name) {
   const inline = root.style.getPropertyValue(name);
   if (inline) root.style.removeProperty(name);
@@ -112,7 +98,7 @@ function sheetValue(name) {
 const editors = ui.el('#colorEditors');
 const inputs = new Map();
 
-const describe = (value) => `${value} \u2192 ${resolve(value)}`;
+const describe = (value) => `${value} \u2192 ${resolveColor(value)}`;
 
 const table = document.createElement('div');
 table.className = 'token-grid';
@@ -126,7 +112,13 @@ table.innerHTML = `<div class="token-head" role="row">${HEAD}${HEAD_DUP}</div>`;
 const tbody = table;
 editors?.appendChild(table);
 
-for (const [name, hint] of SEEDS) {
+for (const seed of GRID) {
+  if (!seed) {
+    tbody.insertAdjacentHTML('beforeend',
+      '<div class="token-row token-gap" aria-hidden="true"><span></span></div>');
+    continue;
+  }
+  const [name, hint] = seed;
   const base = sheetValue(name);
 
   const tr = document.createElement('div');

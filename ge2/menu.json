@@ -82,6 +82,17 @@
       ]
     },
     {
+      "id": "ui-theme",
+      "label": "UI theme",
+      "page": "ui-theme.html",
+      "items": [
+        {
+          "anchor": "ui-theme-panel",
+          "label": "ui theme · colour"
+        }
+      ]
+    },
+    {
       "id": "components",
       "label": "Component",
       "page": "component.html",

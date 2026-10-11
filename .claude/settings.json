@@ -4,11 +4,21 @@
   },
   "permissions": {
     "deny": [
+      "Edit(//var/www/dash/.dash-guard.sh.swp)",
+      "Edit(//var/www/dash/.htaccess)",
       "Edit(//var/www/dash/.log/**)",
+      "Edit(//var/www/dash/CLAUDE.md)",
+      "Edit(//var/www/dash/base.css)",
+      "Edit(//var/www/dash/dash-guard.sh)",
       "Edit(//var/www/dash/fm/**)",
+      "Edit(//var/www/dash/index.php)",
+      "Edit(//var/www/dash/mediato/**)",
       "Edit(//var/www/dash/pop2wa/**)",
       "Edit(//var/www/dash/sima/**)",
+      "Edit(//var/www/dash/style.css)",
+      "Edit(//var/www/dash/sync-ge2.sh)",
       "Edit(//var/www/dash/tps/**)",
+      "Edit(//var/www/dash/vars.css)",
       "Edit(//var/www/dash/vbiak/**)",
       "Edit(//var/www/dash/ws/**)",
       "Edit(//var/www/dash/wtv/**)"

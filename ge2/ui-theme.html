@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ge2 · UI theme</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="stylesheet" href="../css/ge-maker.css">
+</head>
+<body data-page="ui-theme">
+<div class="shell">
+<!-- filled from ge2/menu.json by js/ge-maker/menu.js -->
+<nav class="sidebar" id="siteNav"></nav>
+<div class="page">
+
+  <h1>ge2 · UI theme</h1>
+  <p class="sub">One colour, its derived shades, and how they read on real UI.</p>
+
+  <section id="ui-theme-panel">
+    <h2>ui theme · colour</h2>
+    <p class="out" data-note>Pick one colour, <code>--co</code>, and optionally the <code>--bg</code> and <code>--fg</code> it sits on (empty = the theme's). Under Derived, the scale steps <code>--co</code> toward <code>--bg</code> (<code>bg1</code>…<code>bg5</code>: 15, 30, 45, 60, 85%) and toward <code>--fg</code> (<code>fg1</code>…<code>fg5</code>), each labelled with what it is for. The demo beside it is painted from those steps only, through one set of roles per theme (see <code>css/ge-maker.css</code>). Every field takes any CSS colour. The label names the tokens in the CSS readout.</p>
+
+    <div class="ge2-theme-panel w100 p3 flex column gap-6" id="themePanel">
+
+      <div class="co-top">
+        <div><label for="coLabel">label</label><input type="text" id="coLabel" name="co-label" placeholder="co" spellcheck="false" autocomplete="off"></div>
+        <div class="co-row"><span class="preview-color-box main"></span><input type="text" name="co" aria-label="--co" spellcheck="false" autocomplete="off"><input type="color" name="co-pick" aria-label="Pick --co"></div>
+        <div class="co-row"><span class="preview-color-box main" data-co="bg"></span><input type="text" name="bg" aria-label="--bg" spellcheck="false" autocomplete="off"><input type="color" name="bg-pick" aria-label="Pick --bg"></div>
+        <div class="co-row"><span class="preview-color-box main" data-co="fg"></span><input type="text" name="fg" aria-label="--fg" spellcheck="false" autocomplete="off"><input type="color" name="fg-pick" aria-label="Pick --fg"></div>
+      </div>
+
+      <div class="accordion">
+        <div class="accordion-item active" id="derivedItem">
+          <div class="accordion-header">Derived</div>
+          <div class="accordion-content">
+            <div class="flex gap-6 co-split">
+              <!-- steps filled by js/ge-maker/ui-theme.js -->
+              <div class="co-scale w100 w30-md" role="img" aria-label="--co toward --bg and --fg"></div>
+
+              <div class="co-demo">
+                <header class="co-header">
+                  <strong data-co-label>co</strong>
+                  <nav class="co-header-nav flex wrap gap-1">
+                    <a href="#ui-theme-panel" aria-current="page">home</a>
+                    <a href="#ui-theme-panel">docs</a>
+                    <a href="#ui-theme-panel">about</a>
+                  </nav>
+                </header>
+                <div class="co-demo-buttons flex wrap gap-2">
+                  <button type="button" class="co-btn">solid</button>
+                  <button type="button" class="co-btn-soft">soft</button>
+                  <button type="button" class="co-btn-outline">outline</button>
+                  <button type="button" class="co-btn-outline" disabled>disabled</button>
+                  <span class="co-badge" data-co-label>co</span>
+                </div>
+                <div class="co-alert"><strong data-co-label>co</strong> — an alert: surface, border and text roles.</div>
+                <div class="co-card">
+                  <div class="co-card-head" data-co-label>co</div>
+                  <p>A card: bar, surface and border roles, with <a href="#ui-theme-panel" class="co-link">a link</a> in the text role.</p>
+                </div>
+                <div class="co-field">
+                  <label>focused field</label>
+                  <input type="text" class="co-input" value="ring in --co">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <h3 class="sub-h3">CSS</h3>
+    <pre class="out" id="themeCss"></pre>
+  </section>
+
+</div>
+</div>
+
+
+<script type="module" src="../js/ge-maker.js"></script>
+</body>
+</html>

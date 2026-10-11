@@ -105,12 +105,12 @@ CSS and JS mirror each other: one entry file beside an optional folder. The CSS 
 ### Modules
 - `fm` — file manager: `css/fm.css` → `css/fm/{style,gallery}.css`, `js/fm.js` → `js/fm/{list,gallery}.js`
 - `ge2` demo — the framework's own harness, split one page per group:
-  `ge2/{index,token,component,basic,icons,layout,plugins}.html` (+ its `favicon.ico`),
+  `ge2/{index,token,ui-theme,component,basic,icons,layout,plugins}.html` (+ its `favicon.ico`),
   `css/ge-maker.css`, `js/ge-maker.js` → `js/ge-maker/*.js`. The entry files keep
   the `ge-maker` name so they don't collide with `css/ge2/` and `js/ge2/`.
   The sidebar is shared: `ge2/menu.json` is the single source, built by
   `js/ge-maker/menu.js`, which also hands the file to `js/ge-maker/index.js`
-  for the landing grid. Add a section there, not in seven HTML files.
+  for the landing grid. Add a section there, not in eight HTML files.
   Each page names its demo module with `<body data-page="…">`
   Section prose is `<p class="out" data-note>` — `js/ge-maker/hints.js` folds
   it into a popover behind an icon on the heading. A `.out` that JS writes

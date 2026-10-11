@@ -277,7 +277,9 @@
     text-transform: uppercase;
   }
 
-  .token-head > .dup { display: none; }
+  .token-head > .dup,
+  .token-gap { display: none; }
+  .token-gap > span { grid-column: span 4; }
 
   @media (min-width: 992px) {
     .token-grid {
@@ -285,6 +287,7 @@
     }
 
     .token-head > .dup { display: block; }
+    .token-gap { display: contents; }
 
     .token-head > *:nth-child(5),
     .token-grid > .token-row:nth-child(odd) > .token-name {
@@ -940,5 +943,220 @@
   }
   .btn-grid-sizes { grid-template-columns: repeat(7, max-content); }
   .btn-grid > .head { color: var(--muted); font-family: var(--font-mono); font-size: var(--text-xs); }
+
+
+  /* ui-theme.html — one colour (--co) and its derived shades. The tokens
+     themselves are set inline on the panel by js/ge-maker/ui-theme.js. */
+  .co-split { align-items: flex-start; }
+  /* label and --co side by side, bottoms aligned (the label field has a
+     <label> above it); they stack on narrow screens */
+  .co-top { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--md); }
+  .co-top > * { flex: 1 1 12rem; min-width: 0; }
+  /* an overridden --bg / --fg repaints the whole panel */
+  .ge2-theme-panel { background: var(--bg); color: var(--fg); }
+  /* scale: one row per step, --bg end on top, --co in the middle */
+  .co-scale {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-sm);
+  }
+  /* each step: its name, then its role. Text takes the far end of the scale
+     — --fg on the --bg side, --bg on the --fg side — so it reads in either
+     theme. */
+  .co-scale > span {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--sm);
+    padding: var(--vxs) var(--xs);
+    color: var(--fg);
+    font-size: var(--text-xs);
+  }
+  .co-scale > [data-co-step='co'] { color: var(--black); }
+  .co-scale > span { background: var(--step); }
+  .co-scale > [data-co-step^='co-fg'] { color: var(--bg); }
+  /* transparent steps sit on a checkerboard, so the see-through shows */
+  .co-scale > [data-co-step^='co-tr'] {
+    background:
+      linear-gradient(var(--step), var(--step)),
+      repeating-conic-gradient(var(--bg-muted) 0 25%, var(--bg) 0 50%) 0 0 / 12px 12px;
+  }
+  .co-scale small { font-size: inherit; opacity: .8; }
+  .co-row {
+    display: flex;
+    align-items: center;
+    gap: var(--vxs);
+  }
+  .co-row input[type='text'] { flex: 1; min-width: 0; font-family: var(--font-mono); font-size: var(--text-xs); }
+  .preview-color-box {
+    flex: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-sm);
+  }
+  .preview-color-box.main,
+  .co-row input[type='color'] { width: 2rem; height: 2rem; }
+  .co-row input[type='color'] {
+    flex: none;
+    min-height: 0;
+    padding: 0;
+    border: var(--border-width) solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+  .co-row input[type='color']::-webkit-color-swatch-wrapper { padding: 0; }
+  .co-row input[type='color']::-webkit-color-swatch { border: 0; border-radius: var(--radius-sm); }
+  .co-row input[type='color']::-moz-color-swatch { border: 0; border-radius: var(--radius-sm); }
+
+  /* --co's text field and picker read as one control: no gap, shared border */
+  .co-row input[type='text']:has(+ input[type='color']) {
+    height: 2rem;
+    padding-block: 0;
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+  }
+  .co-row input[type='text'] + input[type='color'] {
+    margin-inline-start: calc(-1 * (var(--vxs) + var(--border-width)));
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+  }
+  .co-row input[type='text'] + input[type='color']::-webkit-color-swatch { border-radius: 0; }
+  .co-row input[type='text'] + input[type='color']::-moz-color-swatch { border-radius: 0; }
+
+  /* demo pane: header across the top, then 2 × 2 — buttons | alert, card | field */
+  .co-demo {
+    flex: 1;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: var(--md);
+  }
+  .co-demo-buttons { align-self: center; }
+
+  /* demo roles, one set per theme. Every value is a step of the scale, so
+     each one is a color-mix() of --co toward --bg, --fg or transparent; the
+     rules below use only these roles. Light is also the fallback when no
+     data-theme is set. */
+  .co-demo,
+  [data-theme='light'] .co-demo {
+    --demo-surface: var(--co-bg5);       /* alert, card body, badge, soft button */
+    --demo-bar: var(--co-bg4);           /* header, card head */
+    --demo-border: var(--co-bg4);
+    --demo-hover: var(--co-bg3);
+    --demo-current: var(--co-bg5);       /* current header link */
+    --demo-solid-hover: var(--co-fg1);
+    --demo-on-solid: var(--co-fg5);      /* text on --co */
+    --demo-text: var(--co-fg2);          /* text and links on a surface */
+    --demo-strong: var(--co-fg4);        /* header text, card head */
+    --demo-disabled: var(--co-bg4);
+    --demo-ring: var(--co-tr3);
+  }
+  /* dark: the --bg end is now dark and the --fg end light, so the same steps
+     keep their meaning; what changes is contrast. Text on --co takes the dark
+     end (bg5), solid hover lifts toward --fg, and disabled and the ring need
+     one step more to show on a dark surface. */
+  [data-theme='dark'] .co-demo {
+    --demo-surface: var(--co-bg5);
+    --demo-bar: var(--co-bg4);
+    --demo-border: var(--co-bg3);
+    --demo-hover: var(--co-bg3);
+    --demo-current: var(--co-bg5);
+    --demo-solid-hover: var(--co-fg1);
+    --demo-on-solid: var(--co-bg5);
+    --demo-text: var(--co-fg2);
+    --demo-strong: var(--co-fg4);
+    --demo-disabled: var(--co-bg3);
+    --demo-ring: var(--co-tr2);
+  }
+
+  .co-header {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sm);
+    padding: var(--xs) var(--sm);
+    border-radius: var(--radius-sm);
+    background: var(--demo-bar);
+    color: var(--demo-strong);
+  }
+  .co-header-nav a {
+    padding: var(--vxs) var(--xs);
+    border-radius: var(--radius-sm);
+    color: var(--demo-strong);
+    text-decoration: none;
+  }
+  .co-header-nav a:hover { background: var(--demo-hover); color: var(--fg); }
+  .co-header-nav a[aria-current] { background: var(--demo-current); color: var(--demo-text); }
+
+  .co-btn { --co-btn-border: var(--co); background: var(--co); color: var(--demo-on-solid); }
+  .co-btn-soft { --co-btn-border: var(--demo-border); background: var(--demo-surface); color: var(--demo-text); }
+  .co-btn-outline { --co-btn-border: var(--co); background: none; color: var(--demo-text); }
+  .co-btn, .co-btn-soft, .co-btn-outline { border-color: var(--co-btn-border); }
+  /* :not(:disabled) matches the page's own button:hover:not(:disabled) above,
+     which would otherwise win on specificity and paint --bg-muted and
+     --border-hover. */
+  :is(.co-btn-soft, .co-btn-outline):hover:not(:disabled) {
+    background: var(--demo-hover);
+    border-color: var(--co-btn-border);
+    color: var(--demo-strong);
+  }
+  .co-btn:hover:not(:disabled) {
+    background: var(--demo-solid-hover);
+    border-color: var(--demo-solid-hover);
+    color: var(--demo-on-solid);
+  }
+  /* disabled: text and border in the disabled role. base.css fades a disabled
+     button to .5 opacity; reset that so the token is what you see. */
+  :is(.co-btn, .co-btn-soft, .co-btn-outline):disabled {
+    color: var(--demo-disabled);
+    border-color: var(--demo-disabled);
+    opacity: 1;
+    cursor: default;
+  }
+  .co-badge {
+    align-self: center;
+    padding: 0 var(--xs);
+    border-radius: var(--radius-sm);
+    background: var(--demo-surface);
+    color: var(--demo-strong);
+    font-size: var(--text-xs);
+  }
+  .co-alert {
+    padding: var(--sm);
+    border: var(--border-width) solid var(--demo-border);
+    border-inline-start-width: 4px;
+    border-inline-start-color: var(--co);
+    border-radius: var(--radius-sm);
+    background: var(--demo-surface);
+    color: var(--demo-text);
+  }
+  .co-card {
+    overflow: hidden;
+    border: var(--border-width) solid var(--demo-border);
+    border-radius: var(--radius-sm);
+    background: var(--demo-surface);
+  }
+  .co-card-head {
+    padding: var(--xs) var(--sm);
+    background: var(--demo-bar);
+    color: var(--demo-strong);
+    font-weight: var(--w-bold);
+  }
+  .co-card p { margin: 0; padding: var(--sm); }
+  .co-link { color: var(--demo-text); }
+  .co-field { display: flex; flex-direction: column; gap: var(--vxs); }
+  .co-input,
+  .co-input:focus { border-color: var(--co); outline: 2px solid var(--demo-ring); }
+
+  @media (max-width: 767.98px) {
+    .co-split { flex-direction: column; align-items: stretch; }
+    .co-demo { grid-template-columns: minmax(0, 1fr); }
+  }
 
 }

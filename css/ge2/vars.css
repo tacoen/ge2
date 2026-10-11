@@ -150,9 +150,9 @@
   --bg: #181118;
   --fg: #e7eee7;
   --gray: #b0b0b0;
+  --seed-ac: #6488dd;
   --seed-pr: #66ccee;
   --seed-wr: #ffcc33;
-  --seed-ac: #4ca8e1;
   --seed-da: #cc1111;
   --seed-sc: #88cc66;
   --seed-in: #66d1ff;
@@ -178,9 +178,9 @@
   --bg-overlay: color-mix(in srgb, var(--black), transparent 50%);
 
   /* borders, weakest → strongest; hover clears 3:1 */
-  --border-muted: color-mix(in srgb, var(--bg), var(--tint) 15%);
-  --border: color-mix(in srgb, var(--bg), var(--tint) 30%);
-  --border-hover: color-mix(in srgb, var(--bg), var(--tint) 45%);
+  --border-muted: color-mix(in srgb, var(--bg), var(--gray) 15%);
+  --border: color-mix(in srgb, var(--bg), var(--gray) 30%);
+  --border-hover: color-mix(in srgb, var(--bg), var(--gray) 45%);
 
   /* functional — on :root so --focus-color can use --pr */
   --pr: color-mix(in srgb, var(--seed-pr), var(--fg) var(--tone-fg));
