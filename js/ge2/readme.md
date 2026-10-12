@@ -41,8 +41,8 @@ sandboxed frames — and an unguarded call takes the caller's whole `try` block
 with it. Every method here degrades to the fallback instead, so a page that
 cannot remember things still works.
 
-**It is the only place in ge that touches `localStorage`**; a test fails if
-another module reaches for it directly. Two bugs came from the raw access it
+**It is the only place in ge that touches `localStorage`**; `ge2-check.sh`
+fails if another module reaches for it directly. Two bugs came from the raw access it
 replaced: a failed write reported *"Failed to set theme"* even though the
 theme had been applied, and an unreadable read skipped the `config.theme`
 fallback, leaving the page with no `data-theme` at all.
@@ -55,6 +55,9 @@ The one file here meant to be edited per project.
 export const config = {
   theme: 'auto',            // 'auto' | 'light' | 'dark' — used when nothing is stored
   themeStorageKey: 'theme', // localStorage key the chosen theme is remembered under
+  plugins: {                // one key per plugin to load — see plugins.js above
+    'text-editor': { /* its settings */ },
+  },
 };
 ```
 
@@ -153,8 +156,8 @@ by default) following one closes the rail. The page owns where the rail sits
 — see `css/ge-maker.css`.
 
 `ui.js` ships no CSS of its own — the classes it sets are styled by
-`css/ge2/ui.css`, on tokens from `css/ge2/vars.css`, with element defaults in
-`css/ge2/base.css`. See `css/ge2/readme.md`.
+`css/ge2/ui.css` (the drawer by `css/ge2/layout.css`), on tokens from
+`css/ge2/vars.css`, with element defaults in `css/ge2/base.css`. See `css/ge2/readme.md`.
 
 ### Changed from `geui.js`
 
@@ -165,7 +168,7 @@ by default) following one closes the rail. The page owns where the rail sits
   `data-theme` at all. It now falls back to `config.theme`.
 - The `static {}` block's `initGlobalKeys()` demo shortcuts (a Ctrl+K toast, a global
   Escape) were app code in a framework file — dropped. Escape-closes-modal now lives
-  in `trapFocus`, where it belongs; the Ctrl+K demo moved to `js/ge-maker.js`.
+  in `trapFocus`, where it belongs; the Ctrl+K demo moved to `js/ge-maker/component.js`.
 - **Focus-trap leak fixed**: `trapFocus` bound its handler to the modal but
   `releaseFocus` removed it from `document`, so every open stacked another listener.
   Both now use `document`, and `trapFocus` releases any previous trap first.
@@ -210,4 +213,4 @@ Hydrated nodes are marked `data-icx-done`, so repeat `hydrate()` calls are cheap
 idempotent. An unknown name warns to the console and renders nothing.
 
 Full API notes, page-side usage and the icon list: `icons.md`. Reference
-grid: the icons section of `ge2/index.html`.
+grid: `ge2/icons.html`.

@@ -1,4 +1,4 @@
-// js/ge-maker/index.js — the demo home page: the landing grid and the two
+// js/ge-maker/index.js — the demo home page: the landing grid and the
 // markdown references rendered into it.
 import { ui } from '../ge2/ui.js';
 import { loadMenu } from './menu.js';
@@ -6,6 +6,8 @@ import { loadMenu } from './menu.js';
 const DOCS = [
   ['ge-maker.md', 'gmref'],
   ['function.md', 'fnref'],
+  ['../css/ge2/readme.md', 'cssref'],
+  ['../js/ge2/readme.md', 'jsref'],
 ];
 const PLUGIN = '../../ge2-plugins/text-editor/js/text-editor.js';
 
@@ -46,6 +48,15 @@ async function mountDoc(file, hostId) {
     return;
   }
   host.innerHTML = html;
+
+  // Relative links in the markdown point next to the .md, not next to this
+  // page — css/ge2/readme.md's `color.md` would otherwise land in ge2/.
+  const base = new URL(file, document.baseURI);
+  ui.els('a[href]', host).forEach((a) => {
+    const href = a.getAttribute('href');
+    if (/^([a-z][\w+.-]*:|#|\/)/i.test(href)) return;
+    a.href = new URL(href, base).href;
+  });
 
   // Prefix the slug with the host: two documents on one page would otherwise
   // both claim ids like #tests, and the first would win every anchor.

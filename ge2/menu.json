@@ -13,37 +13,14 @@
         {
           "anchor": "function-reference",
           "label": "function"
-        }
-      ]
-    },
-    {
-      "id": "quick-start",
-      "label": "Quick start",
-      "page": "../index.html",
-      "items": [
-        {
-          "href": "../boiler.html",
-          "label": "boiler.html"
         },
         {
-          "href": "../boiler-config.js",
-          "label": "boiler-config.js"
+          "anchor": "css-internals",
+          "label": "css/ge2"
         },
         {
-          "href": "../boiler-vars-overrides.css",
-          "label": "boiler-vars-overrides.css"
-        },
-        {
-          "href": "../favicon.ico",
-          "label": "favicon.ico"
-        },
-        {
-          "href": "../style.css",
-          "label": "style.css"
-        },
-        {
-          "href": "../script.js",
-          "label": "script.js"
+          "anchor": "js-internals",
+          "label": "js/ge2"
         }
       ]
     },
@@ -59,10 +36,6 @@
         {
           "anchor": "theme-colour",
           "label": "theme · colour"
-        },
-        {
-          "anchor": "theme-type",
-          "label": "theme · type"
         },
         {
           "anchor": "theme-typography",
@@ -205,6 +178,37 @@
         {
           "anchor": "editor-md",
           "label": "Text Editor"
+        }
+      ]
+    },
+    {
+      "id": "quick-start",
+      "label": "Quick start",
+      "page": "../index.html",
+      "items": [
+        {
+          "href": "../boiler.html",
+          "label": "boiler.html"
+        },
+        {
+          "href": "../boiler-config.js",
+          "label": "boiler-config.js"
+        },
+        {
+          "href": "../boiler-vars-overrides.css",
+          "label": "boiler-vars-overrides.css"
+        },
+        {
+          "href": "../favicon.ico",
+          "label": "favicon.ico"
+        },
+        {
+          "href": "../style.css",
+          "label": "style.css"
+        },
+        {
+          "href": "../script.js",
+          "label": "script.js"
         }
       ]
     }

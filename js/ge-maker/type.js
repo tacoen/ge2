@@ -1,7 +1,7 @@
-// js/ge-maker/type.js — the Theme page's type playground, typography table
-// and buckets. Imported by theme.js. It edits the same overrides
-// (js/ge-maker/overrides.js) as the colour editor, so the buckets and the
-// vars-overrides.css export carry both.
+// js/ge-maker/type.js — the Theme page's typography section (type controls
+// and the per-element table) and buckets. Imported by theme.js. It edits the
+// same overrides (js/ge-maker/overrides.js) as the colour editor, so the
+// buckets and the vars-overrides.css export carry both.
 import { ui } from '../ge2/ui.js';
 import { store } from '../ge2/store.js';
 import { out } from './util.js';
@@ -25,7 +25,6 @@ function syncControls() {
   out('rootSizeVal', `${rootSize.value}px`);
   leading.value = style.getPropertyValue('--leading').trim() || 1.5;
   out('leadingVal', String(leading.value));
-  if (fontFamily) fontFamily.value = style.getPropertyValue('--font-sans').trim();
   syncTypography();
 }
 
@@ -99,19 +98,18 @@ ui.on(leading, 'input', () => {
   persist();
 });
 
-const fontFamily = ui.el('#fontFamily');
-ui.on(fontFamily, 'change', (e) => {
-  if (e.target.value) root.style.setProperty('--font-sans', e.target.value);
-  else root.style.removeProperty('--font-sans');
-  persist();
-});
-
 // Element typography — global tokens, so they land in state.global and the
-// :root block of the export, like --leading and --font-sans.
+// :root block of the export, like --leading. The body row's font is the
+// page font: there is no separate --font-sans picker.
 const syncTypography = mountTypography(ui.el('#typoEditors'), persist);
+// One section, one reset: the root size and --leading above the table go
+// too, and a --font-sans override left by the old picker.
 ui.on(ui.el('#typoReset'), 'click', () => {
   for (const name of TYPO_TOKENS) root.style.removeProperty(name);
-  syncTypography();
+  root.style.fontSize = '';
+  root.style.removeProperty('--leading');
+  root.style.removeProperty('--font-sans');
+  syncControls();
   persist();
   ui.toast('Typography back to the stylesheet', 'info', 1500);
 });

@@ -274,8 +274,9 @@
     </div>
   </section>
 
-  <section id="theme-type">
-    <h2>theme · type</h2>
+  <section id="theme-typography">
+    <h2>theme · typography</h2>
+    <p class="out" data-note>Every size token is in <code>rem</code>, so root font-size scales the whole page; the sample row shows the <code>--text-*</code> scale. Below it, font, size, weight and colour for body text, <code>h1</code>–<code>h6</code>, <code>small</code>, <code>pre</code> and <code>blockquote</code>. Each element reads its own tokens — <code>--body-font</code>, <code>--h1-weight</code>, <code>--small-color</code>… — declared in <code>vars.css</code> and applied in <code>base.css</code>. Every option is another token, written as <code>var(--token)</code>; the option marked <code>*</code> drops the override and shows what the stylesheet gives. A <code>* inherit</code> means the token is left at <code>initial</code>, so the element takes its parent's value. Heading sizes are the existing <code>--h1</code>…<code>--h6</code>. Changes persist, go into buckets, and are written to the <code>:root</code> block of <strong>download vars-overrides.css</strong>.</p>
     <div class="token-controls">
       <label>root font-size · <span class="mono" id="rootSizeVal">16px</span>
         <input type="range" id="rootSize" min="11" max="24" step="1" value="16">
@@ -283,15 +284,7 @@
       <label>--leading · <span class="mono" id="leadingVal">1.5</span>
         <input type="range" id="leading" min="1" max="2.2" step="0.05" value="1.5">
       </label>
-      <label>--font-sans
-        <select id="fontFamily">
-          <option value="">system-ui (default)</option>
-          <option value="var(--font-mono)">--font-mono</option>
-          <option value="var(--font-serif)">--font-serif</option>
-        </select>
-      </label>
     </div>
-    <p class="out" data-note>Every size token is in <code>rem</code>, so root font-size scales the whole page. Sample:</p>
     <p class="type-sample">
       <span style="font-size:var(--text-xs)">--text-xs</span>
       <span style="font-size:var(--text-sm)">--text-sm</span>
@@ -300,10 +293,6 @@
       <span style="font-size:var(--text-2xl)">--text-2xl</span>
       <span style="font-size:var(--text-3xl)">--text-3xl</span>
     </p>
-  </section>
-  <section id="theme-typography">
-    <h2>theme · typography</h2>
-    <p class="out" data-note>Font, size, weight and colour for body text, <code>h1</code>–<code>h6</code>, <code>small</code>, <code>pre</code> and <code>blockquote</code>. Each element reads its own tokens — <code>--body-font</code>, <code>--h1-weight</code>, <code>--small-color</code>… — declared in <code>vars.css</code> and applied in <code>base.css</code>. Every option is another token, written as <code>var(--token)</code>; the option marked <code>*</code> drops the override and shows what the stylesheet gives. A <code>* inherit</code> means the token is left at <code>initial</code>, so the element takes its parent's value. Heading sizes are the existing <code>--h1</code>…<code>--h6</code>. Changes persist, go into buckets, and are written to the <code>:root</code> block of <strong>download vars-overrides.css</strong>.</p>
     <div id="typoEditors"></div>
     <div class="controls" style="margin-block-start:var(--md)">
       <button type="button" id="typoReset">reset typography</button>
@@ -312,7 +301,7 @@
 
   <section id="theme-buckets">
     <h2>theme · buckets</h2>
-    <p class="out" data-note>Every change on this page — colours, type and typography — is kept in <code>localStorage</code> and applied on every demo page, so a reload restores it. A bucket is a named snapshot of <em>both</em> themes — save, load, delete. The block below shows the overrides as CSS, live. <strong>download vars-overrides.css</strong> saves that block as the app's <code>css/vars-overrides.css</code> — changed values only; <code>style.css</code> imports it right after <code>vars.css</code>, so it wins. Light and dark are both written, each scoped to its own <code>[data-theme]</code> block so neither leaks into the other.</p>
+    <p class="out" data-note>Every change on this page — colours and typography — is kept in <code>localStorage</code> and applied on every demo page, so a reload restores it. A bucket is a named snapshot of <em>both</em> themes — save, load, delete. The block below shows the overrides as CSS, live. <strong>download vars-overrides.css</strong> saves that block as the app's <code>css/vars-overrides.css</code> — changed values only; <code>style.css</code> imports it right after <code>vars.css</code>, so it wins. Light and dark are both written, each scoped to its own <code>[data-theme]</code> block so neither leaks into the other.</p>
     <div class="bucket-bar">
       <input type="text" id="bucketName" placeholder="bucket name" autocomplete="off">
       <button type="button" id="bucketSave">save</button>

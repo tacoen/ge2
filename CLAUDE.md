@@ -116,7 +116,8 @@ CSS and JS mirror each other: one entry file beside an optional folder. The CSS 
   it into a popover behind an icon on the heading. A `.out` that JS writes
   into is a readout, gets no `data-note`, and stays on screen.
   `ge2/ge-maker.md` documents the harness and `ge2/function.md` is the API
-  reference for `js/ge2/`; `index.html` renders both via the text-editor
+  reference for `js/ge2/`; `index.html` renders both, plus
+  `css/ge2/readme.md` and `js/ge2/readme.md`, via the text-editor
   plugin, falling back to the raw source when the plugin is absent. Edit the
   markdown, not the HTML
 

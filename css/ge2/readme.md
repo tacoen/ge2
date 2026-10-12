@@ -60,15 +60,16 @@ Every token. Adopted from ge v1 verbatim, plus the groups ge added, marked in th
 | Base | `--white` `--black` `--shadow` |
 | Spacing | `--vxs` `--xs` `--sm` `--md` `--lg` `--xlg` `--vlg` `--scroll-width` |
 | Fonts | `--font-sans` `--font-mono` `--font-serif` |
-| Palette | seeds `--bg` `--fg` `--gray` · direction `--tint` `--sink` · text `--muted` `--subtle` · surface `--bg-subtle` `--bg-muted` `--bg-inset` `--bg-overlay` · line `--border-muted` `--border` `--border-hover` |
-| Functional | `--seed-ac` `--seed-pr` `--seed-sc` `--seed-da` `--seed-wr` `--seed-in` → `--ac` `--pr` `--sc` `--da` `--wr` `--in`. Each but `--ac` has `-bg` / `-subtle` / `-border` / `-bg-text`; `--ac` is its seed as is, with the scale `-bg1`…`-bg5` / `-fg1`…`-fg5` / `-tr1`…`-tr3` |
-| ge · type | `--text-xs` `--text-sm` `--text-md` `--text-lg` `--text-xl` `--text-2xl` `--text-3xl` `--leading` `--leading-tight` `--w-medium` `--w-bold` `--tracking-wide` |
+| Palette | seeds `--bg` `--fg` `--gray` · direction `--tint` `--sink` · text `--muted` `--subtle` · surface `--bg-subtle` `--bg-muted` `--bg-inset` `--bg-overlay` · line `--border-muted` `--border` `--border-hover` · tone mix `--tone-fg` (share of `--fg` in each functional colour) |
+| Functional | `--seed-ac` `--seed-pr` `--seed-sc` `--seed-da` `--seed-wr` `--seed-in` → `--ac` `--pr` `--sc` `--da` `--wr` `--in`. Each but `--ac` has `-bg` / `-subtle` / `-border` / `-bg-text`; `--ac` is its seed as is, with the scale `-bg1`…`-bg5` / `-fg1`…`-fg5` / `-tr1`…`-tr4` |
+| ge · type | `--text-vxs` `--text-xs` `--text-sm` `--text-md` `--text-lg` `--text-xl` `--text-2xl` `--text-3xl` · headings `--h1`…`--h6` · `--leading` `--leading-tight` `--w-thin` `--w-normal` `--w-medium` `--w-bold` `--tracking-wide` |
+| ge · typography | what `base.css` reads per element: `--body-font` `--body-size` `--body-weight` `--body-color` · `--h1-font` `--h1-weight` `--h1-color` … `--h6-*` · `--small-*` `--pre-*` `--blockquote-*` (each `-font` `-size` `-weight` `-color`). `initial` = not set, the property inherits |
 | ge · shape | `--radius-sm` `--radius-md` `--radius-lg` `--border-width` |
 | ge · motion | `--dur-fast` `--dur` `--ease` |
 | ge · focus | `--focus-width` `--focus-offset` `--focus-color` |
 | ge · stacking | `--z-overlay` `--z-modal` `--z-toast` |
 | ge · icon | `--icon-size` `--icon-size-sm` `--icon-size-lg` `--icon-stroke` `--icon-stroke-width` `--icon-fill` `--icon-linecap` `--icon-linejoin` |
-| ge · components | `--modal-min-width` `--modal-max-width` `--toast-max-width` `--tab-indicator-width` |
+| ge · components | `--menu-min-width` `--modal-min-width` `--modal-max-width` `--toast-max-width` `--tab-indicator-width` · layout `--sidemenu-width` `--drawer-width` `--card-min` |
 | ge · breakpoints | `--bp-sm` `--bp-md` `--bp-lg` `--bp-xl` `--bp-xxl` (Bootstrap 5 scale; `xs` is 0, the unqualified base) |
 
 Spacing tokens double as font sizes for controls (`font-size: var(--sm)`),
@@ -93,11 +94,13 @@ edges: see [`color.md`](color.md).
   `--link-subtle`, `--link-border`, a set that sat apart from the four system
   colours for no reason but its name. It is now `--seed-ac` → `--ac`, with the
   same `-bg` / `-subtle` / `-border` / `-bg-text` variants as the rest. There is
-  no `--link*` any more; anchors in `base.css` take `var(--ac)`.
+  no `--link*` any more; anchors in `base.css` take `var(--ac)` (superseded
+  below: links take `--pr`).
 - **Functional colours moved from `body` to `:root`.** They derive from `--fg`,
   which is declared on `<html>` — the same element as `:root` — so they resolve
   identically, but are now visible to `<html>` and to other `:root`-level
-  tokens. `--focus-color: var(--pr)` needs this.
+  tokens. `--focus-color: var(--pr)` needs this (superseded below: it is now
+  `--ac-bg1`).
 - **`--ac` moved to a scale.** `--ac` is now `--seed-ac` itself, no longer
   toned toward `--fg`, and its `-bg` / `-subtle` / `-border` / `-bg-text` are
   gone. In their place: `--ac-bg1`…`-bg5` (`--ac` with 15 / 30 / 45 / 60 / 85%
@@ -137,7 +140,7 @@ its own) and `svg { display: block }` (see the icon note below).
 
 Components `js/ge2/ui.js` drives, plus icon geometry.
 
-`.icx` · `[data-icon]` · `.overlay` `.overlay.active` · `.modal` `.modal.active`
+`.icx` `.icx-sm` `.icx-lg` · `[data-icon]` · `.overlay` `.overlay.active` · `.modal` `.modal.active`
 · `.toast-container` `.toast` `.toast-success|error|info|warning` ·
 `.accordion` `.accordion-header` `.accordion-content` `.accordion-item.active`
 · `.tabmenu > li` `.tabmenu > li.active` · `.sidebar` `.sidebar.collapsed`
@@ -167,28 +170,31 @@ no markup, no JS:
 .toolbar { --icon-size: var(--icon-size-sm); --icon-stroke: var(--pr); }
 ```
 
-The `.icx` rule is deliberately **not** wrapped in `:where()`: base.css sets
-`svg { display: block }`, and an element selector beats a zero-specificity
-one, which would force every icon out of the text flow.
+The `.icx` rule is wrapped in `:where()` like the rest: base.css sets
+`svg { display: block }`, but `ui` is a later layer than `base`, so the
+zero-specificity rule still wins and icons stay in the text flow.
 
 The stroke rules target the shapes rather than the `<svg>`, because the
 bundled Hugeicons paths carry `stroke` / `stroke-width` as presentation
 attributes, which beat a value inherited from the parent.
 
-Per-element overrides (`data-icon-size`, `data-icon-stroke`, or `icx.svg()`
+Per-element overrides (`data-icon-size`, `data-icon-stroke` — the stroke
+*width*, `--icon-stroke-width`; colour is `--icon-stroke` — or `icx.svg()`
 opts) are emitted as inline custom properties, so they still win over the
 tokens. Icons also keep `width`/`height` attributes as a fallback for pages
 that load `icons.js` without `ui.css`.
 
 ## utils.css
 
-Adopted from the ge v1 project, content unchanged.
+Adopted from the ge v1 project, then extended: responsive variants and
+buttons added, the desktop-first width collapse removed (all below).
 
-`.flex` plus modifiers (`row` `column` `top` `bottom` `middle` `base` `stretch`
-`left` `right` `center` `between` `around` `evenly` `wrap` `nowrap`
-`wrap-reverse` `grow` `shrink` `noshrink` `nobasis` `flex-1` `gap-1…8`),
-padding `.p1`–`.p5`, and widths `.w10`–`.w100` with 768px / 480px collapse
-points.
+`.flex` plus modifiers (`row` `row-reverse` `column` `column-reverse` `top`
+`bottom` `middle` `base` `stretch` `left` `right` `center` `between` `around`
+`evenly` `wrap` `nowrap` `wrap-reverse` `grow` `shrink` `noshrink` `nobasis`
+`flex-1` `gap-1…8`), padding `.p1`–`.p5`, widths `.w10`–`.w100` (literal at
+every viewport — see "Width behaviour changed on adoption"), and `.fsmall`
+(small text; see "Known rough edges").
 
 Every modifier is scoped under `.flex` — `.flex.center`, never a bare
 `.center` — so the utilities claim no generic global class names.
@@ -208,14 +214,15 @@ suffixed class applies **from** that breakpoint **up**.
 `.flex` itself becomes `.flex-md` (i.e. `display: flex` from md up).
 Modifiers keep their scoping: `.flex.center-lg`, never `.center-lg`.
 
-The block is machine-generated from the base rules by
-`scratchpad/gen/responsive.js`, between sentinel comments — **edit the base
-rules and regenerate, don't hand-edit inside the sentinels.** A test asserts
-every base utility has a variant at every breakpoint with identical
-declarations, so the two cannot drift.
+The block was machine-generated from the base rules and sits between
+sentinel comments — **when a base rule changes, change its `-<bp>` variants
+with it**, so every base utility keeps a variant at every breakpoint with
+identical declarations. One exception: base `.fsmall` sets only `font-size`
+(its margin and padding come from `p.fsmall` / `aside p.fsmall`), while
+`.fsmall-<bp>` sets all three on any element.
 
-`utils.css` is mobile-first throughout — every query is `min-width`, and a
-test fails if a `max-width` block reappears.
+`utils.css` is mobile-first throughout — every query is `min-width`; don't
+reintroduce a `max-width` block.
 
 ### Buttons
 
@@ -227,7 +234,7 @@ unstyled until it carries a style or tone class, so `button.naked` =
 | Class | |
 |---|---|
 | style | `.rounded` `.plain` (fill, no border) `.outline` (border, no fill) `.naked` (no border, no background, no focus outline — text only, every state) `.link` (drawn like `<a>`, no focus outline) |
-| tone | `.pr` `.sc` `.da` `.wr` `.ac` — none is neutral |
+| tone | `.pr` `.sc` `.da` `.wr` `.ac` `.in` — none is neutral |
 | size | `.vxs` `.xs` `.sm` `.md` `.lg` `.xlg` — the spacing token drives padding (`size/3` × `size`) and type (`--xs + size/3`); default `.sm`. `.link` keeps its surrounding text size until given one |
 | state | `.is-hover` / `.is-focus` force the state, for docs and tests |
 
@@ -276,11 +283,7 @@ class selectors.
 One habit still matters: **don't reuse a framework class name in a page
 sheet.** That is not customisation, it is a collision — the page silently
 restyles `.toast` or `.p3` everywhere, or loses to it and looks broken.
-`.row` and `.wrap` became `.controls` and `.page` for this reason. A test
-rejects any page class that `ui.css` or `utils.css` already defines, and
-another checks every class the page uses actually exists somewhere — reading
-the markup **and the page's JS** (`className`, `classList.add`, template
-literals), since the icons grid exists only in JS.
+`.row` and `.wrap` became `.controls` and `.page` for this reason.
 
 ### Width behaviour changed on adoption
 
@@ -332,8 +335,8 @@ the value exactly:
 Range syntax (`@media (width < 576px)`) reads better and means the same thing,
 but needs Safari 16.4+. ge ships source with no build step, and the rest of
 the CSS only needs Safari 16.2 for `color-mix()`, so the `max-width` form
-keeps the support floor where it already is. A test enforces this, and
-another checks every query value is on the scale.
+keeps the support floor where it already is. Keep every query value on the
+scale.
 
 ### What changed on adoption
 

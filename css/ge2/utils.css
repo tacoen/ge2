@@ -77,8 +77,7 @@ aside p.fsmall,
 
 /* ═══ generated: responsive variants ═══
    Mobile-first (Bootstrap semantics): -<bp> applies from that breakpoint UP.
-   Generated from the base rules above by scratchpad/gen/responsive.js — edit
-   those and regenerate, never inside the sentinels; a test checks they match.
+   Each mirrors a base rule above — change a base rule, change its variants.
    Widths are explicit: .w* holds at every size. */
 
 /* ── sm and up (--bp-sm) ── */

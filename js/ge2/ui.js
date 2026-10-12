@@ -139,23 +139,27 @@ export class GeUI {
 
   // Remembered choice wins, else config.theme ('auto' defers to the OS).
   // The stored value is validated: a corrupt one used to leave no theme set.
+  // Only setTheme stores: a default stored here would freeze 'auto' at the
+  // first visit and hide later config.theme changes from returning visitors.
   static initTheme() {
     try {
+      const apply = (t) => document.documentElement.setAttribute('data-theme', t);
+
       // store.get returns null rather than throwing, so unreadable storage
       // falls through to config.theme instead of leaving no theme at all
       const saved = store.get(config.themeStorageKey);
       if (saved === 'light' || saved === 'dark') {
-        GeUI.setTheme(saved);
+        apply(saved);
         return;
       }
 
       if (config.theme === 'light' || config.theme === 'dark') {
-        GeUI.setTheme(config.theme);
+        apply(config.theme);
         return;
       }
 
       const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      GeUI.setTheme(isDark ? 'dark' : 'light');
+      apply(isDark ? 'dark' : 'light');
     } catch (e) {
       GeUI.error('Theme init failed', e);
     }
