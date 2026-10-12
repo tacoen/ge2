@@ -60,6 +60,7 @@
   background: var(--ac-bg5);
   border: var(--border-width) solid var(--border);
   border-radius: var(--radius-md);
+  list-style: none;
 }
 
 :where(.sidemenu ul) { margin: 0; padding: 0; list-style: none; }
