@@ -62,7 +62,7 @@
   --h6-font: initial;  --h6-weight: var(--w-medium);  --h6-color: initial;
 
   --small-font: initial;
-  --small-size: smaller;
+  --small-size: var(--text-vxs);
   --small-weight: initial;
   --small-color: initial;
 
@@ -71,7 +71,7 @@
   --pre-weight: initial;
   --pre-color: initial;
 
-  --blockquote-font: initial;
+  --blockquote-font: var(--font-serif);
   --blockquote-size: initial;
   --blockquote-weight: initial;
   --blockquote-color: initial;

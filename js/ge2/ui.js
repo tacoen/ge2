@@ -5,8 +5,6 @@
 import { config } from './config.js';
 import { store } from './store.js';
 
-export const VERSION = '0.1.0';
-
 const TAG = '[ge2/ui]';
 
 // 'Ctrl+K' / 'Escape' / 'Shift+Space' -> normalized shape for onKey().

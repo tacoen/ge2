@@ -2,8 +2,7 @@
 
 Framework-only code. Nothing here is app/page-specific — see `CLAUDE.md` at the repo root for the boundary rule.
 
-Version `0.1.0` — `VERSION` in `ui.js`, `--ge2-version` in `css/ge2/vars.css`.
-A test fails if the two drift. Licensing and the Hugeicons notice: `/LICENSE`.
+No version number: the git commit is the version. Licensing and the Hugeicons notice: `/LICENSE`.
 
 ## plugins.js
 

@@ -8,7 +8,7 @@ Five modules:
 
 | Module | Export | Job |
 |---|---|---|
-| `ui.js` | `ui`, `GeUI`, `VERSION` | DOM helpers + components |
+| `ui.js` | `ui`, `GeUI` | DOM helpers + components |
 | `icons.js` | `icx` | inline SVG icons |
 | `store.js` | `store` | localStorage that cannot throw |
 | `config.js` | `config` | per-project settings |

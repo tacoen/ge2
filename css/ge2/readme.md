@@ -57,7 +57,6 @@ Every token. Adopted from ge v1 verbatim, plus the groups ge added, marked in th
 
 | Group | Tokens |
 |---|---|
-| Meta | `--ge2-version` (matches `VERSION` in `js/ge2/ui.js`) |
 | Base | `--white` `--black` `--shadow` |
 | Spacing | `--vxs` `--xs` `--sm` `--md` `--lg` `--xlg` `--vlg` `--scroll-width` |
 | Fonts | `--font-sans` `--font-mono` `--font-serif` |
